@@ -22,6 +22,11 @@ public class TipoProductoEntity {
     @OneToMany(mappedBy = "tipoproducto")
     private ArrayList<ProductoEntity> productos = new ArrayList<>();
 
+    public TipoProductoEntity(Long id, String nombre) {
+        this.id = id;
+        this.nombre = nombre;
+    }
+
     public Long getId() {
         return id;
     }
@@ -41,4 +46,5 @@ public class TipoProductoEntity {
     public int getProductos() {
         return productos.size();
     }
+
 }
