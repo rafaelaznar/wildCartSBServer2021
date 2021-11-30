@@ -79,7 +79,7 @@ public class ProductoController {
     public ResponseEntity<Page<ProductoEntity>> getPage(@PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable oPageable,
              @RequestParam(name = "filter") String filter, @RequestParam(name = "filtertype") Long filtertype) {
         Page<ProductoEntity> oPage = null;
-        if (filtertype!=null) {
+        if (filtertype!=0) {
             oPage = oProductoRepository.findByTipoproductoIdAndNombreOrCodigo(filtertype,filter,filter,oPageable);
         } else {
             oPage = oProductoRepository.findByNombreIgnoreCaseContainingOrCodigoIgnoreCaseContaining(filter, filter, oPageable);
