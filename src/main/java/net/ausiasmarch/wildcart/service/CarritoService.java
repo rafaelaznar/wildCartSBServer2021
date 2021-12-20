@@ -103,6 +103,8 @@ public class CarritoService {
                 throw new CarritoVacioEnCompraException();
             }
             oFacturaRepository.save(oFacturaEntity);
+            oCarritoRepository.deleteAllByUsuario(oSessionUsuarioEntity);
+
         } else {
             throw new UnauthorizedException();
         }
