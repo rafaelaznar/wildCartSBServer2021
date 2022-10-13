@@ -211,16 +211,21 @@
                         </tr>
                         <tr>
                             <td>carrito</td>
-                            <td>buy</td>
+                            <td>buy products from carrito</td>
                             <td>localhost:8082/buy</td>
                             <td>PUT</td>
+                            <td></td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Buy items from the carrito</td>
+                            <td>Only logged in users can buy</td>
                             <td></td>
                             <td></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td>carrito</td>
-                            <td>counts all carritos</td>
+                            <td>count carritos</td>
                             <td>localhost:8082/carrito/count</td>
                             <td>GET</td>
                             <td></td>
@@ -247,18 +252,200 @@
                         </tr>
                         <tr>
                             <td>carrito</td>
-                            <td>Generates a given amount of carrito</td>
+                            <td>generate carrito</td>
                             <td>localhost:8082/carrito/generate/{amount}</td>
                             <td>POST</td>
                             <td>amount</td>
                             <td></td>
-                            <td>admin</td>
-                            
+                            <td>admin (1)</td>
+                            <td>Generates a given amount of carrito</td>
+                            <td>Only admins can generate carritos</td>
+                            <td></td>
+                            <td>
+                                <pre>
+10
+                                </pre>
+                            </td>
+                            <td>
+                                <pre>
+{
+    "timestamp": "2022-10-13T22:08:59.099+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/carrito/generate/1"
+}
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>delete products from carrito</td>
+                            <td>localhost:8082/carrito/producto/{id_producto}</td>
+                            <td>DELETE</td>
+                            <td>id_producto</td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Deletes a product from the user's carrito</td>
+                            <td>Only logged in users can delete</td>
+                            <td>The product gets deleted from the user's carrito</td>
+                            <td>
+                                <pre>
+1
+                                </pre>
+                            </td>
+                            <td>
+                                <pre>
+{
+    "timestamp": "2022-10-13T22:15:50.600+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user role",
+    "details": "uri=/carrito/producto/3"
+}
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>delete a product with amount from carrito</td>
+                            <td>localhost:8082/carrito/producto/{id_producto}/{amount}</td>
+                            <td>DELETE</td>
+                            <td>id_producto, amount</td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Deletes a given number of products from the cart</td>
+                            <td>Only logged in users can delete</td>
+                            <td>Deletes a given number of products from the cart</td>
+                            <td>
+                                <pre>
+4                                    
+                                </pre>
+                            </td>
+                            <td>
+                                <pre>
+{
+    "timestamp": "2022-10-13T22:46:46.717+00:00",
+    "status": "INTERNAL_SERVER_ERROR",
+    "message": "ERROR: Cannot perform operation: no exist that product in users cart",
+    "details": "uri=/carrito/producto/2/5"
+}
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>get page of carritos</td>
+                            <td>localhost:8082/carrito</td>
+                            <td>GET</td>
+                            <td></td>
+                            <td></td>
+                            <td>admin (1)</td>
+                            <td>Returns a pagination of carrito</td>
+                            <td>Only admins can do it</td>
+                            <td>Returns a pagination of carts</td>
+                            <td>
+                                <pre>
+{
+    "content": [
+        carritos...
+    ],
+    "pageable": {
+        "sort": {
+            "empty": true,
+            "sorted": false,
+            "unsorted": true
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 10,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": true,
+    "totalPages": 1,
+    "totalElements": 10,
+    "size": 10,
+    "number": 0,
+    "sort": {
+        "empty": true,
+        "sorted": false,
+        "unsorted": true
+    },
+    "first": true,
+    "numberOfElements": 10,
+    "empty": false
+}
+                                </pre>
+                            </td>
+                            <td>
+                                <pre>
+{
+    "timestamp": "2022-10-13T22:37:11.450+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/carrito"
+}
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>delete a carrito by id</td>
+                            <td>localhost:8082/carrito{id}/</td>
+                            <td>DELETE</td>
+                            <td></td>
+                            <td></td>
+                            <td>admin (1)</td>
+                            <td>Deletes a carrito</td>
+                            <td>Only admins can do it</td>
+                            <td>Deletes a carrito</td>
+                            <td>
+                                <pre>
+2
+                                </pre>
+                            </td>
+                            <td>
+                                <pre>
+{
+    "timestamp": "2022-10-13T22:37:11.450+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/carrito/2"
+}
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>add a product to user's carrito</td>
+                            <td>localhost:8082/carrito/{id}/{amount}</td>
+                            <td>POST</td>
+                            <td>id_producto, amount</td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Adds a selected amount of products on the carrito</td>
+                            <td>Users can do it</td>
+                            <td>Adds a selected amount of products on the carrito</td>
+                            <td>
+                                <pre>
+3                                    
+                                </pre>
+                            </td>
+                            <td>
+                                <pre>
+{
+    "timestamp": "2022-10-13T22:45:07.052+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user role",
+    "details": "uri=/carrito/3/1"
+}
+                                </pre>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+    </div>
 </body>
 
 </html>
