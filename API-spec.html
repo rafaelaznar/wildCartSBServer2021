@@ -101,6 +101,160 @@
 </pre>
                             </td>
                         </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>save carrito</td>
+                            <td>localhost:8082/carrito</td>
+                            <td>PUT</td>
+                            <td>id from payload</td>
+                            <td>
+                                <pre>
+{
+    "id": 2025,
+    "cantidad": 22,
+    "precio": 22.22,
+    "producto": {
+        "id": 2
+    },
+    "usuario": {
+        "id": 2
+    }
+}
+                                </pre>
+                            </td>
+                            <td>admin (1)</td>
+                            <td>Updates a carrito by his id</td>
+                            <td>Only admins can update a carrito</td>
+                            <td></td>
+                            <td>
+                                <pre>
+2
+                                </pre>
+                            </td>
+                            <td>
+                                <pre>
+{
+    "timestamp": "2022-10-13T18:47:08.462+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/carrito/"
+}
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>create carrito</td>
+                            <td>localhost:8082/carrito</td>
+                            <td>POST</td>
+                            <td></td>
+                            <td>
+                                <pre>
+{
+    "cantidad": 2,
+    "precio": 1.11,
+    "producto": {
+        "id": 9
+    },
+    "usuario": {
+        "id": 2
+    }
+}
+                                </pre>
+                            </td>
+                            <td>admin (1)</td>
+                            <td>Creates a carrito</td>
+                            <td>Only admins can create a carrito</td>
+                            <td></td>
+                            <td>
+                                <pre>
+11
+                                </pre>
+                            </td>
+                            <td>
+                                <pre>
+{
+    "timestamp": "2022-10-13T19:00:24.230+00:00",
+    "status": "NOT_ACCEPTABLE",
+    "message": "ERROR: Field data not valid: error de validación: campo cantidad de la entidad carrito (debe ser un entero entre 1 y 1000)",
+    "details": "uri=/carrito/"
+}
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>empty carrito</td>
+                            <td>localhost:8082/carrito/{id}</td>
+                            <td>DELETE</td>
+                            <td>id</td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Empties products from a carrito</td>
+                            <td>Only users can empty a carrito</td>
+                            <td></td>
+                            <td>
+                                <pre>
+2
+                                </pre>
+                            </td>
+                            <td>
+                                <pre>
+{
+    "timestamp": "2022-10-13T19:08:06.330+00:00",
+    "status": "NOT_FOUND",
+    "message": "ERROR: Resource not found: id 253535 not exist",
+    "details": "uri=/carrito/253535"
+}
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>buy</td>
+                            <td>localhost:8082/buy</td>
+                            <td>PUT</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>counts all carritos</td>
+                            <td>localhost:8082/carrito/count</td>
+                            <td>GET</td>
+                            <td></td>
+                            <td></td>
+                            <td>user/admin</td>
+                            <td>A user counts all the products on his carrito and an admin counts all the carritos on the app</td>
+                            <td>You have to be logged in</td>
+                            <td></td>
+                            <td>
+                                <pre>
+20
+                                </pre>
+                            </td>
+                            <td>
+                                <pre>
+{
+    "timestamp": "2022-10-13T19:24:06.326+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/carrito/count"
+}
+                                </pre>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>Generates a given amount of carrito</td>
+                            <td>localhost:8082/carrito/generate/{amount}</td>
+                            <td>POST</td>
+                            <td>amount</td>
+                            <td></td>
+                            <td>admin</td>
+                            
+                        </tr>
                     </tbody>
                 </table>
             </div>
