@@ -116,9 +116,57 @@
                             <td></td>
                             <td></td>
                             <td>user (2)</td>
-                            <td>If logged as a user, shows owned receipts. If admin, shows amount of receipts in the database</td>
+                            <td>If logged as a user, shows owned receipts.</td>
                             <td>Must be logged in as user or admin</td>
                             <td> counts owned receipts by user</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseFacturaCount"
+                                        role="button" aria-expanded="false" aria-controls="collapseFacturaCount">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseFacturaCount">
+                                    <div class="card card-body">
+<pre>
+100                                                                   
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseFacturaCountError"
+                                        role="button" aria-expanded="false" aria-controls="collapseFacturaCountError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseFacturaCountError">
+                                    <div class="card card-body">
+<pre>
+    {
+        "timestamp": "2022-10-13T18:55:04.439+00:00",
+        "status": "UNAUTHORIZED",
+        "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+        "details": "uri=/factura/count"
+    }
+        
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>factura</td>
+                            <td>get</td>
+                            <td>localhost:8082/factura/count</td>
+                            <td>GET</td>
+                            <td></td>
+                            <td></td>
+                            <td>admin (1)</td>
+                            <td>If admin, shows amount of receipts in the database</td>
+                            <td>Must be logged in as user or admin</td>
+                            <td> counts owned receipts by specified user</td>
                             <td>
                                 <p>
                                     <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseFacturaCount"
@@ -164,7 +212,7 @@
                             <td>page, size, direction</td>
                             <td></td>
                             <td>user (2)</td>
-                            <td>Returns paged owned receipts depending if logged user or admin</td>
+                            <td>Shows paginated receipts from logged user</td>
                             <td>Must be logged in as user or admin</td>
                             <td>counts owned receipts by logged user and shows them paginated</td>
                             <td>
@@ -264,7 +312,7 @@
                             <td>page, size, sort, sort, usuario, filter</td>
                             <td></td>
                             <td>admin (1)</td>
-                            <td>If logged as admin, shows receipts from specified user</td>
+                            <td>Shows receipts from specified user</td>
                             <td>Must be logged in as user or admin</td>
                             <td>counts specified user’s owned receipts</td>
                             <td>
@@ -386,8 +434,8 @@
                             <td></td>
                             <td>{ "fecha": "03/12/2020 00:00", "iva": 12, "pagado": false, "usuario": { "id": 4 } }</td>
                             <td>user (2)</td>
-                            <td>Generates a new factura only from the user that is logged or admins</td>
-                            <td>Full access to admins and individual access for logged user</td>
+                            <td>When user buys, a receipt is generated automatically</td>
+                            <td>Admins get full</td>
                             <td>Generates a receipt</td>
                             <td>
 
@@ -449,9 +497,57 @@
                             <td>id</td>
                             <td></td>
                             <td>user (2)</td>
-                            <td>If logged as a user, shows owned receipts. If admin, shows amount of receipts in the database</td>
-                            <td>Must be logged in as user or admin</td>
-                            <td>counts owned receipts by user</td>
+                            <td>If logged as a user, shows owned receipts.</td>
+                            <td>Must be logged in as user</td>
+                            <td>deletes specified owned receipt by user</td>
+                            <td>
+
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseFacturaDelete"
+                                        role="button" aria-expanded="false" aria-controls="collapseFacturaDelete">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseFacturaDelete">
+                                    <div class="card card-body">
+<pre>
+    1 (deletes the selected one)
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseFacturaDeleteError"
+                                        role="button" aria-expanded="false" aria-controls="collapseFacturaDeleteError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseFacturaDeleteError">
+                                    <div class="card card-body">
+<pre>
+    {
+        "timestamp": "2022-10-13T23:04:50.079+00:00",
+        "status": "NOT_FOUND",
+        "message": "ERROR: Resource not found: id 112312 not exist",
+        "details": "uri=/factura/112312"
+    }
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>factura</td>
+                            <td>delete</td>
+                            <td>localhost:8082/factura/1</td>
+                            <td>delete</td>
+                            <td>id</td>
+                            <td></td>
+                            <td>admin (1)</td>
+                            <td>If admin, shows amount of receipts in the database</td>
+                            <td>Must be logged in as admin</td>
+                            <td>deletes receipt with specified ID</td>
                             <td>
 
                                 <p>
@@ -493,13 +589,13 @@
                             <td>factura</td>
                             <td>put</td>
                             <td>localhost:8082/factura/</td>
-                            <td>delete</td>
+                            <td>put</td>
                             <td></td>
                             <td>{"id": 3, "fecha": "03/12/2020 00:00", "iva": 12, "pagado": false, "usuario": { "id": 4 } }</td>
                             <td>user (2)</td>
-                            <td>Generates a new receipt only from the user that is logged or admins</td>
+                            <td>Updates data from receipt owned by user</td>
                             <td>Full access only to admins. Logged user can only interact with his own receipts</td>
-                            <td>Generates a receipt</td>
+                            <td>Updates a receipt</td>
                             <td>
 
                                 <p>
