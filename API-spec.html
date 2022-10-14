@@ -36,68 +36,338 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>carrito</td>
+                            <td>factura</td>
                             <td>get</td>
-                            <td>localhost:8082/carrito/{id}</td>
+                            <td>localhost:8082/factura/{id}</td>
                             <td>GET</td>
                             <td>id</td>
                             <td></td>
                             <td>user (2)</td>
-                            <td>Get carrito of a user in session</td>
-                            <td>A usuario only can see his own carrito</td>
-                            <td>The carrito is obtained from the database</td>
+                            <td>Obtains the data from the factura number 40</td>
+                            <td>It can only be seen by the receipt owner or the admin</td>
+                            <td>Displays data from the logged user’s owned receipts according to database</td>
                             <td>
-                                <pre>
-{
-    "id": 2,
-    "cantidad": 3,
-    "precio": 0.0,
-    "producto": {
-        "id": 1,
-        "codigo": "41298Z",
-        "nombre": "Lampara de plastico de color amarillo de tamaño mediano",
-        "existencias": 55,
-        "precio": 94.9,
-        "imagen": 2,
-        "descuento": 21,
-        "tipoproducto": {
-            "id": 47,
-            "nombre": "Productos de gran tonelage para el jardin",
-            "productos": 7
-        },
-        "carritos": 1,
-        "compras": 0
-    },
+<pre>{
+    "id": 40,
+    "fecha": "2018-01-07T21:12:55.000Z",
+    "iva": 10,
+    "pagado": true,
+    "compras": 2,
     "usuario": {
-        "id": 2,
-        "dni": "51707107W",
-        "nombre": "sergio",
-        "apellido1": "marti",
-        "apellido2": "salom",
-        "login": "user",
-        "email": "marti_sergio@daw.tk",
-        "descuento": 46,
-        "validado": false,
-        "activo": false,
-        "tipousuario": {
-            "id": 2,
-            "nombre": "usuario",
-            "usuarios": 79
-        },
-        "carritos": 1,
-        "facturas": 1
+            "id": 83,
+            "dni": "43383857S",
+            "nombre": "pere",
+            "apellido1": "dung",
+            "apellido2": "marti",
+            "login": "pere_dung",
+            "email": "dung_pere@daw.tk",
+            "descuento": 7,
+            "validado": false,
+            "activo": false,
+            "tipousuario": {
+                "id": 2,
+                "nombre": "usuario",
+                "usuarios": 77
+            },
+        "carritos": 0,
+        "facturas": 2
     }
-}                                                                   
-                                </pre>
+}</pre>
+                            </td>
+                            <td>
+<pre>{
+    "timestamp": "2022-10-13T18:46:25.686+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/factura/40"
+}</pre>
+                            </td>
+                        </tr>
+                        <!--////////////////////////////////////////////////////////-->
+                        <tr>
+                            <td>factura</td>
+                            <td>get</td>
+                            <td>localhost:8082/factura/count</td>
+                            <td>GET</td>
+                            <td></td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>If logged as a user, shows owned receipts. If admin, shows amount of receipts in the database</td>
+                            <td>Must be logged in as user or admin</td>
+                            <td> counts owned receipts by user</td>
+                            <td>
+<pre>100</pre>
                             </td>
                             <td>
 <pre>
 {
-    "timestamp": "2022-10-13T18:34:12.330+00:00",
+    "timestamp": "2022-10-13T18:55:04.439+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/factura/count"
+}</pre>
+                            </td>
+                        </tr>
+                        <!--/////////////////////////////////////////////////////////-->
+                        <tr>
+                            <td>factura</td>
+                            <td>get</td>
+                            <td>localhost:8082/factura?page=0&size=3&sort=fecha,asc&sort=id,desc</td>
+                            <td>GET</td>
+                            <td>page, size, direction</td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Returns paged owned receipts depending if logged user or admin</td>
+                            <td>Must be logged in as user or admin</td>
+                            <td>counts owned receipts by logged user and shows them paginated</td>
+                            <td>
+<pre>{
+    "content": [  {
+            "id": 51,
+            "fecha": "2010-01-09T21:12:56.000Z",
+            "iva": 21,
+            "pagado": false,
+            "compras": 0,
+            "usuario": {
+                "id": 88,
+                "dni": "14126561F",
+                "nombre": "jose",
+                "apellido1": "ortega",
+                "apellido2": "mocholi",
+                "login": "jose_ortega",
+                "email": "ortega_jose@daw.tk",
+                "descuento": 25,
+                "validado": false,
+                "activo": false,
+                "tipousuario": {
+                    "id": 2,
+                    "nombre": "usuario",
+                    "usuarios": 77
+                },
+                "carritos": 0,
+                "facturas": 1
+            }
+        }, {...}, {...} ],
+    "pageable": {
+        "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 3,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalPages": 34,
+    "totalElements": 100,
+    "last": false,
+    "number": 0,
+    "sort": {
+        "empty": false,
+        "sorted": true,
+        "unsorted": false
+    },
+    "size": 3,
+    "first": true,
+    "numberOfElements": 3,
+    "empty": false
+}</pre>
+                            </td>
+                            <td>
+<pre>
+    {
+        "timestamp":"2022-10-13T19:00:13.630+00:00",
+        "status":"UNAUTHORIZED",
+        "message":"ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+        "details":"uri=/factura"
+    }   
+</pre>
+                            </td>
+                        </tr>
+                        <!--////////////////////////////////////////////////////////-->
+                        <tr>
+                            <td>factura</td>
+                            <td>get</td>
+                            <td>localhost:8082/factura?page=0&size=3&sort=fecha,asc&sort=id,desc&usuario=1044&filter=21</td>
+                            <td>GET</td>
+                            <td>page, size, sort, sort, usuario, filter</td>
+                            <td></td>
+                            <td>admin (1)</td>
+                            <td>If logged as admin, shows receipts from specified user</td>
+                            <td>Must be logged in as user or admin</td>
+                            <td>counts specified user’s owned receipts</td>
+                            <td>
+<pre>
+{
+    "content": [],
+    "pageable": {
+        "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 3,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalPages": 0,
+    "totalElements": 0,
+    "last": true,
+    "number": 0,
+    "sort": {
+        "empty": false,
+        "sorted": true,
+        "unsorted": false
+    },
+    "size": 3,
+    "first": true,
+    "numberOfElements": 0,
+    "empty": true
+}</pre>
+                            </td>
+                            <td>
+<pre>
+{
+    "timestamp": "2022-10-13T18:55:04.439+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/factura/"
+}</pre>
+                            </td>
+                        </tr>
+                        <!--/////////////////////////////////////////////////////////-->
+                        <tr>
+                            <td>factura</td>
+                            <td>post</td>
+                            <td>localhost:8082/factura/generate/10</td>
+                            <td>POST</td>
+                            <td></td>
+                            <td>{“amount” : 10}</td>
+                            <td>admin (1)</td>
+                            <td>Admin generates 10 random receipts</td>
+                            <td>Access restricted to admins only</td>
+                            <td>Program generates 10 new receipts with random items</td>
+                            <td>
+                                <pre>10</pre>
+                            </td>
+                            <td>
+<pre>
+    {
+        "timestamp":"2022-10-13T19:00:13.630+00:00",
+        "status":"UNAUTHORIZED",
+        "message":"ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+        "details":"uri=/factura/generate/10"
+    }   
+</pre>
+                            </td>
+                        </tr>
+                        <!--/////////////////////////////////////////////////////////-->
+                        <tr>
+                            <td>factura</td>
+                            <td>post</td>
+                            <td>localhost:8082/factura</td>
+                            <td>POST</td>
+                            <td></td>
+                            <td>{ "fecha": "03/12/2020 00:00", "iva": 12, "pagado": false, "usuario": { "id": 4 } }</td>
+                            <td>user (2)</td>
+                            <td>Generates a new factura only from the user that is logged or admins</td>
+                            <td>Full access to admins and individual access for logged user</td>
+                            <td>Generates a receipt</td>
+                            <td>
+<pre>
+{
+
+    "timestamp":"2022-10-13T22:58:13.508+00:00",
+    "status":"INTERNAL_SERVER_ERROR",
+    "message":"JSON parse error: Cannot deserialize value of type 
+    java.time.LocalDateTime from String "03/12/2020 00:00": Failed to deserialize 
+    java.time.LocalDateTime: (java.time.format.DateTimeParseException)
+    Text '03/12/2020 00:00' could not be parsed at index 0;
+    nested exception is com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type
+    java.time.LocalDateTime from String "03/12/2020 00:00": Failed to deserialize java.time.LocalDateTime:
+    (java.time.format.DateTimeParseException) Text '03/12/2020 00:00' could not be parsed at index 0
+    at [Source: (PushbackInputStream); line: 2, column: 14] (through reference chain: 
+    net.ausiasmarch.wildcart.entity.FacturaEntity["fecha"])", "details": "uri=/factura/"    
+} 
+</pre>
+                            </td>
+                            <td>
+<pre>
+    {
+    "timestamp": "2022-10-13T21:35:26.429+00:00",
+    "status": "UNAUTHORIZED",
+    
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin
+    role",
+    "details": "uri=/factura/generate/10"
+    }
+</pre>
+                            </td>
+                        </tr>
+                        <!--/////////////////////////////////////////////////////////-->
+                        <tr>
+                            <td>factura</td>
+                            <td>delete</td>
+                            <td>localhost:8082/factura/1</td>
+                            <td>delete</td>
+                            <td>id</td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>If logged as a user, shows owned receipts. If admin, shows amount of receipts in the database</td>
+                            <td>Must be logged in as user or admin</td>
+                            <td>counts owned receipts by user</td>
+                            <td>
+<pre>
+    1 (deletes the one you selected)
+</pre>
+                            </td>
+                            <td>
+<pre>
+{
+    "timestamp": "2022-10-13T23:04:50.079+00:00",
     "status": "NOT_FOUND",
-    "message": "ERROR: Resource not found: id 5 not exist",
-    "details": "uri=/carrito/5"
-}    
+    "message": "ERROR: Resource not found: id 112312 not exist",
+    "details": "uri=/factura/112312"
+}
+</pre>
+                            </td>
+                        </tr>
+                        <!--/////////////////////////////////////////////////////////-->
+                        <tr>
+                            <td>factura</td>
+                            <td>put</td>
+                            <td>localhost:8082/factura/</td>
+                            <td>delete</td>
+                            <td></td>
+                            <td>{"id": 3, "fecha": "03/12/2020 00:00", "iva": 12, "pagado": false, "usuario": { "id": 4 } }</td>
+                            <td>user (2)</td>
+                            <td>Generates a new receipt only from the user that is logged or admins</td>
+                            <td>Full access only to admins. Logged user can only interact with his own receipts</td>
+                            <td>Generates a receipt</td>
+                            <td>
+<pre>
+{
+    "timestamp": "2022-10-13T22:58:13.508+00:00",
+    "status": "INTERNAL_SERVER_ERROR",
+    "message": "JSON parse error: Cannot deserialize value of type java.time.LocalDateTime from String "03/12/2020 00:00": Failed to deserialize java.time.LocalDateTime: (java.time.format.DateTimeParseException) Text '03/12/2020 00:00' could not be parsed at index 0;
+    nested exception is com.fasterxml.jackson.databind.exc.InvalidFormatException: Cannot deserialize value of type java.time.LocalDateTime from String "03/12/2020 00:00": Failed to deserialize java.time.LocalDateTime: (java.time.format.DateTimeParseException)
+    Text '03/12/2020 00:00' could not be parsed at index 0\n at [Source: (PushbackInputStream);
+    line: 2, column: 14] (through reference chain: net.ausiasmarch.wildcart.entity.FacturaEntity["fecha"])", "details": "uri=/factura/" 
+}
+</pre>
+                            </td>
+                            <td>
+<pre>
+{
+    "timestamp": "2022-10-13T21:35:26.429+00:00",
+    "status": "UNAUTHORIZED",    
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/factura/generate/10"
+}
 </pre>
                             </td>
                         </tr>
