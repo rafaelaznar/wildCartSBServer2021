@@ -385,7 +385,21 @@
                             <td>localhost:8082/factura/generate/10</td>
                             <td>POST</td>
                             <td></td>
-                            <td>{“amount” : 10}</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseFacturaPostPayloadAdmin"
+                                        role="button" aria-expanded="false" aria-controls="collapseFacturaPostPayloadAdmin">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseFacturaPostPayloadAdmin">
+                                    <div class="card card-body">
+<pre>
+    {"amount" : 10}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
                             <td>admin (1)</td>
                             <td>Admin generates 10 random receipts</td>
                             <td>Access restricted to admins only</td>
@@ -432,7 +446,27 @@
                             <td>localhost:8082/factura</td>
                             <td>POST</td>
                             <td></td>
-                            <td>{ "fecha": "03/12/2020 00:00", "iva": 12, "pagado": false, "usuario": { "id": 4 } }</td>
+                            <td>
+
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseFacturaPostPayload"
+                                        role="button" aria-expanded="false" aria-controls="collapseFacturaPostPayload">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseFacturaPostPayload">
+                                    <div class="card card-body">
+<pre>
+    {
+        "fecha": "03/12/2020 00:00",
+        "iva": 12,
+        "pagado": false,
+        "usuario": { "id": 4 }
+    }
+</pre>
+                                    </div>
+                                </div>
+                            </td>
                             <td>user (2)</td>
                             <td>When user buys, a receipt is generated automatically</td>
                             <td>Admins get full</td>
@@ -591,7 +625,28 @@
                             <td>localhost:8082/factura/</td>
                             <td>put</td>
                             <td></td>
-                            <td>{"id": 3, "fecha": "03/12/2020 00:00", "iva": 12, "pagado": false, "usuario": { "id": 4 } }</td>
+                            <td>
+
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseFacturaPutPayload"
+                                        role="button" aria-expanded="false" aria-controls="collapseFacturaPutPayload">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseFacturaPutPayload">
+                                    <div class="card card-body">
+<pre>
+    {
+        "id": 3,
+        "fecha": "03/12/2020 00:00",
+        "iva": 12,
+        "pagado": false,
+        "usuario": { "id": 4 } 
+    }
+</pre>
+                                    </div>
+                                </div>
+                            </td>
                             <td>user (2)</td>
                             <td>Updates data from receipt owned by user</td>
                             <td>Full access only to admins. Logged user can only interact with his own receipts</td>
