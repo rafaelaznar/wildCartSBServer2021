@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WildCart API Specification</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="container" style="font-size: smaller;">
+        <div class="row">
+            <div class="col-12">
+                <h1>WildCart API Specification - Carrito</h1>
+                <h2>Endpoints</h2>
+                <table class="table table-responsive table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Entity</th>
+                            <th>Operation</th>
+                            <th>URL</th>
+                            <th>Method</th>
+                            <th>Arguments</th>
+                            <th>Payload</th>
+                            <th>Profile</th>
+                            <th>Description</th>
+                            <th>Security</th>
+                            <th>Process</th>
+                            <th>Response example</th>
+                            <th>Error response example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>carrito</td>
+                            <td>get</td>
+                            <td>localhost:8082/carrito/{id}</td>
+                            <td>GET</td>
+                            <td>id</td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Get carrito of a user in session</td>
+                            <td>A usuario only can see his own carrito</td>
+                            <td>The carrito is obtained from the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoGetUser"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetUser">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoGetUser">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "id": 2,
+    "cantidad": 3,
+    "precio": 0.0,
+    "producto": {
+        "id": 1,
+        "codigo": "41298Z",
+        "nombre": "Lampara de plastico de color amarillo de tamaño mediano",
+        "existencias": 55,
+        "precio": 94.9,
+        "imagen": 2,
+        "descuento": 21,
+        "tipoproducto": {
+            "id": 47,
+            "nombre": "Productos de gran tonelage para el jardin",
+            "productos": 7
+        },
+        "carritos": 1,
+        "compras": 0
+    },
+    "usuario": {
+        "id": 2,
+        "dni": "51707107W",
+        "nombre": "sergio",
+        "apellido1": "marti",
+        "apellido2": "salom",
+        "login": "user",
+        "email": "marti_sergio@daw.tk",
+        "descuento": 46,
+        "validado": false,
+        "activo": false,
+        "tipousuario": {
+            "id": 2,
+            "nombre": "usuario",
+            "usuarios": 79
+        },
+        "carritos": 1,
+        "facturas": 1
+    }
+}                                                                   
+                                                                            </pre>
+                                    </div>
+                                </div>
+
+
+
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoGetUserError"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetUserError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoGetUserError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T18:34:12.330+00:00",
+    "status": "NOT_FOUND",
+    "message": "ERROR: Resource not found: id 5 not exist",
+    "details": "uri=/carrito/5"
+}    
+                                        </pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>get</td>
+                            <td>localhost:8082/carrito/{id}</td>
+                            <td>GET</td>
+                            <td>id</td>
+                            <td></td>
+                            <td>admin (1)</td>
+                            <td>Retrieves a carrito by id </td>
+                            <td>Admins can fetch all carritos</td>
+                            <td>The carrito is obtained from the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoGetAdmin"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetAdmin">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoGetAdmin">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "id": 2,
+    "cantidad": 3,
+    "precio": 0.0,
+    "producto": {
+        "id": 1,
+        "codigo": "41298Z",
+        "nombre": "Lampara de plastico de color amarillo de tamaño mediano",
+        "existencias": 55,
+        "precio": 94.9,
+        "imagen": 2,
+        "descuento": 21,
+        "tipoproducto": {
+            "id": 47,
+            "nombre": "Productos de gran tonelage para el jardin",
+            "productos": 7
+        },
+        "carritos": 1,
+        "compras": 0
+    },
+    "usuario": {
+        "id": 2,
+        "dni": "51707107W",
+        "nombre": "sergio",
+        "apellido1": "marti",
+        "apellido2": "salom",
+        "login": "user",
+        "email": "marti_sergio@daw.tk",
+        "descuento": 46,
+        "validado": false,
+        "activo": false,
+        "tipousuario": {
+            "id": 2,
+            "nombre": "usuario",
+            "usuarios": 79
+        },
+        "carritos": 1,
+        "facturas": 1
+    }
+}                                                                   
+                                        </pre>
+                                    </div>
+                                </div>
+                                
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoGetAdminError"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetAdminError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoGetAdminError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T18:34:12.330+00:00",
+    "status": "NOT_FOUND",
+    "message": "ERROR: Resource not found: id 5 not exist",
+    "details": "uri=/carrito/5"
+}    
+                                        </pre>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>get page of carritos</td>
+                            <td>localhost:8082/carrito</td>
+                            <td>GET</td>
+                            <td></td>
+                            <td></td>
+                            <td>admin (1)</td>
+                            <td>Returns a pagination of carrito</td>
+                            <td>Only admins can get a page of carritos</td>
+                            <td>Returns a pagination of carts</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoGetPage"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetPage">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoGetPage">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "content": [
+        carritos...
+    ],
+    "pageable": {
+        "sort": {
+            "empty": true,
+            "sorted": false,
+            "unsorted": true
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 10,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": true,
+    "totalPages": 1,
+    "totalElements": 10,
+    "size": 10,
+    "number": 0,
+    "sort": {
+        "empty": true,
+        "sorted": false,
+        "unsorted": true
+    },
+    "first": true,
+    "numberOfElements": 10,
+    "empty": false
+}
+                                        </pre>
+                                    </div>
+                                </div>
+                                
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoGetPageError"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetPageError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoGetPageError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T22:37:11.450+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/carrito"
+}
+                                        </pre>
+                                    </div>
+                                </div>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>save carrito</td>
+                            <td>localhost:8082/carrito</td>
+                            <td>PUT</td>
+                            <td>id from payload</td>
+                            <td>
+                                <pre>
+{
+    "id": 2025,
+    "cantidad": 22,
+    "precio": 22.22,
+    "producto": {
+        "id": 2
+    },
+    "usuario": {
+        "id": 2
+    }
+}
+                                </pre>
+                            </td>
+                            <td>admin (1)</td>
+                            <td>Updates a carrito by his id</td>
+                            <td>Only admins can update a carrito</td>
+                            <td></td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoUpdate"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoUpdate">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoUpdate">
+                                    <div class="card card-body">
+                                        <pre>
+2
+                                        </pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoUpdateError"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoUpdateError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoUpdateError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T18:47:08.462+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/carrito/"
+}
+                                        </pre>
+                                    </div>
+                                </div>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>create carrito</td>
+                            <td>localhost:8082/carrito</td>
+                            <td>POST</td>
+                            <td></td>
+                            <td>
+                                <pre>
+{
+    "cantidad": 2,
+    "precio": 1.11,
+    "producto": {
+        "id": 9
+    },
+    "usuario": {
+        "id": 2
+    }
+}
+                                </pre>
+                            </td>
+                            <td>admin (1)</td>
+                            <td>Creates a carrito</td>
+                            <td>Only admins can create a carrito</td>
+                            <td></td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoCreate"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoCreate">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoCreate">
+                                    <div class="card card-body">
+                                        <pre>
+11  
+                                        </pre>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoCreateError"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoCreateError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoCreateError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T19:00:24.230+00:00",
+    "status": "NOT_ACCEPTABLE",
+    "message": "ERROR: Field data not valid: error de validación: campo cantidad de la entidad carrito (debe ser un entero entre 1 y 1000)",
+    "details": "uri=/carrito/"
+}
+                                        </pre>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>empty carrito</td>
+                            <td>localhost:8082/carrito/{id}</td>
+                            <td>DELETE</td>
+                            <td>id</td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Empties all products from the user's carrito</td>
+                            <td>Only logged in users can empty a carrito</td>
+                            <td></td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoEmpty"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoEmpty">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoEmpty">
+                                    <div class="card card-body">
+                                        <pre>
+2
+                                        </pre>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoEmptyError"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoEmptyError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoEmptyError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T19:08:06.330+00:00",
+    "status": "NOT_FOUND",
+    "message": "ERROR: Resource not found: id 253535 not exist",
+    "details": "uri=/carrito/253535"
+}
+                                        </pre>
+                                    </div>
+                                </div>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>delete carrito</td>
+                            <td>localhost:8082/carrito/{id}</td>
+                            <td>DELETE</td>
+                            <td>id</td>
+                            <td></td>
+                            <td>admin (1)</td>
+                            <td>Deletes a carrito</td>
+                            <td>Admins can delete a carrito from the database</td>
+                            <td></td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoDelete"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoDelete">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoDelete">
+                                    <div class="card card-body">
+                                        <pre>
+2
+                                        </pre>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoDeleteError"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoDeleteError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoDeleteError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T19:08:06.330+00:00",
+    "status": "NOT_FOUND",
+    "message": "ERROR: Resource not found: id 253535 not exist",
+    "details": "uri=/carrito/253535"
+}
+                                        </pre>
+                                    </div>
+                                </div>
+                               
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>buy products from carrito</td>
+                            <td>localhost:8082/buy</td>
+                            <td>PUT</td>
+                            <td></td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Buy items from the carrito</td>
+                            <td>Only logged in users can buy</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>add a product to user's carrito</td>
+                            <td>localhost:8082/carrito/{id_product}/{amount}</td>
+                            <td>POST</td>
+                            <td>id_product, amount</td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Adds a selected amount of products on the carrito</td>
+                            <td>Only logged in users can add products to his carrito</td>
+                            <td>Adds a selected amount of products on the carrito</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoAddProductAmount"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoAddProductAmount">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoAddProductAmount">
+                                    <div class="card card-body">
+                                        <pre>
+3
+                                        </pre>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoAddProductAmountError"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoAddProductAmountError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoAddProductAmountError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T22:45:07.052+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user role",
+    "details": "uri=/carrito/3/1"
+}
+                                        </pre>
+                                    </div>    
+                                </div>    
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td>carrito</td>
+                            <td>count carritos</td>
+                            <td>localhost:8082/carrito/count</td>
+                            <td>GET</td>
+                            <td></td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Count products from his carrito</td>
+                            <td>Only logged in users can count products on his carrito</td>
+                            <td></td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoCountUser"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoCountUser">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoCountUser">
+                                    <div class="card card-body">
+                                        <pre>
+20
+                                        </pre>
+                                    </div>
+                                </div>
+                                
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoCountUserError"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoCountUserError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoCountUserError">
+                                    <div class="card card-body" >
+                                        <pre>
+{
+    "timestamp": "2022-10-13T19:24:06.326+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/carrito/count"
+}
+                                        </pre>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>count carritos</td>
+                            <td>localhost:8082/carrito/count</td>
+                            <td>GET</td>
+                            <td></td>
+                            <td></td>
+                            <td>admin (1)</td>
+                            <td>Counts all carritos in the database</td>
+                            <td>Only admins can count all carritos</td>
+                            <td></td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoCountAdmin"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoCountAdmin">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoCountAdmin">
+                                    <div class="card card-body">
+                                        <pre>
+20
+                                        </pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoCountAdminError"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoCountAdminError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoCountAdminError">
+                                    <div class="card card-body" >
+                                        <pre>
+{
+    "timestamp": "2022-10-13T19:24:06.326+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/carrito/count"
+}
+                                        </pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>generate carrito</td>
+                            <td>localhost:8082/carrito/generate/{amount}</td>
+                            <td>POST</td>
+                            <td>amount</td>
+                            <td></td>
+                            <td>admin (1)</td>
+                            <td>Generates a given amount of carrito</td>
+                            <td>Only admins can generate carritos</td>
+                            <td></td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoGenerate"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGenerate">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoGenerate">
+                                    <div class="card card-body">
+                                        <pre>
+10
+                                        </pre>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoGenerateError"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGenerateError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoGenerateError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T22:08:59.099+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/carrito/generate/1"
+}
+                                        </pre>
+                                    </div>
+                                </div>
+                            
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>delete products from carrito</td>
+                            <td>localhost:8082/carrito/producto/{id_producto}</td>
+                            <td>DELETE</td>
+                            <td>id_producto</td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Deletes a product from the user's carrito</td>
+                            <td>Only logged in users can delete products from his carrito</td>
+                            <td>The product gets deleted from the user's carrito</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoDeleteProductos"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoDeleteProductos">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoDeleteProductos">
+                                    <div class="card card-body">    
+                                        <pre>
+1
+                                        </pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoDeleteProductosError"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoDeleteProductosError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoDeleteProductosError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T22:15:50.600+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user role",
+    "details": "uri=/carrito/producto/3"
+}
+                                        </pre>
+                                </div>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>carrito</td>
+                            <td>delete a product with amount from carrito</td>
+                            <td>localhost:8082/carrito/producto/{id_producto}/{amount}</td>
+                            <td>DELETE</td>
+                            <td>id_producto, amount</td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Deletes a given number of products from the cart</td>
+                            <td>Only logged in users can delete an amount of products from his carrito</td>
+                            <td>Deletes a given number of products from the cart</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoDeleteProductosAmount"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoDeleteProductosAmount">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoDeleteProductosAmount">
+                                    <div class="card card-body">
+                                        <pre>
+4                                    
+                                        </pre>
+                                    </div>
+                                </div>
+
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoDeleteProductosAmountError"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoDeleteProductosAmountError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoDeleteProductosAmountError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T22:46:46.717+00:00",
+    "status": "INTERNAL_SERVER_ERROR",
+    "message": "ERROR: Cannot perform operation: no exist that product in users cart",
+    "details": "uri=/carrito/producto/2/5"
+}
+                                        </pre>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
