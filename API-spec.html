@@ -49,12 +49,12 @@
                             <td>
 
                                 <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoGet"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoGet1"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet1">
                                         JSON
                                     </a>
                                 </p>
-                                <div class="collapse" id="collapseCarritoGet">
+                                <div class="collapse" id="collapseCarritoGet1">
                                     <div class="card card-body">
                                         <pre>
 {
@@ -106,12 +106,12 @@
                             </td>
                             <td>
                                 <p>
-                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoGetError"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetError">
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoGetError1"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetError1">
                                         JSON
                                     </a>
                                 </p>
-                                <div class="collapse" id="collapseCarritoGetError">
+                                <div class="collapse" id="collapseCarritoGetError1">
                                     <div class="card card-body">
                                         <pre>
 {
@@ -123,6 +123,188 @@
                                         </pre>
                                     </div>
                                 </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>Session</td>
+                            <td>post</td>
+                            <td>localhost:8082/session</td>
+                            <td>POST</td>
+                            <td></td>
+                            <td><pre>{
+                                "login": "admin",
+                                "password": "4298f843f830fb3cc13ecdfe1b2cf10f51f929df056d644d1bca73228c5e8f64"
+                            }</pre></td>
+                            <td>user(2)</td>
+                            <td>A user log in the system </td>
+                            <td>Gets into the system if the password is correct</td>
+                            <td>Gets the user and password from a Json</td>
+                            <td>
+
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoGet2"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet2">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoGet2">
+                                    <div class="card card-body">
+                                <pre>
+                                    {
+                                        "id": 1,
+                                        "dni": "12345678Z",
+                                        "nombre": "Admin.",
+                                        "apellido1": "Administrador",
+                                        "apellido2": "Administrador",
+                                        "login": "admin",
+                                        "email": "admin@wildcart.com",
+                                        "descuento": 0,
+                                        "validado": true,
+                                        "activo": true,
+                                        "tipousuario": {
+                                            "id": 1,
+                                            "nombre": "administrador",
+                                            "usuarios": 23
+                                        },
+                                        "carritos": 0,
+                                        "facturas": 0
+                                    }
+                                                                     
+                                </pre>
+
+                                </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoGetError2"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetError2">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoGetError2">
+                                    <div class="card card-body">
+<pre>
+{
+    "timestamp": "2022-10-13T18:34:12.330+00:00",
+    "status": "NOT_FOUND",
+    "message": "ERROR: Resource not found: id 5 not exist",
+    "details": "uri=/carrito/5"
+}    
+</pre>
+</div>
+</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Session</td>
+                            <td>get</td>
+                            <td>localhost:8082/session</td>
+                            <td>GET</td>
+                            <td></td>
+                            <td></td>
+                            <td>user(2)</td>
+                            <td>Return the current session</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoGet3"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet3">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoGet3">
+                                    <div class="card card-body">
+                                <pre>
+                                    {
+                                        "id": 1,
+                                        "dni": "12345678Z",
+                                        "nombre": "Admin.",
+                                        "apellido1": "Administrador",
+                                        "apellido2": "Administrador",
+                                        "login": "admin",
+                                        "email": "admin@wildcart.com",
+                                        "descuento": 0,
+                                        "validado": true,
+                                        "activo": true,
+                                        "tipousuario": {
+                                            "id": 1,
+                                            "nombre": "administrador",
+                                            "usuarios": 23
+                                        },
+                                        "carritos": 0,
+                                        "facturas": 0
+                                    }
+                                                                     
+                                </pre>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoGet3"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet3">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoGet3">
+                                    <div class="card card-body">
+                            </td>
+                            <td>
+                                <p> rafazanar
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoGetError3"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetError3">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoGetError3">
+                                    <div class="card card-body">
+<pre>
+{
+    "timestamp": "2022-10-13T18:34:12.330+00:00",
+    "status": "NOT_FOUND",
+    "message": "ERROR: Resource not found: id 5 not exist",
+    "details": "uri=/carrito/5"
+}    
+</pre>
+</div>
+</div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Session</td>
+                            <td>delete</td>
+                            <td>localhost:8082/session</td>
+                            <td>DELETE</td>
+                            <td></td>
+                            <td></td>
+                            <td>user(2)</td>
+                            <td>The user log out from the system</td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <pre>
+                                                            
+                                </pre>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoGetError4"
+                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetError4">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCarritoGetError4">
+                                    <div class="card card-body">
+<pre>
+{
+    "timestamp": "2022-10-13T18:34:12.330+00:00",
+    "status": "NOT_FOUND",
+    "message": "ERROR: Resource not found: id 5 not exist",
+    "details": "uri=/carrito/5"
+}    
+</pre>
+</div>
+</div>
                             </td>
                         </tr>
                     </tbody>
