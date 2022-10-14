@@ -35,96 +35,385 @@
                         </tr>
                     </thead>
                     <tbody>
+                       
                         <tr>
-                            <td>carrito</td>
-                            <td>get</td>
-                            <td>localhost:8082/carrito/{id}</td>
-                            <td>GET</td>
+                            <td>user</td>
+                            <td>DELETE</td>
+                            <td>localhost:8082/usuario/{id}</td>
+                            <td>DELETE</td>
                             <td>id</td>
                             <td></td>
                             <td>user (2)</td>
-                            <td>Get carrito of a user in session</td>
-                            <td>A usuario only can see his own carrito</td>
-                            <td>The carrito is obtained from the database</td>
+                            <td>Delete user by id</td>
+                            <td>The administrator  is the only one who can delete users</td>
+                            <td>The user is delete from the database</td>
                             <td>
-
-                                <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCarritoGet"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
-                                        JSON
-                                    </a>
+                            	<p>
+                            	   <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseUsuarioDelete" role="button" aria-expanded="false" aria-controls="collapseUsuarioDelete">
+                            	   JSON
+                            	   </a>
                                 </p>
-                                <div class="collapse" id="collapseCarritoGet">
-                                    <div class="card card-body">
-                                        <pre>
-{
-    "id": 2,
-    "cantidad": 3,
-    "precio": 0.0,
-    "producto": {
-        "id": 1,
-        "codigo": "41298Z",
-        "nombre": "Lampara de plastico de color amarillo de tamaño mediano",
-        "existencias": 55,
-        "precio": 94.9,
-        "imagen": 2,
-        "descuento": 21,
-        "tipoproducto": {
-            "id": 47,
-            "nombre": "Productos de gran tonelage para el jardin",
-            "productos": 7
-        },
-        "carritos": 1,
-        "compras": 0
-    },
-    "usuario": {
-        "id": 2,
-        "dni": "51707107W",
-        "nombre": "sergio",
-        "apellido1": "marti",
-        "apellido2": "salom",
-        "login": "user",
-        "email": "marti_sergio@daw.tk",
-        "descuento": 46,
-        "validado": false,
-        "activo": false,
-        "tipousuario": {
-            "id": 2,
-            "nombre": "usuario",
-            "usuarios": 79
-        },
-        "carritos": 1,
-        "facturas": 1
-    }
-}                                                                   
-                                                                            </pre>
-                                    </div>
-                                </div>
+                                <div class="collapse" id="collapseUsuarioDelete">
+                                	<div class="card card-body">
+                                	<pre>
 
-
-
+4
+                                                                 
+                                	</pre>
+                                	</div>
+                        	</div>
                             </td>
                             <td>
                                 <p>
-                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCarritoGetError"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetError">
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseUsuarioDeleteError"
+                                        role="button" aria-expanded="false" aria-controls="collapseUsuarioDeleteError">
                                         JSON
                                     </a>
                                 </p>
-                                <div class="collapse" id="collapseCarritoGetError">
+                                <div class="collapse" id="collapseUsuarioDeleteError">
                                     <div class="card card-body">
-                                        <pre>
-{
-    "timestamp": "2022-10-13T18:34:12.330+00:00",
-    "status": "NOT_FOUND",
-    "message": "ERROR: Resource not found: id 5 not exist",
-    "details": "uri=/carrito/5"
-}    
-                                        </pre>
+<pre>
+    {
+        "timestamp": "2022-10-13T19:07:22.299+00:00",
+        "status": "UNAUTHORIZED",
+        "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+        "details": "uri=/usuario/1280"
+    }   
+</pre>
                                     </div>
                                 </div>
                             </td>
                         </tr>
+                        <tr>
+                            <td>user</td>
+                            <td>GET</td>
+                            <td>localhost:8082/usuario/{id}</td>
+                            <td>GET</td>
+                            <td>id</td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Return a user entity</td>
+                            <td>The administrator  is the only one who can search data users</td>
+                            <td>Obtain data information from users seached by id</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseUsuarioGet" role="button" aria-expanded="false" aria-controls="collapseUsuarioGet">
+                                    JSON
+                                    </a>
+                                 </p>
+                                 <div class="collapse" id="collapseUsuarioGet">
+                                     <div class="card card-body">
+                                <pre>
+
+{
+    "id": 1,
+    "dni": "12345678Z",
+    "nombre": "Admin.",
+    "apellido1": "Administrador",
+    "apellido2": "Administrador",
+    "login": "admin",
+    "email": "admin@wildcart.com",
+    "descuento": 0,
+    "validado": true,
+    "activo": true,
+    "tipousuario": {
+        "id": 1,
+        "nombre": "administrador",
+        "usuarios": 23
+    },
+    "carritos": 0,
+    "facturas": 2
+}
+                                                                 
+                                </pre>
+                                </div>
+                            </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseUsuarioGetError"
+                                        role="button" aria-expanded="false" aria-controls="collapseUsuarioGetError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseUsuarioGetError">
+                                    <div class="card card-body">
+<pre>
+{
+    "timestamp": "2022-10-13T19:20:02.202+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/usuario/1"
+} 
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>user</td>
+                            <td>POST</td>
+                            <td>localhost:8082/usuario/</td>
+                            <td>POST</td>
+                            <td></td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Create a new user</td>
+                            <td>The administrator  is the only one who can create users</td>
+                            <td>Create a new user in a data base</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseUsuarioPost" role="button" aria-expanded="false" aria-controls="collapseUsuarioPost">
+                                    JSON
+                                    </a>
+                                 </p>
+                                 <div class="collapse" id="collapseUsuarioPost">
+                                     <div class="card card-body">
+                                <pre>
+
+102 
+                                                                 
+                                </pre>
+                                </div>
+                            </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseUsuarioPostError"
+                                        role="button" aria-expanded="false" aria-controls="collapseUsuarioPostError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseUsuarioPostError">
+                                    <div class="card card-body">
+<pre>
+{
+    "timestamp": "2022-10-13T19:23:53.025+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/usuario/"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>user</td>
+                            <td>UPDATE</td>
+                            <td>localhost:8082/usuario/</td>
+                            <td>PUT</td>
+                            <td></td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Update a data user</td>
+                            <td>The administrator  is the only one who can update users</td>
+                            <td>Update data user in a data base</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseUsuarioPut" role="button" aria-expanded="false" aria-controls="collapseUsuarioPut">
+                                    JSON
+                                    </a>
+                                 </p>
+                                <div class="collapse" id="collapseUsuarioPut">
+                                     <div class="card card-body">
+                                <pre>
+
+20 
+                                                                 
+                                </pre>
+                                     </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseUsuarioPutError"
+                                        role="button" aria-expanded="false" aria-controls="collapseUsuarioPutError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseUsuarioPutError">
+                                    <div class="card card-body">
+<pre>
+{
+    "timestamp": "2022-10-13T19:29:03.771+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/usuario/"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>user</td>
+                            <td>COUNT</td>
+                            <td>localhost:8082/usuario/count</td>
+                            <td>GET</td>
+                            <td></td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Return the total of users of data base</td>
+                            <td>The administrator  is the only one who can obtain this information</td>
+                            <td>Return the total of users of data base</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseUsuarioCount" role="button" aria-expanded="false" aria-controls="collapseUsuarioCount">
+                                    JSON
+                                    </a>
+                                 </p>
+                                <div class="collapse" id="collapseUsuarioCount">
+                                     <div class="card card-body">
+                                <pre>
+
+102 
+                                                                 
+                                </pre>
+                                     </div>
+                                    </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseUsuarioCountError"
+                                        role="button" aria-expanded="false" aria-controls="collapseUsuarioCountError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseUsuarioCountError">
+                                    <div class="card card-body">
+<pre>
+{
+    "timestamp": "2022-10-13T19:30:25.457+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/usuario/count"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>user</td>
+                            <td>GENERATE{amount}</td>
+                            <td>localhost:8082/usuario/generate/10</td>
+                            <td>POST</td>
+                            <td>nº of generate users </td>
+                            <td></td>
+                            <td>user (2)</td>
+                            <td>Generate n new random users and returns the total of user on database</td>
+                            <td>The administrator is the only one who can generates new users</td>
+                            <td>It generates 10 new users random</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseUsuarioGenerate10" role="button" aria-expanded="false" aria-controls="collapseUsuarioGenerate10">
+                                    JSON
+                                    </a>
+                                 </p>
+                                <div class="collapse" id="collapseUsuarioGenerate10">
+                                     <div class="card card-body">
+                                <pre>
+
+11
+                                                                 
+                                </pre>
+                                     </div>
+                                    </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseUsuarioGenerate10Error"
+                                        role="button" aria-expanded="false" aria-controls="collapseUsuarioGenerate10Error">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseUsuarioGenerate10Error">
+                                    <div class="card card-body">
+<pre>
+{
+    "timestamp": "2022-10-14T10:37:33.660+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to
+    admin role",
+    "details": "uri=/usuario/generate/10"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td>user</td>
+                    <td>GENERATE</td>
+                    <td>localhost:8082/usuario/generate/</td>
+                    <td>POST</td>
+                    <td></td>
+                    <td></td>
+                    <td>user (2)</td>
+                    <td>Generate only one new random user and returns the user generated</td>
+                    <td>The administrator is the only one who can generates new users</td>
+                    <td>It generates a new random user</td>
+                    <td>
+                        <p>
+                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseUsuarioGenerate" role="button" aria-expanded="false" aria-controls="collapseUsuarioGenerate">
+                            JSON
+                            </a>
+                         </p>
+                        <div class="collapse" id="collapseUsuarioGenerate">
+                             <div class="card card-body">
+                        <pre>
+
+{
+    "id": null,
+    "dni": "16298050C",
+    "nombre": "sergio",
+    "apellido1": "santos",
+    "apellido2": "santamaría",
+    "login": "sergio_santos",
+    "email": "santos_sergio@daw.tk",
+    "descuento": 45,
+    "validado": false,
+    "activo": false,
+    "tipousuario": {
+    "id": 1,
+    "nombre": "administrador",
+    "usuarios": 4
+    },
+    "carritos": 0,
+    "facturas":0
+}
+                                                         
+                        </pre>
+                             </div>
+                            </div>
+                    </td>
+                    <td>
+                        <p>
+                            <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseUsuarioGenerateError"
+                                role="button" aria-expanded="false" aria-controls="collapseUsuarioGenerateError">
+                                JSON
+                            </a>
+                        </p>
+                        <div class="collapse" id="collapseUsuarioGenerateError">
+                            <div class="card card-body">
+<pre>
+{
+    "timestamp": "2022-10-14T10:46:57.942+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to
+    admin role",
+    "details": "uri=/usuario/generate"
+}
+</pre>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
                     </tbody>
                 </table>
             </div>
