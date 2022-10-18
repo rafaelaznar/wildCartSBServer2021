@@ -380,7 +380,7 @@
                         <td></td>
                         <td>user (2)</td>
                         <td>Returns page of types of users in wildCart2021.</td>
-                        <td>Only admins can access here , users are unable to enter.</td>
+                        <td></td>
                         <td>The page containing the types of users and info are received all from the database.</td>
                         <td>
 
@@ -394,12 +394,45 @@
                                 <div class="card card-body">
                                     <pre>
 {
-    "timestamp": "2022-10-14T11:00:34.003+00:00",
-    "status": "UNAUTHORIZED",
-    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
-    "details": "uri=/tipousuario"
+    "content": [
+        {
+            "id": 1,
+            "nombre": "administrador",
+            "usuarios": 1
+        },
+        {
+            "id": 2,
+            "nombre": "lucas",
+            "usuarios": 10
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "empty": true,
+            "sorted": false,
+            "unsorted": true
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 11,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalPages": 1,
+    "totalElements": 2,
+    "last": true,
+    "size": 11,
+    "number": 0,
+    "sort": {
+        "empty": true,
+        "sorted": false,
+        "unsorted": true
+    },
+    "first": true,
+    "numberOfElements": 2,
+    "empty": false
 }
-                                                                 
+                            
                                                                                 </pre>
                                 </div>
                             </div>
@@ -434,7 +467,7 @@
                         <td></td>
                         <td>administrador (1)</td>
                         <td>Returns page of types of users in wildCart2021.</td>
-                        <td>Only admins can access here , users are unable to enter.</td>
+                        <td></td>
                         <td>The page containing the types of users and info are received all from the database.</td>
                         <td>
 
@@ -643,7 +676,7 @@
                         <td></td>
                         <td>administrador (1)</td>
                         <td>Allows generate types of user.</td>
-                        <td>Only admins can do this..</td>
+                        <td>Only admins can do this.td>
                         <td>Generates new kind of user to the db.</td>
                         <td>
 
@@ -694,7 +727,7 @@
                         <td></td>
                         <td>user (2)</td>
                         <td>Allows generate types of user.</td>
-                        <td>Only admins can do this..</td>
+                        <td>Only admins can do this.</td>
                         <td>Generates new kind of user to the db.</td>
                         <td>
 
