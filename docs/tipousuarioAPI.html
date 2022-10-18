@@ -526,9 +526,9 @@
                             
                         </pre></td>
                         <td>user (2)</td>
-                        <td>Put allows modify info of the types of user.</td>
-                        <td>TO-DO : Error! users can also modify it , they shouldnt be able to , use put .</td>
-                        <td>The info of the types of users its all obtained from the db.</td>
+                        <td>Put allows modify info of the table tipousuario.</td>
+                        <td>UNAUTHORIZED only administrador can modify tipousuario.</td>
+                        <td>Update allows to modify info from the db of the table tipousuario.</td>
                         <td>
 
                             <p>
@@ -541,7 +541,10 @@
                                 <div class="card card-body">
                                     <pre>
 {
-     2
+    "timestamp": "2022-10-18T10:49:02.275+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/tipousuario/"
 }                           
                                                     </pre>
                                 </div>
@@ -587,9 +590,9 @@
 }
                         </pre></td>
                         <td>administrador (1)</td>
-                        <td>Put allows modify info of the types of user.</td>
-                        <td>Only admins can modify this info , now user can modify it too ,so it is badly done.</td>
-                        <td>The info of the types of users its all obtained from the db.</td>
+                        <td>Put allows modify info of the table tipousuario.</td>
+                        <td>UNAUTHORIZED only administrador can modify tipousuario.</td>
+                        <td>Update allows to modify info from the db of the table tipousuario.</td>
                         <td>
 
                             <p>
