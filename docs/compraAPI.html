@@ -41,7 +41,7 @@
                         <tr>
                             <td>compra</td>
                             <td>get</td>
-                            <td>localhost:8082/compra/{id}</td>
+                            <td>localhost:8082/compra/5</td>
                             <td>GET</td>
                             <td>id</td>
                             <td></td>
@@ -60,27 +60,27 @@
                                     <div class="card card-body">
                                         <pre>
 {
-    "id": 1,
-    "cantidad": 184,
-    "precio": 244.12,
-    "fecha": "2022-09-22T11:49:15.000Z",
-    "descuento_usuario": 3,
-    "descuento_producto": 15,
+    "id": 5,
+    "cantidad": 99,
+    "precio": 356.12,
+    "fecha": "2022-09-22T03:33:10.000Z",
+    "descuento_usuario": 5,
+    "descuento_producto": 33,
     "factura": {
-        "id": 60,
-        "fecha": "2017-02-03T21:12:59.000Z",
-        "iva": 21,
+        "id": 2,
+        "fecha": "2010-01-29T21:12:56.000Z",
+        "iva": 10,
         "pagado": true,
-        "compras": 2,
+        "compras": 3,
         "usuario": {
-            "id": 42,
-            "dni": "54939536B",
-            "nombre": "aaron",
-            "apellido1": "tatay",
-            "apellido2": "tarazón",
-            "login": "aaron_tatay",
-            "email": "tatay_aaron@daw.tk",
-            "descuento": 48,
+            "id": 14,
+            "dni": "42772154C",
+            "nombre": "mark",
+            "apellido1": "mocholi",
+            "apellido2": "gil",
+            "login": "mark_mocholi",
+            "email": "mark_mocholi@daw.tk",
+            "descuento": 16,
             "validado": false,
             "activo": false,
             "tipousuario": {
@@ -89,26 +89,26 @@
                 "usuarios": 82
             },
             "carritos": 0,
-            "facturas": 1
+            "facturas": 2
         }
     },
     "producto": {
-        "id": 63,
-        "codigo": "68237R",
-        "nombre": "Sillón de madera de color rosa de tamaño grade",
-        "existencias": 24,
-        "precio": 14.67,
+        "id": 670,
+        "codigo": "85595D",
+        "nombre": "Vitrina de metal de color rojo de tamaño extra grande",
+        "existencias": 61,
+        "precio": 22.43,
         "imagen": 1,
-        "descuento": 38,
+        "descuento": 16,
         "tipoproducto": {
-            "id": 60,
-            "nombre": "Artículos abatibles para cines y teatros",
-            "productos": 16
+            "id": 31,
+            "nombre": "Productos de lujo para el hogar",
+            "productos": 15
         },
         "carritos": 0,
         "compras": 1
     }
-} 
+}
 </pre>
                                     </div>
                                 </div>
@@ -137,7 +137,7 @@
                         <tr>
                             <td>compra</td>
                             <td>get</td>
-                            <td>localhost:8082/compra/{id}</td>
+                            <td>localhost:8082/compra/3</td>
                             <td>GET</td>
                             <td>id</td>
                             <td></td>
@@ -281,10 +281,10 @@
                         <tr>
                             <td>compra</td>
                             <td>getPage</td>
-                            <td>localhost:8082/compra?page={numPage}&size={numSize}&sort={data},{orden}&sort={data},{orden}
+                            <td>localhost:8082/compra?page=0&size=3&sort=fecha,asc&sort=id,desc
                             </td>
                             <td>GET</td>
-                            <td>numPage,numSize,data,oden,sort,data,orden</td>
+                            <td>page,size,sort,(asc, desc)</td>
                             <td></td>
                             <td>user(2)</td>
                             <td>Show your purchase page in the order you specify</td>
@@ -303,27 +303,27 @@
 {
     "content": [
         {
-            "id": 125,
-            "cantidad": 14,
-            "precio": 31.36,
-            "fecha": "2022-10-13T19:31:41.000Z",
-            "descuento_usuario": 2,
+            "id": 5,
+            "cantidad": 99,
+            "precio": 356.12,
+            "fecha": "2022-09-22T03:33:10.000Z",
+            "descuento_usuario": 5,
             "descuento_producto": 33,
             "factura": {
-                "id": 3,
-                "fecha": "2013-03-10T23:49:14.000Z",
+                "id": 2,
+                "fecha": "2010-01-29T21:12:56.000Z",
                 "iva": 10,
                 "pagado": true,
                 "compras": 3,
                 "usuario": {
-                    "id": 50,
-                    "dni": "70217090E",
-                    "nombre": "jose",
-                    "apellido1": "gil",
-                    "apellido2": "raga",
-                    "login": "jose_gil",
-                    "email": "jose_gil@daw.tk",
-                    "descuento": 18,
+                    "id": 14,
+                    "dni": "42772154C",
+                    "nombre": "mark",
+                    "apellido1": "mocholi",
+                    "apellido2": "gil",
+                    "login": "mark_mocholi",
+                    "email": "mark_mocholi@daw.tk",
+                    "descuento": 16,
                     "validado": false,
                     "activo": false,
                     "tipousuario": {
@@ -332,48 +332,48 @@
                         "usuarios": 82
                     },
                     "carritos": 0,
-                    "facturas": 1
+                    "facturas": 2
                 }
             },
             "producto": {
-                "id": 8,
-                "codigo": "76393T",
-                "nombre": "Sillón de cartón de color amarillo de tamaño pequeño",
-                "existencias": 5,
-                "precio": 59.11,
+                "id": 670,
+                "codigo": "85595D",
+                "nombre": "Vitrina de metal de color rojo de tamaño extra grande",
+                "existencias": 61,
+                "precio": 22.43,
                 "imagen": 1,
-                "descuento": 10,
+                "descuento": 16,
                 "tipoproducto": {
-                    "id": 8,
-                    "nombre": "Elaboraciones estándar para la oficina",
-                    "productos": 3
+                    "id": 31,
+                    "nombre": "Productos de lujo para el hogar",
+                    "productos": 15
                 },
                 "carritos": 0,
-                "compras": 2
+                "compras": 1
             }
         },
         {
-            "id": 102,
-            "cantidad": 21,
-            "precio": 41.8,
-            "fecha": "2022-10-13T22:00:00.000Z",
-            "descuento_usuario": 6,
-            "descuento_producto": 12,
+            "id": 28,
+            "cantidad": 177,
+            "precio": 324.39,
+            "fecha": "2022-09-22T14:55:58.000Z",
+            "descuento_usuario": 7,
+            "descuento_producto": 23,
             "factura": {
-                "id": 3,
-                "fecha": "2013-03-10T23:49:14.000Z",
+                "id": 2,
+                "fecha": "2010-01-29T21:12:56.000Z",
                 "iva": 10,
                 "pagado": true,
                 "compras": 3,
                 "usuario": {
-                    "id": 50,
-                    "dni": "70217090E",
-                    "nombre": "jose",
-                    "apellido1": "gil",
-                    "apellido2": "raga",
-                    "login": "jose_gil",
-                    "email": "jose_gil@daw.tk",
-                    "descuento": 18,
+                    "id": 14,
+                    "dni": "42772154C",
+                    "nombre": "mark",
+                    "apellido1": "mocholi",
+                    "apellido2": "gil",
+                    "login": "mark_mocholi",
+                    "email": "mark_mocholi@daw.tk",
+                    "descuento": 16,
                     "validado": false,
                     "activo": false,
                     "tipousuario": {
@@ -382,48 +382,48 @@
                         "usuarios": 82
                     },
                     "carritos": 0,
-                    "facturas": 1
+                    "facturas": 2
                 }
             },
             "producto": {
-                "id": 2,
-                "codigo": "62724C",
-                "nombre": "Aparador de cristal de color naranja de tamaño mediano",
-                "existencias": 30,
-                "precio": 63.88,
+                "id": 36,
+                "codigo": "64347V",
+                "nombre": "Cama de cartón de color azul de tamaño grade",
+                "existencias": 10,
+                "precio": 11.65,
                 "imagen": 1,
-                "descuento": 49,
+                "descuento": 5,
                 "tipoproducto": {
-                    "id": 93,
-                    "nombre": "Artículos de alta resistencia para la restauracion",
-                    "productos": 4
+                    "id": 29,
+                    "nombre": "Manufacturas de gran tonelage para cines y teatros",
+                    "productos": 17
                 },
                 "carritos": 0,
-                "compras": 3
+                "compras": 1
             }
         },
         {
-            "id": 3,
-            "cantidad": 126,
-            "precio": 41.22,
-            "fecha": "2022-10-13T22:00:00.000Z",
-            "descuento_usuario": 2,
-            "descuento_producto": 2,
+            "id": 83,
+            "cantidad": 42,
+            "precio": 17.3,
+            "fecha": "2022-09-22T17:14:46.000Z",
+            "descuento_usuario": 4,
+            "descuento_producto": 50,
             "factura": {
-                "id": 3,
-                "fecha": "2013-03-10T23:49:14.000Z",
+                "id": 2,
+                "fecha": "2010-01-29T21:12:56.000Z",
                 "iva": 10,
                 "pagado": true,
                 "compras": 3,
                 "usuario": {
-                    "id": 50,
-                    "dni": "70217090E",
-                    "nombre": "jose",
-                    "apellido1": "gil",
-                    "apellido2": "raga",
-                    "login": "jose_gil",
-                    "email": "jose_gil@daw.tk",
-                    "descuento": 18,
+                    "id": 14,
+                    "dni": "42772154C",
+                    "nombre": "mark",
+                    "apellido1": "mocholi",
+                    "apellido2": "gil",
+                    "login": "mark_mocholi",
+                    "email": "mark_mocholi@daw.tk",
+                    "descuento": 16,
                     "validado": false,
                     "activo": false,
                     "tipousuario": {
@@ -432,24 +432,24 @@
                         "usuarios": 82
                     },
                     "carritos": 0,
-                    "facturas": 1
+                    "facturas": 2
                 }
             },
             "producto": {
-                "id": 2,
-                "codigo": "62724C",
-                "nombre": "Aparador de cristal de color naranja de tamaño mediano",
-                "existencias": 30,
-                "precio": 63.88,
+                "id": 885,
+                "codigo": "97779W",
+                "nombre": "Cama de cartón de color blanco de tamaño grade",
+                "existencias": 1,
+                "precio": 54.0,
                 "imagen": 1,
-                "descuento": 49,
+                "descuento": 33,
                 "tipoproducto": {
-                    "id": 93,
-                    "nombre": "Artículos de alta resistencia para la restauracion",
-                    "productos": 4
+                    "id": 51,
+                    "nombre": "Artículos de lujo para la oficina",
+                    "productos": 19
                 },
                 "carritos": 0,
-                "compras": 3
+                "compras": 1
             }
         }
     ],
@@ -468,13 +468,13 @@
     "totalPages": 1,
     "totalElements": 3,
     "last": true,
-    "size": 3,
     "number": 0,
     "sort": {
         "empty": false,
         "sorted": true,
         "unsorted": false
     },
+    "size": 3,
     "first": true,
     "numberOfElements": 3,
     "empty": false
@@ -508,10 +508,10 @@
                         <tr>
                             <td>compra</td>
                             <td>getPage</td>
-                            <td>localhost:8082/compra?page={numPage}&size={numSize}&sort={data},{orden}&sort={data},{orden}
+                            <td>localhost:8082/compra?page=0&size=3&sort=fecha,asc&sort=id,desc
                             </td>
                             <td>GET</td>
-                            <td>numPage,numSize,data,oden,sort,data,orden</td>
+                            <td>page,size,sort,(asc, desc)</td>
                             <td></td>
                             <td>admin(1)</td>
                             <td>Show your purchase page in the order you specify</td>
@@ -530,27 +530,127 @@
 {
     "content": [
         {
-            "id": 66,
-            "cantidad": 130,
-            "precio": 155.46,
-            "fecha": "2022-10-12T23:52:10.000Z",
-            "descuento_usuario": 0,
-            "descuento_producto": 40,
+            "id": 95,
+            "cantidad": 115,
+            "precio": 261.44,
+            "fecha": "2022-09-21T21:23:41.000Z",
+            "descuento_usuario": 5,
+            "descuento_producto": 5,
             "factura": {
-                "id": 14,
-                "fecha": "2012-01-02T23:49:14.000Z",
+                "id": 90,
+                "fecha": "2016-10-24T21:13:00.000Z",
+                "iva": 4,
+                "pagado": true,
+                "compras": 1,
+                "usuario": {
+                    "id": 34,
+                    "dni": "72839332B",
+                    "nombre": "vika",
+                    "apellido1": "coronado",
+                    "apellido2": "villanueva",
+                    "login": "vika_coronado",
+                    "email": "coronado_vika@daw.tk",
+                    "descuento": 36,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 2,
+                        "nombre": "usuario",
+                        "usuarios": 82
+                    },
+                    "carritos": 0,
+                    "facturas": 1
+                }
+            },
+            "producto": {
+                "id": 633,
+                "codigo": "81239R",
+                "nombre": "Cama de madera de color rojo de tamaño extra grande",
+                "existencias": 100,
+                "precio": 95.86,
+                "imagen": 1,
+                "descuento": 0,
+                "tipoproducto": {
+                    "id": 77,
+                    "nombre": "Elaboraciones artesanos para el hogar",
+                    "productos": 16
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        },
+        {
+            "id": 74,
+            "cantidad": 195,
+            "precio": 125.81,
+            "fecha": "2022-09-21T21:26:21.000Z",
+            "descuento_usuario": 9,
+            "descuento_producto": 58,
+            "factura": {
+                "id": 91,
+                "fecha": "2016-12-31T21:13:00.000Z",
                 "iva": 10,
                 "pagado": false,
                 "compras": 2,
                 "usuario": {
-                    "id": 40,
-                    "dni": "26243837D",
-                    "nombre": "sergio",
-                    "apellido1": "santos",
-                    "apellido2": "cosin",
-                    "login": "sergio_santos",
-                    "email": "santos_sergio@daw.tk",
-                    "descuento": 5,
+                    "id": 38,
+                    "dni": "78392012P",
+                    "nombre": "javi",
+                    "apellido1": "frejo",
+                    "apellido2": "salom",
+                    "login": "javi_frejo",
+                    "email": "javi_frejo@daw.tk",
+                    "descuento": 14,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 2,
+                        "nombre": "usuario",
+                        "usuarios": 82
+                    },
+                    "carritos": 0,
+                    "facturas": 1
+                }
+            },
+            "producto": {
+                "id": 426,
+                "codigo": "17641I",
+                "nombre": "Aparador de bambú de color marron de tamaño pequeño",
+                "existencias": 36,
+                "precio": 79.52,
+                "imagen": 1,
+                "descuento": 39,
+                "tipoproducto": {
+                    "id": 41,
+                    "nombre": "Manufacturas abatibles para cines y teatros",
+                    "productos": 6
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        },
+        {
+            "id": 87,
+            "cantidad": 15,
+            "precio": 244.18,
+            "fecha": "2022-09-21T21:34:12.000Z",
+            "descuento_usuario": 6,
+            "descuento_producto": 55,
+            "factura": {
+                "id": 33,
+                "fecha": "2019-07-03T21:12:57.000Z",
+                "iva": 4,
+                "pagado": true,
+                "compras": 2,
+                "usuario": {
+                    "id": 68,
+                    "dni": "87794494K",
+                    "nombre": "javi",
+                    "apellido1": "arias",
+                    "apellido2": "aparici",
+                    "login": "javi_arias",
+                    "email": "javi_arias@daw.tk",
+                    "descuento": 6,
                     "validado": false,
                     "activo": false,
                     "tipousuario": {
@@ -563,120 +663,20 @@
                 }
             },
             "producto": {
-                "id": 44,
-                "codigo": "6311A",
-                "nombre": "Lampara de mármol de color blanco de tamaño grade",
-                "existencias": 97,
-                "precio": 24.97,
+                "id": 814,
+                "codigo": "77927F",
+                "nombre": "Marco de metal de color negro de tamaño extra grande",
+                "existencias": 6,
+                "precio": 19.87,
                 "imagen": 1,
-                "descuento": 15,
+                "descuento": 23,
                 "tipoproducto": {
-                    "id": 72,
-                    "nombre": "Utilidades de alta resistencia para la oficina",
-                    "productos": 1
+                    "id": 61,
+                    "nombre": "Utilidades de segunda mano para el camping",
+                    "productos": 9
                 },
                 "carritos": 0,
-                "compras": 2
-            }
-        },
-        {
-            "id": 70,
-            "cantidad": 50,
-            "precio": 282.33,
-            "fecha": "2022-10-13T00:20:17.000Z",
-            "descuento_usuario": 5,
-            "descuento_producto": 57,
-            "factura": {
-                "id": 57,
-                "fecha": "2015-02-06T23:49:14.000Z",
-                "iva": 4,
-                "pagado": true,
-                "compras": 1,
-                "usuario": {
-                    "id": 25,
-                    "dni": "78308020N",
-                    "nombre": "sergio",
-                    "apellido1": "aznar",
-                    "apellido2": "frejo",
-                    "login": "sergio_aznar",
-                    "email": "aznar_sergio@daw.tk",
-                    "descuento": 49,
-                    "validado": false,
-                    "activo": false,
-                    "tipousuario": {
-                        "id": 1,
-                        "nombre": "administrador",
-                        "usuarios": 19
-                    },
-                    "carritos": 0,
-                    "facturas": 3
-                }
-            },
-            "producto": {
-                "id": 83,
-                "codigo": "77339Y",
-                "nombre": "Cama de cristal de color marron de tamaño extra grande",
-                "existencias": 32,
-                "precio": 53.03,
-                "imagen": 1,
-                "descuento": 29,
-                "tipoproducto": {
-                    "id": 8,
-                    "nombre": "Elaboraciones estándar para la oficina",
-                    "productos": 3
-                },
-                "carritos": 0,
-                "compras": 2
-            }
-        },
-        {
-            "id": 77,
-            "cantidad": 120,
-            "precio": 4.9,
-            "fecha": "2022-10-13T00:27:25.000Z",
-            "descuento_usuario": 8,
-            "descuento_producto": 1,
-            "factura": {
-                "id": 92,
-                "fecha": "2012-11-19T23:49:15.000Z",
-                "iva": 10,
-                "pagado": true,
-                "compras": 2,
-                "usuario": {
-                    "id": 26,
-                    "dni": "42149009Z",
-                    "nombre": "pere",
-                    "apellido1": "coronado",
-                    "apellido2": "martinez",
-                    "login": "pere_coronado",
-                    "email": "pere_coronado@daw.tk",
-                    "descuento": 0,
-                    "validado": false,
-                    "activo": false,
-                    "tipousuario": {
-                        "id": 1,
-                        "nombre": "administrador",
-                        "usuarios": 19
-                    },
-                    "carritos": 0,
-                    "facturas": 2
-                }
-            },
-            "producto": {
-                "id": 1,
-                "codigo": "43591U",
-                "nombre": "Mesa de madera de color negro de tamaño extra grande",
-                "existencias": 90,
-                "precio": 50.44,
-                "imagen": 1,
-                "descuento": 40,
-                "tipoproducto": {
-                    "id": 29,
-                    "nombre": "Utilidades de gran tonelage para el hogar",
-                    "productos": 2
-                },
-                "carritos": 0,
-                "compras": 3
+                "compras": 1
             }
         }
     ],
@@ -695,13 +695,13 @@
     "totalPages": 34,
     "totalElements": 100,
     "last": false,
-    "size": 3,
     "number": 0,
     "sort": {
         "empty": false,
         "sorted": true,
         "unsorted": false
     },
+    "size": 3,
     "first": true,
     "numberOfElements": 3,
     "empty": false
@@ -735,9 +735,9 @@
                         <tr>
                             <td>compra</td>
                             <td>getPage factura</td>
-                            <td>localhost:8082/compra?page={numPage}&size={numSize}&sort={data},{orden}&sort={data},{orden}&factura={id}</td>
+                            <td>localhost:8082/compra?page=0&size=3&sort=fecha,asc&sort=id,desc&factura=2</td>
                             <td>GET</td>
-                            <td>numPage,numSize,data,oden,sort,data,orden, id</td>
+                            <td>page,size,sort,(asc, desc), id</td>
                             <td></td>
                             <td>user(2)</td>
                             <td>Shows a page with the purchases made filtered by invoice id</td>
@@ -756,27 +756,27 @@
 {
     "content": [
         {
-            "id": 1,
-            "cantidad": 184,
-            "precio": 244.12,
-            "fecha": "2022-09-22T11:49:15.000Z",
-            "descuento_usuario": 3,
-            "descuento_producto": 15,
+            "id": 5,
+            "cantidad": 99,
+            "precio": 356.12,
+            "fecha": "2022-09-22T03:33:10.000Z",
+            "descuento_usuario": 5,
+            "descuento_producto": 33,
             "factura": {
-                "id": 60,
-                "fecha": "2017-02-03T21:12:59.000Z",
-                "iva": 21,
+                "id": 2,
+                "fecha": "2010-01-29T21:12:56.000Z",
+                "iva": 10,
                 "pagado": true,
-                "compras": 2,
+                "compras": 3,
                 "usuario": {
-                    "id": 42,
-                    "dni": "54939536B",
-                    "nombre": "aaron",
-                    "apellido1": "tatay",
-                    "apellido2": "tarazón",
-                    "login": "aaron_tatay",
-                    "email": "tatay_aaron@daw.tk",
-                    "descuento": 48,
+                    "id": 14,
+                    "dni": "42772154C",
+                    "nombre": "mark",
+                    "apellido1": "mocholi",
+                    "apellido2": "gil",
+                    "login": "mark_mocholi",
+                    "email": "mark_mocholi@daw.tk",
+                    "descuento": 16,
                     "validado": false,
                     "activo": false,
                     "tipousuario": {
@@ -785,48 +785,48 @@
                         "usuarios": 82
                     },
                     "carritos": 0,
-                    "facturas": 1
+                    "facturas": 2
                 }
             },
             "producto": {
-                "id": 63,
-                "codigo": "68237R",
-                "nombre": "Sillón de madera de color rosa de tamaño grade",
-                "existencias": 24,
-                "precio": 14.67,
+                "id": 670,
+                "codigo": "85595D",
+                "nombre": "Vitrina de metal de color rojo de tamaño extra grande",
+                "existencias": 61,
+                "precio": 22.43,
                 "imagen": 1,
-                "descuento": 38,
+                "descuento": 16,
                 "tipoproducto": {
-                    "id": 60,
-                    "nombre": "Artículos abatibles para cines y teatros",
-                    "productos": 16
+                    "id": 31,
+                    "nombre": "Productos de lujo para el hogar",
+                    "productos": 15
                 },
                 "carritos": 0,
                 "compras": 1
             }
         },
         {
-            "id": 38,
-            "cantidad": 152,
-            "precio": 309.87,
-            "fecha": "2022-09-22T15:48:50.000Z",
-            "descuento_usuario": 3,
-            "descuento_producto": 58,
+            "id": 28,
+            "cantidad": 177,
+            "precio": 324.39,
+            "fecha": "2022-09-22T14:55:58.000Z",
+            "descuento_usuario": 7,
+            "descuento_producto": 23,
             "factura": {
-                "id": 60,
-                "fecha": "2017-02-03T21:12:59.000Z",
-                "iva": 21,
+                "id": 2,
+                "fecha": "2010-01-29T21:12:56.000Z",
+                "iva": 10,
                 "pagado": true,
-                "compras": 2,
+                "compras": 3,
                 "usuario": {
-                    "id": 42,
-                    "dni": "54939536B",
-                    "nombre": "aaron",
-                    "apellido1": "tatay",
-                    "apellido2": "tarazón",
-                    "login": "aaron_tatay",
-                    "email": "tatay_aaron@daw.tk",
-                    "descuento": 48,
+                    "id": 14,
+                    "dni": "42772154C",
+                    "nombre": "mark",
+                    "apellido1": "mocholi",
+                    "apellido2": "gil",
+                    "login": "mark_mocholi",
+                    "email": "mark_mocholi@daw.tk",
+                    "descuento": 16,
                     "validado": false,
                     "activo": false,
                     "tipousuario": {
@@ -835,21 +835,71 @@
                         "usuarios": 82
                     },
                     "carritos": 0,
-                    "facturas": 1
+                    "facturas": 2
                 }
             },
             "producto": {
-                "id": 308,
-                "codigo": "67508R",
-                "nombre": "Silla de madera de color morado de tamaño pequeño",
-                "existencias": 13,
-                "precio": 68.02,
+                "id": 36,
+                "codigo": "64347V",
+                "nombre": "Cama de cartón de color azul de tamaño grade",
+                "existencias": 10,
+                "precio": 11.65,
                 "imagen": 1,
-                "descuento": 7,
+                "descuento": 5,
                 "tipoproducto": {
-                    "id": 39,
-                    "nombre": "Productos de lujo para el hogar",
-                    "productos": 16
+                    "id": 29,
+                    "nombre": "Manufacturas de gran tonelage para cines y teatros",
+                    "productos": 17
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        },
+        {
+            "id": 83,
+            "cantidad": 42,
+            "precio": 17.3,
+            "fecha": "2022-09-22T17:14:46.000Z",
+            "descuento_usuario": 4,
+            "descuento_producto": 50,
+            "factura": {
+                "id": 2,
+                "fecha": "2010-01-29T21:12:56.000Z",
+                "iva": 10,
+                "pagado": true,
+                "compras": 3,
+                "usuario": {
+                    "id": 14,
+                    "dni": "42772154C",
+                    "nombre": "mark",
+                    "apellido1": "mocholi",
+                    "apellido2": "gil",
+                    "login": "mark_mocholi",
+                    "email": "mark_mocholi@daw.tk",
+                    "descuento": 16,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 2,
+                        "nombre": "usuario",
+                        "usuarios": 82
+                    },
+                    "carritos": 0,
+                    "facturas": 2
+                }
+            },
+            "producto": {
+                "id": 885,
+                "codigo": "97779W",
+                "nombre": "Cama de cartón de color blanco de tamaño grade",
+                "existencias": 1,
+                "precio": 54.0,
+                "imagen": 1,
+                "descuento": 33,
+                "tipoproducto": {
+                    "id": 51,
+                    "nombre": "Artículos de lujo para la oficina",
+                    "productos": 19
                 },
                 "carritos": 0,
                 "compras": 1
@@ -869,7 +919,7 @@
         "unpaged": false
     },
     "totalPages": 1,
-    "totalElements": 2,
+    "totalElements": 3,
     "last": true,
     "number": 0,
     "sort": {
@@ -879,7 +929,7 @@
     },
     "size": 3,
     "first": true,
-    "numberOfElements": 2,
+    "numberOfElements": 3,
     "empty": false
 }
 </pre>
@@ -911,9 +961,9 @@
                         <tr>
                             <td>compra</td>
                             <td>getPage factura</td>
-                            <td>localhost:8082/compra?page={numPage}&size={numSize}&sort={data},{orden}&sort={data},{orden}&factura={id}</td>
+                            <td>localhost:8082/compra?page=0&size=3&sort=fecha,asc&sort=id,desc&factura=26</td>
                             <td>GET</td>
-                            <td>numPage,numSize,data,oden,sort,data,orden, id</td>
+                            <td>page,size,sort,(asc, desc), id</td>
                             <td></td>
                             <td>admin(1)</td>
                             <td>Shows a page with the purchases made filtered by invoice id</td>
@@ -1087,9 +1137,9 @@
                         <tr>
                             <td>compra</td>
                             <td>getPage producto</td>
-                            <td>localhost:8082/compra?page={numPage}&size={numSize}&sort={data},{orden}&sort={data},{orden}&producto={id}</td>
+                            <td>localhost:8082/compra?page=0&size=3&sort=fecha,asc&sort=id,desc&producto=670</td>
                             <td>GET</td>
-                            <td>numPage,numSize,data,oden,sort,data,orden, id</td>
+                            <td>page,size,sort,(asc, desc), id</td>
                             <td></td>
                             <td>user(2)</td>
                             <td>Shows a page with the purchases made filtered by product id</td>
@@ -1108,27 +1158,27 @@
 {
     "content": [
         {
-            "id": 1,
-            "cantidad": 184,
-            "precio": 244.12,
-            "fecha": "2022-09-22T11:49:15.000Z",
-            "descuento_usuario": 3,
-            "descuento_producto": 15,
+            "id": 5,
+            "cantidad": 99,
+            "precio": 356.12,
+            "fecha": "2022-09-22T03:33:10.000Z",
+            "descuento_usuario": 5,
+            "descuento_producto": 33,
             "factura": {
-                "id": 60,
-                "fecha": "2017-02-03T21:12:59.000Z",
-                "iva": 21,
+                "id": 2,
+                "fecha": "2010-01-29T21:12:56.000Z",
+                "iva": 10,
                 "pagado": true,
-                "compras": 2,
+                "compras": 3,
                 "usuario": {
-                    "id": 42,
-                    "dni": "54939536B",
-                    "nombre": "aaron",
-                    "apellido1": "tatay",
-                    "apellido2": "tarazón",
-                    "login": "aaron_tatay",
-                    "email": "tatay_aaron@daw.tk",
-                    "descuento": 48,
+                    "id": 14,
+                    "dni": "42772154C",
+                    "nombre": "mark",
+                    "apellido1": "mocholi",
+                    "apellido2": "gil",
+                    "login": "mark_mocholi",
+                    "email": "mark_mocholi@daw.tk",
+                    "descuento": 16,
                     "validado": false,
                     "activo": false,
                     "tipousuario": {
@@ -1137,21 +1187,21 @@
                         "usuarios": 82
                     },
                     "carritos": 0,
-                    "facturas": 1
+                    "facturas": 2
                 }
             },
             "producto": {
-                "id": 63,
-                "codigo": "68237R",
-                "nombre": "Sillón de madera de color rosa de tamaño grade",
-                "existencias": 24,
-                "precio": 14.67,
+                "id": 670,
+                "codigo": "85595D",
+                "nombre": "Vitrina de metal de color rojo de tamaño extra grande",
+                "existencias": 61,
+                "precio": 22.43,
                 "imagen": 1,
-                "descuento": 38,
+                "descuento": 16,
                 "tipoproducto": {
-                    "id": 60,
-                    "nombre": "Artículos abatibles para cines y teatros",
-                    "productos": 16
+                    "id": 31,
+                    "nombre": "Productos de lujo para el hogar",
+                    "productos": 15
                 },
                 "carritos": 0,
                 "compras": 1
@@ -1213,9 +1263,9 @@
                         <tr>
                             <td>compra</td>
                             <td>getPage producto</td>
-                            <td>localhost:8082/compra?page={numPage}&size={numSize}&sort={data},{orden}&sort={data},{orden}&producto={id}</td>
+                            <td>localhost:8082/compra?page=0&size=3&sort=fecha,asc&sort=id,desc&producto=69</td>
                             <td>GET</td>
-                            <td>numPage,numSize,data,oden,sort,data,orden, id</td>
+                            <td>page,size,sort,(asc, desc), id</td>
                             <td></td>
                             <td>admin(1)</td>
                             <td>Shows a page with the purchases made filtered by product id</td>
@@ -1489,7 +1539,7 @@
                         <tr>
                             <td>compra</td>
                             <td>delete</td>
-                            <td>localhost:8082/compra/{id}</td>
+                            <td>localhost:8082/compra/35</td>
                             <td>DELETE</td>
                             <td>id</td>
                             <td>
@@ -1635,7 +1685,7 @@
                         <tr>
                             <td>compra</td>
                             <td>generateSome</td>
-                            <td>http://localhost:8082/compra/generate/{amount}</td>
+                            <td>http://localhost:8082/compra/generate/10</td>
                             <td>POST</td>
                             <td>amount</td>
                             <td></td>
