@@ -7,4 +7,4 @@ wildCartSBServer2021
   * grade of madurity of web client: 85%  
 
 
-https://rafaelaznar.github.io/wildCartSBServer2021/
+* API spec: https://rafaelaznar.github.io/wildCartSBServer2021/ (unfinished)
