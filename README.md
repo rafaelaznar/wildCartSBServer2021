@@ -7,7 +7,6 @@
 * API developed on Java over Spring Boot. MySQL Database.
 * It's still a working in progress:
   * grade of madurity of API server: 70%
-  * grade of madurity of web client: 85%  
 
 
 * API spec: https://rafaelaznar.github.io/wildCartSBServer2021/ (unfinished)
