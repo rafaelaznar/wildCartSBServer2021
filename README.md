@@ -9,4 +9,4 @@
   * grade of madurity of API server: 70%
 
 
-* API spec: https://rafaelaznar.github.io/wildCartSBServer2021/ (unfinished)
+* API spec: https://rafaelaznar.github.io/wildCartSBServer2021/ 
