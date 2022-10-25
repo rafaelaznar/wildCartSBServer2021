@@ -89,6 +89,7 @@ public class FacturaService {
 
     public Page<FacturaEntity> getPage(Pageable oPageable, String strFilter, Long lUsuario) {
         oAuthService.OnlyAdminsOrUsers();
+        ValidationHelper.validateRPP(oPageable.getPageSize());
         if (oAuthService.isAdmin()) {
             if (lUsuario != null) {
                 if (strFilter == null || strFilter.isEmpty() || strFilter.trim().isEmpty()) {

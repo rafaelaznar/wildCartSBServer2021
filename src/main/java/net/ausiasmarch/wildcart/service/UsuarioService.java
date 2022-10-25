@@ -111,6 +111,7 @@ public class UsuarioService {
 
     public Page<UsuarioEntity> getPage(Pageable oPageable, String strFilter, Long lTipoUsuario) {
         oAuthService.OnlyAdmins();
+        ValidationHelper.validateRPP(oPageable.getPageSize());
         Page<UsuarioEntity> oPage = null;
         if (lTipoUsuario == null) {
             if (strFilter == null || strFilter.isEmpty() || strFilter.trim().isEmpty()) {

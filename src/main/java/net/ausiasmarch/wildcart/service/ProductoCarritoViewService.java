@@ -34,6 +34,7 @@ package net.ausiasmarch.wildcart.service;
 
 import net.ausiasmarch.wildcart.entity.ProductoCarritoViewEntity;
 import net.ausiasmarch.wildcart.exception.ResourceNotFoundException;
+import net.ausiasmarch.wildcart.helper.ValidationHelper;
 import net.ausiasmarch.wildcart.repository.ProductoCarritoViewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -72,6 +73,7 @@ public class ProductoCarritoViewService {
     }
 
     public Page<ProductoCarritoViewEntity> getPage(Pageable oPageable, String strFilter, Long lTipoProducto) {
+        ValidationHelper.validateRPP(oPageable.getPageSize());
         Page<ProductoCarritoViewEntity> oPage = null;
         if (lTipoProducto == null) {
             if (strFilter == null || strFilter.isEmpty() || strFilter.trim().isEmpty()) {

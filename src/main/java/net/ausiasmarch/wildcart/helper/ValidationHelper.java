@@ -50,6 +50,12 @@ public class ValidationHelper {
         }
     }
 
+    public static void validateRPP(int iRPP) {
+        if (iRPP < 1 || iRPP > 1000) {
+            throw new ValidationException("RPP value is not valid (must be between 1 and 1000)");
+        }
+    }
+
     public static void validateStringLength(String strNombre, int minlength, int maxlength, String error) {
         if (strNombre.length() >= minlength && strNombre.length() <= maxlength) {
         } else {
@@ -115,7 +121,8 @@ public class ValidationHelper {
         }
     }
 
-    public static void validateDate(LocalDateTime oDate, LocalDateTime oDateStart, LocalDateTime oDateEnd, String error) {
+    public static void validateDate(LocalDateTime oDate, LocalDateTime oDateStart, LocalDateTime oDateEnd,
+            String error) {
         Long lDur1 = Duration.between(oDateStart, oDate).toMillis();
         Long lDur2 = Duration.between(oDate, oDateEnd).toMillis();
         if (lDur1 > 0L && lDur2 > 0L) {
