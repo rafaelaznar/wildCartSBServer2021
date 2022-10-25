@@ -137,10 +137,9 @@
                                     Not error
                                 </td>
                             </tr>
-                            <!--producto count-->
                             <tr>
                                 <td>producto</td>
-                                <td>get</td>
+                                <td>count</td>
                                 <td>localhost:8082/producto/count</td>
                                 <td>GET</td>
                                 <td></td>
@@ -159,7 +158,7 @@
                             </tr>
                             <tr>
                                 <td>producto</td>
-                                <td>get</td>
+                                <td>count</td>
                                 <td>localhost:8082/producto/count</td>
                                 <td>GET</td>
                                 <td></td>
@@ -176,10 +175,9 @@
                                     Not error
                                 </td>
                             </tr>
-                            <!--producto getpage-->
                             <tr>
                                 <td>producto</td>
-                                <td>get</td>
+                                <td>getPage</td>
                                 <td>localhost:8082/producto?page=2&size=11&sort=codigo,asc&sort=id,desc&filter=me</td>
                                 <td>GET</td>
                                 <td>?page=2&size=11&sort=codigo,asc&sort=id,desc&filter=me</td>
@@ -418,7 +416,7 @@
                             </tr>
                             <tr>
                                 <td>producto</td>
-                                <td>get</td>
+                                <td>getPage</td>
                                 <td>localhost:8082/producto?page=2&size=11&sort=codigo,asc&sort=id,desc&filter=me</td>
                                 <td>GET</td>
                                 <td>?page=2&size=11&sort=codigo,asc&sort=id,desc&filter=me</td>
@@ -652,126 +650,11 @@
                                 <td>
                                     Not error
                             </tr>
-                            <!--producto postpage-->
-                            <tr>
-                                <td>product</td>
-                                <td>post</td>
-                                <td>localhost:8082/producto/</td>
-                                <td>post</td>
-                                <td></td>
-                                <td>
-                                    <p>
-                                        <a class="btn btn-success" data-bs-toggle="collapse" href="#collapsePostPay"
-                                            role="button" aria-expanded="false" aria-controls="collapsePostPay">
-                                            JSON
-                                        </a>
-                                    </p>
-                                    <div class="collapse" id="collapsePostPay">
-                                        <div class="card card-body">
-        <pre>
-                                    
-{
-    "codigo": "1111Q677754sdftt911",
-    "precio": 331.01,
-    "imagen": 1,
-    "nombre": "tornzzzill55gfgfo flojoo3366666663",
-    "descuento": 3,
-    "existencias": 110,
-    "tipoproducto": {"id": 2}
-}
-                                </pre>
-                            </div>
-                        </div>
-                                </td>
-                                <td>admin (1)</td>
-                                <td>Post a product</td>
-                                <td>Only admin can do it</td>
-                                <td></td>
-                                <td>1032</td>
-                                <td>
-                                    <p>
-                                        <a class="btn btn-danger" data-bs-toggle="collapse"
-                                            href="#collapseProductoPostError" role="button" aria-expanded="false"
-                                            aria-controls="collapseProductoPostError">
-                                            JSON
-                                        </a>
-                                    </p>
-                                    <div class="collapse" id="collapseProductoPostError">
-                                        <div class="card card-body">
-                                            <pre>
-{
-    "timestamp": "2022-10-14T14:42:00.751+00:00",
-    "status": "UNAUTHORIZED",
-    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
-    "details": "uri=/producto/"
-} 
-                     </pre>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>product</td>
-                                <td>post</td>
-                                <td>localhost:8082/producto/</td>
-                                <td>post</td>
-                                <td></td>
-                                <td>
-                                    <p>
-                                        <a class="btn btn-success" data-bs-toggle="collapse" href="#collapsePostPayUser"
-                                            role="button" aria-expanded="false" aria-controls="collapsePostPayUser">
-                                            JSON
-                                        </a>
-                                    </p>
-                                    <div class="collapse" id="collapsePostPayUser">
-                                        <div class="card card-body">
-        <pre>
-{
-    "codigo": "1111Q677754sdftt911",
-    "precio": 331.01,
-    "imagen": 1,
-    "nombre": "tornzzzill55gfgfo flojoo3366666663",
-    "descuento": 3,
-    "existencias": 110,
-    "tipoproducto": {"id": 2}
-}
-</pre>
-                            </div>
-                        </div>
-                                </td>
-                                <td>user (2)</td>
-                                <td>Post a product</td>
-                                <td>User can not do it</td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <p>
-                                        <a class="btn btn-danger" data-bs-toggle="collapse"
-                                            href="#collapseProductoPostErrorUser" role="button" aria-expanded="false"
-                                            aria-controls="collapseProductoPostErrorUser">
-                                            JSON
-                                        </a>
-                                    </p>
-                                    <div class="collapse" id="collapseProductoPostErrorUser">
-                                        <div class="card card-body">
-                                            <pre>
-{
-"timestamp": "2022-10-14T14:42:00.751+00:00",
-"status": "UNAUTHORIZED",
-"message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
-"details": "uri=/producto/"
-} 
-                     </pre>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <!---->
                             <tr>
                                 <td>product</td>
                                 <td>put</td>
                                 <td>localhost:8082/producto/</td>
-                                <td>put</td>
+                                <td>PUT</td>
                                 <td></td>
                                 <td>
                                     <p>
@@ -802,34 +685,13 @@
                                 <td>Only the admin can update a product attributes</td>
                                 <td>The product attributes is obtained from the database</td>
                                 <td>383</td>
-                                <td>
-                                    <p>
-                                        <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseProductoPut"
-                                            role="button" aria-expanded="false" aria-controls="collapseProductoPut">
-                                            JSON
-                                        </a>
-                                    </p>
-                                    <div class="collapse" id="collapseProductoPut">
-                                        <div class="card card-body">
-                                            <pre>
-{
-"timestamp": "2022-10-13T19:22:09.593+00:00",
-"status": "UNAUTHORIZED",
-"message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
-"details": "uri=/producto/"
-
-
-}   
-                     </pre>
-                                        </div>
-                                    </div>
-                                </td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>product</td>
                                 <td>put</td>
                                 <td>localhost:8082/producto/</td>
-                                <td>put</td>
+                                <td>PUT</td>
                                 <td></td>
                                 <td>
                                     <p>
@@ -882,71 +744,96 @@
                                     </div>
                                 </td>
                             </tr>
-
                             <tr>
                                 <td>product</td>
-                                <td>delete</td>
-                                <td>localhost:8082/producto/{id}</td>
-                                <td>delete</td>
-                                <td>id</td>
+                                <td>post</td>
+                                <td>localhost:8082/producto/</td>
+                                <td>POST</td>
                                 <td></td>
-                                <td>admin (1)</td>
-                                <td>Delete a product from card</td>
-                                <td>Only the admin can delete a product from card</td>
-                                <td>The product is obtained from the database</td>
-                                <td>1010</td>
                                 <td>
                                     <p>
-                                        <a class="btn btn-danger" data-bs-toggle="collapse"
-                                            href="#collapseProdcutoDeleteError" role="button" aria-expanded="false"
-                                            aria-controls="collapseProdcutoDeleteError">
+                                        <a class="btn btn-success" data-bs-toggle="collapse" href="#collapsePostPay"
+                                            role="button" aria-expanded="false" aria-controls="collapsePostPay">
                                             JSON
                                         </a>
                                     </p>
-                                    <div class="collapse" id="collapseProdcutoDeleteError">
+                                    <div class="collapse" id="collapsePostPay">
                                         <div class="card card-body">
-                                            <pre>
+        <pre>
+                                    
 {
-"timestamp": "2022-10-13T19:14:58.347+00:00",
-"status": "UNAUTHORIZED",
-"message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
-"details": "uri=/producto/1018"
-
-}   
-                     </pre>
-                                        </div>
+    "codigo": "1111Q677754sdftt911",
+    "precio": 331.01,
+    "imagen": 1,
+    "nombre": "tornzzzill55gfgfo flojoo3366666663",
+    "descuento": 3,
+    "existencias": 110,
+    "tipoproducto": {"id": 2}
+}
+                                </pre>
+                            </div>
+                        </div>
+                                </td>
+                                <td>admin (1)</td>
+                                <td>Post a product</td>
+                                <td>Only admin can do it</td>
+                                <td></td>
+                                <td>1032</td>
+                                <td></div>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td>product</td>
-                                <td>delete</td>
-                                <td>localhost:8082/producto/{id}</td>
-                                <td>delete</td>
-                                <td>id</td>
+                                <td>post</td>
+                                <td>localhost:8082/producto/</td>
+                                <td>POST</td>
                                 <td></td>
+                                <td>
+                                    <p>
+                                        <a class="btn btn-success" data-bs-toggle="collapse" href="#collapsePostPayUser"
+                                            role="button" aria-expanded="false" aria-controls="collapsePostPayUser">
+                                            JSON
+                                        </a>
+                                    </p>
+                                    <div class="collapse" id="collapsePostPayUser">
+                                        <div class="card card-body">
+        <pre>
+{
+    "codigo": "1111Q677754sdftt911",
+    "precio": 331.01,
+    "imagen": 1,
+    "nombre": "tornzzzill55gfgfo flojoo3366666663",
+    "descuento": 3,
+    "existencias": 110,
+    "tipoproducto": {"id": 2}
+}
+</pre>
+                            </div>
+                        </div>
+                                </td>
                                 <td>user (2)</td>
-                                <td>Delete a product from card</td>
-                                <td>Only the admin can delete a product from card</td>
-                                <td>The product is obtained from the database</td>
+                                <td>Post a product</td>
+                                <td>User can not do it</td>
+                                <td></td>
                                 <td></td>
                                 <td>
                                     <p>
                                         <a class="btn btn-danger" data-bs-toggle="collapse"
-                                            href="#collapseProdcutoDeleteErrorUser" role="button" aria-expanded="false"
-                                            aria-controls="collapseProdcutoDeleteErrorUser">
+                                            href="#collapseProductoPostErrorUser" role="button" aria-expanded="false"
+                                            aria-controls="collapseProductoPostErrorUser">
                                             JSON
                                         </a>
                                     </p>
-                                    <div class="collapse" id="collapseProdcutoDeleteErrorUser">
+                                    <div class="collapse" id="collapseProductoPostErrorUser">
                                         <div class="card card-body">
                                             <pre>
 {
-"timestamp": "2022-10-14T13:21:09.932+00:00",
+"timestamp": "2022-10-14T14:42:00.751+00:00",
 "status": "UNAUTHORIZED",
 "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
-"details": "uri=/producto/1018"
-}
+"details": "uri=/producto/"
+} 
                      </pre>
                                         </div>
                                     </div>
@@ -956,7 +843,7 @@
                                 <td>product</td>
                                 <td>post</td>
                                 <td>localhost:8082/producto/generate</td>
-                                <td>post</td>
+                                <td>POST</td>
                                 <td></td>
                                 <td>
                                     <p>
@@ -1014,34 +901,13 @@
                                             }</div>
                                     </div>
                                 </td>
-                                <td>
-                                    <p>
-                                        <a class="btn btn-danger" data-bs-toggle="collapse"
-                                            href="#collapseProdcuoPostGenerateError" role="button" aria-expanded="false"
-                                            aria-controls="collapseProdcuoPostGenerateError">
-                                            JSON
-                                        </a>
-                                    </p>
-                                    <div class="collapse" id="collapseProdcuoPostGenerateError">
-                                        <div class="card card-body">
-                                            <pre>
-{
-"timestamp": "2022-10-13T19:14:58.347+00:00",
-"status": "UNAUTHORIZED",
-"message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
-"details": "uri=/producto/1018"
-
-}   
-                     </pre>
-                                        </div>
-                                    </div>
-                                </td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>product</td>
                                 <td>post</td>
                                 <td>localhost:8082/producto/generate</td>
-                                <td>post</td>
+                                <td>POST</td>
                                 <td></td>
                                 <td>
                                     <p>
@@ -1100,9 +966,9 @@
                             <tr>
                                 <td>product</td>
                                 <td>post</td>
-                                <td>localhost:8082/producto/generate/{amount}
+                                <td>localhost:8082/producto/generate/{10}
                                 </td>
-                                <td>post</td>
+                                <td>POST</td>
                                 <td>{amount}</td>
                                 <td></td>
                                 <td>admin (1)</td>
@@ -1110,36 +976,15 @@
                                 <td>Only the admin can generate</td>
                                 <td>Products are generated in database</td>
                                 <td>1029</td>
-                                <td>
-                                    <p>
-                                        <a class="btn btn-danger" data-bs-toggle="collapse"
-                                            href="#collapseProdcuoPostGenerateAmountError" role="button"
-                                            aria-expanded="false"
-                                            aria-controls="collapseProdcuoPostGenerateAmountError">
-                                            JSON
-                                        </a>
-                                    </p>
-                                    <div class="collapse" id="collapseProdcuoPostGenerateAmountError">
-                                        <div class="card card-body">
-                                            <pre>
-{
-"timestamp": "2022-10-14T13:16:30.191+00:00",
-"status": "UNAUTHORIZED",
-"message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
-"details": "uri=/producto/generate/10"
-}
-                 </pre>
-                                        </div>
-                                    </div>
-                                </td>
+                                <td> </td>
                             </tr>
                             </tr>
                             <tr>
                                 <td>product</td>
                                 <td>post</td>
-                                <td>localhost:8082/producto/generate/{amount}
+                                <td>localhost:8082/producto/generate/{10}
                                 </td>
-                                <td>post</td>
+                                <td>POST</td>
                                 <td>{amount}</td>
                                 <td></td>
                                 <td>user (2)</td>
@@ -1166,6 +1011,54 @@
 "details": "uri=/producto/generate/10"
 }
                 </pre>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>product</td>
+                                <td>delete</td>
+                                <td>localhost:8082/producto/{5}</td>
+                                <td>DELETE</td>
+                                <td>id</td>
+                                <td></td>
+                                <td>admin (1)</td>
+                                <td>Delete a product from card</td>
+                                <td>Only the admin can delete a product from card</td>
+                                <td>The product is obtained from the database and is deleted</td>
+                                <td>1010</td>
+                                <td> </td>
+                            </tr>
+                            <tr>
+                                <td>product</td>
+                                <td>delete</td>
+                                <td>localhost:8082/producto/{5}</td>
+                                <td>DELETE</td>
+                                <td>id</td>
+                                <td></td>
+                                <td>user (2)</td>
+                                <td>Delete a product from card</td>
+                                <td>Only the admin can delete a product from card</td>
+                                <td>The product is obtained from the database and is deleted</td>
+                                <td></td>
+                                <td>
+                                    <p>
+                                        <a class="btn btn-danger" data-bs-toggle="collapse"
+                                            href="#collapseProdcutoDeleteErrorUser" role="button" aria-expanded="false"
+                                            aria-controls="collapseProdcutoDeleteErrorUser">
+                                            JSON
+                                        </a>
+                                    </p>
+                                    <div class="collapse" id="collapseProdcutoDeleteErrorUser">
+                                        <div class="card card-body">
+                                            <pre>
+{
+"timestamp": "2022-10-14T13:21:09.932+00:00",
+"status": "UNAUTHORIZED",
+"message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+"details": "uri=/producto/1018"
+}
+                     </pre>
                                         </div>
                                     </div>
                                 </td>

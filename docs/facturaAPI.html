@@ -40,7 +40,7 @@
                             <td>get</td>
                             <td>localhost:8082/factura/{id}</td>
                             <td>GET</td>
-                            <td>id</td>
+                            <td>40</td>
                             <td></td>
                             <td>user (2)</td>
                             <td>Obtains the data from the factura number 40</td>
@@ -110,7 +110,7 @@
                         </tr>
                         <tr>
                             <td>factura</td>
-                            <td>get</td>
+                            <td>count</td>
                             <td>localhost:8082/factura/count</td>
                             <td>GET</td>
                             <td></td>
@@ -158,7 +158,7 @@
                         </tr>
                         <tr>
                             <td>factura</td>
-                            <td>get</td>
+                            <td>count</td>
                             <td>localhost:8082/factura/count</td>
                             <td>GET</td>
                             <td></td>
@@ -206,7 +206,7 @@
                         </tr>
                         <tr>
                             <td>factura</td>
-                            <td>get</td>
+                            <td>getPage</td>
                             <td>localhost:8082/factura?page=0&size=3&sort=fecha,asc&sort=id,desc</td>
                             <td>GET</td>
                             <td>page, size, direction</td>
@@ -306,7 +306,7 @@
                         </tr>
                         <tr>
                             <td>factura</td>
-                            <td>get</td>
+                            <td>getPage</td>
                             <td>localhost:8082/factura?page=0&size=3&sort=fecha,asc&sort=id,desc&usuario=1044&filter=21</td>
                             <td>GET</td>
                             <td>page, size, sort, sort, usuario, filter</td>
@@ -381,7 +381,7 @@
                         </tr>
                         <tr>
                             <td>factura</td>
-                            <td>post</td>
+                            <td>generate</td>
                             <td>localhost:8082/factura/generate/10</td>
                             <td>POST</td>
                             <td></td>
@@ -442,7 +442,7 @@
                         </tr>
                         <tr>
                             <td>factura</td>
-                            <td>post</td>
+                            <td>create</td>
                             <td>localhost:8082/factura</td>
                             <td>POST</td>
                             <td></td>
@@ -527,8 +527,8 @@
                             <td>factura</td>
                             <td>delete</td>
                             <td>localhost:8082/factura/1</td>
-                            <td>delete</td>
-                            <td>id</td>
+                            <td>DELETE</td>
+                            <td>1</td>
                             <td></td>
                             <td>user (2)</td>
                             <td>If logged as a user, shows owned receipts.</td>
@@ -575,8 +575,8 @@
                             <td>factura</td>
                             <td>delete</td>
                             <td>localhost:8082/factura/1</td>
-                            <td>delete</td>
-                            <td>id</td>
+                            <td>DELETE</td>
+                            <td>1</td>
                             <td></td>
                             <td>admin (1)</td>
                             <td>If admin, shows amount of receipts in the database</td>
@@ -623,7 +623,7 @@
                             <td>factura</td>
                             <td>put</td>
                             <td>localhost:8082/factura/</td>
-                            <td>put</td>
+                            <td>PUT</td>
                             <td></td>
                             <td>
 
