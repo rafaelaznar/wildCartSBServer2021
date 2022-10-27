@@ -88,8 +88,8 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public Long delete(@PathVariable(value = "id") Long id) {
-        return oUsuarioService.delete(id);
+    public ResponseEntity<Long> delete(@PathVariable(value = "id") Long id) {
+        return new ResponseEntity<Long>(oUsuarioService.delete(id), HttpStatus.OK);
     }
 
     @PostMapping("/generate")
