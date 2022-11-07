@@ -264,3 +264,69 @@ INSERT INTO `tipousuario` (`id`, `nombre`) VALUES
 
 INSERT INTO `usuario` (`id`, `dni`, `nombre`, `apellido1`, `apellido2`, `login`, `password`, `email`, `descuento`, `id_tipousuario`, `token`, `validado`, `activo`) VALUES
 (1, '12345678Z', 'Admin.', 'Administrador', 'Administrador', 'admin', '4298f843f830fb3cc13ecdfe1b2cf10f51f929df056d644d1bca73228c5e8f64', 'admin@wildcart.com', 0, 1, NULL, 1, 1);
+
+
+--
+-- Estructura de tabla para la tabla `pendent`
+--
+
+CREATE TABLE `pendent` (
+  `id` bigint(20) NOT NULL,
+  `id_question` bigint(20) NOT NULL,
+  `token` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `question`
+--
+
+CREATE TABLE `question` (
+  `id` bigint(20) NOT NULL,
+  `statement` varchar(256) COLLATE utf8_unicode_ci NOT NULL,
+  `response` varchar(256) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `question`
+--
+
+INSERT INTO `question` (`id`, `statement`, `response`) VALUES
+(1, '¿De qué color era el caballo blanco de Santiago?', 'blanco'),
+(2, '¿Quién se comió a la abuelita?', 'lobo'),
+(3, '¿Cuál es el país más poblado?', 'china'),
+(4, '¿Dónde están las llaves?', 'mar'),
+(5, '¿Cómo es el patio de mi casa?', 'particular');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `pendent`
+--
+ALTER TABLE `pendent`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `question`
+--
+ALTER TABLE `question`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `pendent`
+--
+ALTER TABLE `pendent`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
+-- AUTO_INCREMENT de la tabla `question`
+--
+ALTER TABLE `question`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
