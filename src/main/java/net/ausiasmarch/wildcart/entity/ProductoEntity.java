@@ -72,14 +72,20 @@ public class ProductoEntity {
     @OneToMany(mappedBy = "producto", fetch = FetchType.LAZY)
     private final List<CompraEntity> compras;
 
+    @OneToMany(mappedBy = "producto", fetch = FetchType.LAZY)
+    private final List<CommentEntity> comments;
+    
+    
     public ProductoEntity() {
         this.carritos = new ArrayList<>();
         this.compras = new ArrayList<>();
+        this.comments = new ArrayList<>();
     }
 
     public ProductoEntity(Long id) {
         this.carritos = new ArrayList<>();
         this.compras = new ArrayList<>();
+        this.comments = new ArrayList<>();
         this.id = id;
     }
 
@@ -147,6 +153,10 @@ public class ProductoEntity {
         return compras.size();
     }
 
+    public int getComments() {
+        return comments.size();
+    }
+        
     public TipoproductoEntity getTipoproducto() {
         return tipoproducto;
     }
@@ -159,5 +169,6 @@ public class ProductoEntity {
     public void nullify() {
         this.carritos.forEach(c -> c.setProducto(null));
         this.compras.forEach(c -> c.setProducto(null));
+        this.comments.forEach(c -> c.setProducto(null));
     }
 }

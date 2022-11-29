@@ -85,14 +85,19 @@ public class UsuarioEntity {
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private final List<FacturaEntity> facturas;
 
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private final List<CommentEntity> comments;
+       
     public UsuarioEntity() {
         this.facturas = new ArrayList<>();
         this.carritos = new ArrayList<>();
+        this.comments = new ArrayList<>();
     }
 
     public UsuarioEntity(Long id) {
         this.facturas = new ArrayList<>();
         this.carritos = new ArrayList<>();
+        this.comments = new ArrayList<>();
         this.id = id;
     }
 
@@ -207,10 +212,15 @@ public class UsuarioEntity {
     public int getFacturas() {
         return facturas.size();
     }
+    
+    public int getComments() {
+        return comments.size();
+    }
 
     @PreRemove
     public void nullify() {
         this.facturas.forEach(c -> c.setUsuario(null));
         this.carritos.forEach(c -> c.setUsuario(null));
+        this.comments.forEach(c -> c.setUsuario(null));
     }
 }
