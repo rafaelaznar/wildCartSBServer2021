@@ -330,3 +330,26 @@ ALTER TABLE `pendent`
 --
 ALTER TABLE `question`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+
+CREATE TABLE `comment` (
+  `id` bigint(20) NOT NULL,
+  `comment` text COLLATE utf8_unicode_ci NOT NULL,
+  `id_usuario` bigint(20) NOT NULL,
+  `id_producto` bigint(20) NOT NULL,
+  `creation` datetime NOT NULL,
+  `lastedition` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Indexes for table `comment`
+--
+ALTER TABLE `comment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for table `comment`
+--
+ALTER TABLE `comment`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
+COMMIT;
