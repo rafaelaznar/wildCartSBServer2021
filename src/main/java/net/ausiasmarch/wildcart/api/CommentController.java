@@ -32,13 +32,22 @@
  */
 package net.ausiasmarch.wildcart.api;
 
+import net.ausiasmarch.wildcart.entity.CommentEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import net.ausiasmarch.wildcart.service.CommentService;
+import org.springdoc.api.annotations.ParameterObject;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/comment")
@@ -46,6 +55,27 @@ public class CommentController {
 
     @Autowired
     CommentService oCommentService;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CommentEntity> get(@PathVariable(value = "id") Long id) {
+        return new ResponseEntity<CommentEntity>(oCommentService.get(id), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<CommentEntity>> getPage(
+            @ParameterObject @PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable oPageable,
+            @RequestParam(name = "filter", required = false) String strFilter,
+            @RequestParam(value = "usuario", required = false) Long id_usuario,
+            @RequestParam(value = "producto", required = false) Long id_producto) {
+        return new ResponseEntity<>(oCommentService.getPage(oPageable, strFilter, id_usuario, id_producto), HttpStatus.OK);
+    }
+
+    @GetMapping
+    public ResponseEntity<Long> count(@RequestParam(name = "filter", required = false) String strFilter,
+            @RequestParam(value = "usuario", required = false) Long id_usuario,
+            @RequestParam(value = "producto", required = false) Long id_producto) {
+        return new ResponseEntity<>(oCommentService.count(strFilter, id_usuario, id_producto), HttpStatus.OK);
+    }
 
     @PostMapping("/generate")
     public ResponseEntity<Long> generateSome() {

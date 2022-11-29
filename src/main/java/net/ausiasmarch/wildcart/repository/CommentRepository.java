@@ -33,8 +33,39 @@
 package net.ausiasmarch.wildcart.repository;
 
 import net.ausiasmarch.wildcart.entity.CommentEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CommentRepository extends JpaRepository<CommentEntity, Long> {
 
+    Page<CommentEntity> findByProductoId(Long id_producto, Pageable oPageable);
+
+    Page<CommentEntity> findByUsuarioId(Long id_usuario, Pageable oPageable);
+
+    Page<CommentEntity> findByUsuarioIdAndProductoId(Long id_usuario, Long id_producto, Pageable oPageable);
+
+    Page<CommentEntity> findByCommentIgnoreCaseContaining(String strFilter, Pageable oPageable);
+
+    Page<CommentEntity> findByCommentIgnoreCaseContainingAndProductoId(String strFilter, Long id_producto, Pageable oPageable);
+
+    Page<CommentEntity> findByCommentIgnoreCaseContainingAndUsuarioId(String strFilter, Long id_usuario, Pageable oPageable);
+
+    Page<CommentEntity> findByCommentIgnoreCaseContainingAndUsuarioIdAndProductoId(String strFilter, Long id_usuario, Long id_producto, Pageable oPageable);
+
+    Long countByProductoId(Long id_producto);
+
+    Long countByUsuarioId(Long id_usuario);
+
+    Long countByUsuarioIdAndProductoId(Long id_usuario, Long id_producto);
+
+    Long countByCommentIgnoreCaseContaining(String strFilter);
+
+    Long countByCommentIgnoreCaseContainingAndProductoId(String strFilter, Long id_producto);
+
+    Long countByCommentIgnoreCaseContainingAndUsuarioId(String strFilter, Long id_usuario);
+
+    Long countByCommentIgnoreCaseContainingAndUsuarioIdAndProductoId(String strFilter, Long id_usuario, Long id_producto);
+    
+    
 }

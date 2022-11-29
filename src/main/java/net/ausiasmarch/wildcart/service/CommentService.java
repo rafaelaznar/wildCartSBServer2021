@@ -39,10 +39,15 @@ import net.ausiasmarch.wildcart.entity.ProductoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import net.ausiasmarch.wildcart.entity.UsuarioEntity;
+import net.ausiasmarch.wildcart.exception.ResourceNotFoundException;
+import net.ausiasmarch.wildcart.exception.ResourceNotModifiedException;
 import net.ausiasmarch.wildcart.helper.RandomHelper;
+import net.ausiasmarch.wildcart.helper.ValidationHelper;
 import net.ausiasmarch.wildcart.repository.CommentRepository;
 import net.ausiasmarch.wildcart.repository.ProductoRepository;
 import net.ausiasmarch.wildcart.repository.UsuarioRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service
 public class CommentService {
@@ -65,7 +70,101 @@ public class CommentService {
     @Autowired
     HttpSession oHttpSession;
 
+    @Autowired
+    AuthService oAuthService;
+
     private final String[] WORDS = {"de", "a", "pero", "toma", "donde", "con", "un", "antes", "total", "mismo", "ahora", "sin", "hay", "en"};
+
+    public CommentEntity get(Long id) {
+        try {
+            return oCommentRepository.findById(id).get();
+        } catch (Exception ex) {
+            throw new ResourceNotFoundException("id " + id + " not exist");
+        }
+    }
+
+    public Page<CommentEntity> getPage(Pageable oPageable, String strFilter, Long id_usuario, Long id_producto) {
+        //oAuthService.OnlyAdmins();
+        ValidationHelper.validateRPP(oPageable.getPageSize());
+        if (strFilter == null || strFilter.length() == 0) {
+            if (id_usuario == null) {
+                if (id_producto == null) {
+                    return oCommentRepository.findAll(oPageable);
+                } else {
+                    return oCommentRepository.findByProductoId(id_producto, oPageable);
+                }
+            } else {
+                if (id_producto == null) {
+                    return oCommentRepository.findByUsuarioId(id_usuario, oPageable);
+                } else {
+                    return oCommentRepository.findByUsuarioIdAndProductoId(id_usuario, id_producto, oPageable);
+                }
+            }
+        } else {
+            if (id_usuario == null) {
+                if (id_producto == null) {
+                    return oCommentRepository.findByCommentIgnoreCaseContaining(strFilter, oPageable);
+                } else {
+                    return oCommentRepository.findByCommentIgnoreCaseContainingAndProductoId(strFilter, id_producto, oPageable);
+                }
+            } else {
+                if (id_producto == null) {
+                    return oCommentRepository.findByCommentIgnoreCaseContainingAndUsuarioId(strFilter, id_usuario, oPageable);
+                } else {
+                    return oCommentRepository.findByCommentIgnoreCaseContainingAndUsuarioIdAndProductoId(strFilter, id_usuario, id_producto, oPageable);
+                }
+            }
+        }
+
+    }
+
+    public Long count(String strFilter, Long id_usuario, Long id_producto) {
+        //oAuthService.OnlyAdmins();
+
+        if (strFilter == null || strFilter.length() == 0) {
+            if (id_usuario == null) {
+                if (id_producto == null) {
+                    return oCommentRepository.count();
+                } else {
+                    return oCommentRepository.countByProductoId(id_producto);
+                }
+            } else {
+                if (id_producto == null) {
+                    return oCommentRepository.countByUsuarioId(id_usuario);
+                } else {
+                    return oCommentRepository.countByUsuarioIdAndProductoId(id_usuario, id_producto);
+                }
+            }
+        } else {
+            if (id_usuario == null) {
+                if (id_producto == null) {
+                    return oCommentRepository.countByCommentIgnoreCaseContaining(strFilter);
+                } else {
+                    return oCommentRepository.countByCommentIgnoreCaseContainingAndProductoId(strFilter, id_producto);
+                }
+            } else {
+                if (id_producto == null) {
+                    return oCommentRepository.countByCommentIgnoreCaseContainingAndUsuarioId(strFilter, id_usuario);
+                } else {
+                    return oCommentRepository.countByCommentIgnoreCaseContainingAndUsuarioIdAndProductoId(strFilter, id_usuario, id_producto);
+                }
+            }
+        }
+    }
+
+    public Long delete(Long id) {
+        oAuthService.OnlyAdminsOrOwnUsersData(oCommentRepository.getById(id).getUsuario().getId());
+        if (oCommentRepository.existsById(id)) {
+            oCommentRepository.deleteById(id);
+            if (oCommentRepository.existsById(id)) {
+                throw new ResourceNotModifiedException("can't remove register " + id);
+            } else {
+                return id;
+            }
+        } else {
+            throw new ResourceNotModifiedException("id " + id + " not exist");
+        }
+    }
 
     public Long generateSome() {
 
