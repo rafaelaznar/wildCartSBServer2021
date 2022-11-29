@@ -33,6 +33,7 @@
 package net.ausiasmarch.wildcart.service;
 
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import net.ausiasmarch.wildcart.entity.CommentEntity;
 import net.ausiasmarch.wildcart.entity.ProductoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,13 +62,18 @@ public class CommentService {
     @Autowired
     ProductoService oProductoService;
 
+    @Autowired
+    HttpSession oHttpSession;
+
     private final String[] WORDS = {"de", "a", "pero", "toma", "donde", "con", "un", "antes", "total", "mismo", "ahora", "sin", "hay", "en"};
 
     public Long generateSome() {
 
+        oHttpSession.setAttribute("usuario", oUsuarioRepository.getById(1L));
+
         List<ProductoEntity> oProductoList = oProductoRepository.findAll();
-        for (int i = 0; i < oProductoList.size(); i++) {
-            for (int j = 0; j <= 25; j++) {
+        for (int i = 0; i < oProductoList.size() - 1; i++) {
+            for (int j = 0; j < 25; j++) {
                 CommentEntity oCommentEntity = new CommentEntity();
                 oCommentEntity.setProducto(oProductoList.get(i));
                 oCommentEntity.setUsuario(oUsuarioService.getOneRandom());
@@ -79,8 +85,8 @@ public class CommentService {
         }
 
         List<UsuarioEntity> oUsuarioList = oUsuarioRepository.findAll();
-        for (int i = 0; i < oUsuarioList.size(); i++) {
-            for (int j = 0; j <= 25; j++) {
+        for (int i = 0; i < oUsuarioList.size() - 1; i++) {
+            for (int j = 0; j < 25; j++) {
                 CommentEntity oCommentEntity = new CommentEntity();
                 oCommentEntity.setProducto(oProductoService.getOneRandom());
                 oCommentEntity.setUsuario(oUsuarioList.get(i));
@@ -90,9 +96,7 @@ public class CommentService {
                 oCommentRepository.save(oCommentEntity);
             }
         }
-
         return oCommentRepository.count();
-
     }
 
     private String generateComment() {
@@ -101,7 +105,7 @@ public class CommentService {
         for (int j = 1; j <= repe; j++) {
             comment += this.generateWord() + " ";
         }
-        return comment;
+        return comment.trim();
     }
 
     private String generateWord() {

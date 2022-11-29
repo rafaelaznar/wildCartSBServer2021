@@ -338,7 +338,7 @@ CREATE TABLE `comment` (
   `id_usuario` bigint(20) NOT NULL,
   `id_producto` bigint(20) NOT NULL,
   `creation` datetime NOT NULL,
-  `lastedition` datetime NOT NULL
+  `lastedition` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
