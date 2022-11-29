@@ -41,7 +41,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/comment")
 public class CommentController {
 
     @Autowired
