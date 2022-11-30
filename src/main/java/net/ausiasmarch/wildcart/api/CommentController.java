@@ -70,7 +70,7 @@ public class CommentController {
         return new ResponseEntity<>(oCommentService.getPage(oPageable, strFilter, id_usuario, id_producto), HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/count")
     public ResponseEntity<Long> count(@RequestParam(name = "filter", required = false) String strFilter,
             @RequestParam(value = "usuario", required = false) Long id_usuario,
             @RequestParam(value = "producto", required = false) Long id_producto) {
