@@ -32,6 +32,7 @@
  */
 package net.ausiasmarch.wildcart.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import net.ausiasmarch.wildcart.entity.CommentEntity;
@@ -41,6 +42,7 @@ import org.springframework.stereotype.Service;
 import net.ausiasmarch.wildcart.entity.UsuarioEntity;
 import net.ausiasmarch.wildcart.exception.ResourceNotFoundException;
 import net.ausiasmarch.wildcart.exception.ResourceNotModifiedException;
+import net.ausiasmarch.wildcart.exception.UnauthorizedException;
 import net.ausiasmarch.wildcart.helper.RandomHelper;
 import net.ausiasmarch.wildcart.helper.ValidationHelper;
 import net.ausiasmarch.wildcart.repository.CommentRepository;
@@ -74,6 +76,13 @@ public class CommentService {
     AuthService oAuthService;
 
     private final String[] WORDS = {"de", "a", "pero", "toma", "donde", "con", "un", "antes", "total", "mismo", "ahora", "sin", "hay", "en"};
+
+    public void validate(Long id) {
+    }
+
+    public void validate(CommentEntity oCommentEntity) {
+        ValidationHelper.validateStringLength(oCommentEntity.getComment(), 10, 200, "error in comment length");
+    }
 
     public CommentEntity get(Long id) {
         try {
@@ -152,6 +161,46 @@ public class CommentService {
         }
     }
 
+    public Long create(CommentEntity oNewCommentEntity) {
+        validate(oNewCommentEntity);
+        if (oAuthService.isAdmin()) {            
+            oNewCommentEntity.setId(0L);
+            oNewCommentEntity.setProducto(oProductoService.get(oNewCommentEntity.getProducto().getId()));
+            oNewCommentEntity.setUsuario(oUsuarioService.get(oNewCommentEntity.getUsuario().getId()));
+            return oCommentRepository.save(oNewCommentEntity).getId();
+        } else {
+            if (oAuthService.isUser()) {
+                oNewCommentEntity.setId(0L);
+                oNewCommentEntity.setUsuario(oAuthService.getUser());
+                //fechas
+                oNewCommentEntity.setCreation(LocalDateTime.now());
+                oNewCommentEntity.setLastedition(null);
+                return oCommentRepository.save(oNewCommentEntity).getId();
+            } else {
+                throw new UnauthorizedException("no active session");
+            }
+        }
+    }
+
+    public Long update(CommentEntity oNewCommentEntity) {
+        validate(oNewCommentEntity);
+        if (oAuthService.isAdmin()) {                        
+            oNewCommentEntity.setProducto(oProductoService.get(oNewCommentEntity.getProducto().getId()));
+            oNewCommentEntity.setUsuario(oUsuarioService.get(oNewCommentEntity.getUsuario().getId()));
+            return oCommentRepository.save(oNewCommentEntity).getId();
+        } else {
+            if (oAuthService.isUser()) {
+                oNewCommentEntity.setUsuario(oAuthService.getUser());
+                //fechas                                               
+                oNewCommentEntity.setCreation(oCommentRepository.getById(oNewCommentEntity.getId()).getCreation());
+                oNewCommentEntity.setLastedition(LocalDateTime.now());
+                return oCommentRepository.save(oNewCommentEntity).getId();
+            } else {
+                throw new UnauthorizedException("no active session");
+            }
+        }
+    }
+           
     public Long delete(Long id) {
         oAuthService.OnlyAdminsOrOwnUsersData(oCommentRepository.getById(id).getUsuario().getId());
         if (oCommentRepository.existsById(id)) {

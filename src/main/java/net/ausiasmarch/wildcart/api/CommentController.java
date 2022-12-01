@@ -33,6 +33,7 @@
 package net.ausiasmarch.wildcart.api;
 
 import net.ausiasmarch.wildcart.entity.CommentEntity;
+import net.ausiasmarch.wildcart.entity.UsuarioEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,9 +45,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
@@ -75,6 +79,21 @@ public class CommentController {
             @RequestParam(value = "usuario", required = false) Long id_usuario,
             @RequestParam(value = "producto", required = false) Long id_producto) {
         return new ResponseEntity<>(oCommentService.count(strFilter, id_usuario, id_producto), HttpStatus.OK);
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<Long> create(@RequestBody CommentEntity oNewCommentEntity) {
+        return new ResponseEntity<Long>(oCommentService.create(oNewCommentEntity), HttpStatus.OK);
+    }
+
+    @PutMapping("/")
+    public ResponseEntity<Long> update(@RequestBody CommentEntity oCommentEntity) {
+        return new ResponseEntity<Long>(oCommentService.update(oCommentEntity), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Long> delete(@PathVariable(value = "id") Long id) {
+        return new ResponseEntity<Long>(oCommentService.delete(id), HttpStatus.OK);
     }
 
     @PostMapping("/generate")

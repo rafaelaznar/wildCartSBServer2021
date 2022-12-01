@@ -101,6 +101,15 @@ public class AuthService {
         }
     }
 
+    public UsuarioEntity getUser() {
+        UsuarioEntity oUsuarioSessionEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");
+        if (oUsuarioSessionEntity != null) {
+            return oUsuarioSessionEntity;
+        } else {
+            throw new UnauthorizedException("this request is only allowed to auth users");
+        }
+    }
+
     public Long getUserID() {
         UsuarioEntity oUsuarioSessionEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");
         if (oUsuarioSessionEntity != null) {
@@ -203,7 +212,7 @@ public class AuthService {
                 if (oPendentEntity.getQuestion().getResponse().toLowerCase().contains(oCaptchaBean.getAnswer().toLowerCase())) {
                     oHttpSession.setAttribute("usuario", oUsuarioEntity);
                     //borrar el reg
-                    oPendentRepository.delete(oPendentEntity);                                        
+                    oPendentRepository.delete(oPendentEntity);
                     return oUsuarioEntity;
                 } else {
                     throw new UnauthorizedException("wrong login or password or response");
