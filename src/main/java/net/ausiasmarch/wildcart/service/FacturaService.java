@@ -185,4 +185,17 @@ public class FacturaService {
         return oFacturaEntity;
     }
 
+    public Double getTotalFacturas4User(Long id_usuario) {
+        oUsuarioService.validate(id_usuario);
+        oAuthService.OnlyAdminsOrOwnUsersData(id_usuario);
+        return oFacturaRepository.getTotalFacturasUsuario(id_usuario);
+    }
+
+    public Double getTotalFactura(Long id_factura) {
+        this.validate(id_factura);
+        FacturaEntity oFactura = oFacturaRepository.getById(id_factura);
+        oAuthService.OnlyAdminsOrOwnUsersData(oFactura.getUsuario().getId());
+        return oFacturaRepository.getTotalFactura(id_factura);
+    }
+
 }

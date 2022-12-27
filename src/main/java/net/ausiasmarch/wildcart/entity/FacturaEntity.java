@@ -45,8 +45,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PostLoad;
 import javax.persistence.PreRemove;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "factura")
@@ -62,6 +64,9 @@ public class FacturaEntity {
 
     private int iva;
     private boolean pagado;
+
+    @Transient
+    private Double total;
 
     //@OneToMany(mappedBy = "factura", fetch = FetchType.LAZY, cascade = CascadeType.ALL )
     @OneToMany(mappedBy = "factura", fetch = FetchType.LAZY)
@@ -117,6 +122,16 @@ public class FacturaEntity {
 
     public void setUsuario(UsuarioEntity usuario) {
         this.usuario = usuario;
+    }
+
+    public Double getTotal() {
+        Double dtotal = 0D;
+        for (int i = 0; i < compras.size(); i++) {
+            dtotal += ((compras.get(i).getPrecio() * compras.get(i).getCantidad())
+                   - (compras.get(i).getPrecio() * compras.get(i).getCantidad() * ((double) compras.get(i).getDescuento_producto() / 100))
+                   - (compras.get(i).getPrecio() * compras.get(i).getCantidad() * ((double) compras.get(i).getDescuento_usuario() / 100)));
+        }
+        return dtotal;
     }
 
     @PreRemove
