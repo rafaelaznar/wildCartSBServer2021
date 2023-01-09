@@ -12,7 +12,7 @@
 * API spec: https://rafaelaznar.github.io/wildCartSBServer2021/ 
 
 
-## How to run Wildcart in development mode?
+## How to run Wildcart back-end in development mode?
 
 In a development environment we are concerned with speed of setup and ease of configuration versus security or productivity. The development system can be set up in Linux, Windows or Mac environments, although Linux is recommended.
 
@@ -24,4 +24,4 @@ To develop with the Java environment, we must install the Java Development Kitâ€
 
 To get the web application quickly running there are a number of api endpoints to create fake data. These endpoints can be accessed from the front-end so there is no need to do anything else on the server.
 
-
+To continue the start-up of WildCart web application in development mode, you can access a [how to run Wildcart front-end in development mode](https://github.com/rafaelaznar/wildCartAngularClient2021)
