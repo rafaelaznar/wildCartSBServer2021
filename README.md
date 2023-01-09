@@ -2,7 +2,7 @@
 
 * WildCart is a project that was developed by my students & I @ 2021.
 * It's an online shop.
-* It's made to be simple to learn.
+* It's made to be simple to learn but it's also funcional.
 * This backend API was developed on Java over Spring Boot. Uses MySQL or MariaDB Database underneath.
 * It's still a working in progress: I estimate grade of madurity of API server: 70%
 * You can access the API spec: https://rafaelaznar.github.io/wildCartSBServer2021/  (needs to be updated with product comments and captcha)
