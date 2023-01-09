@@ -1,4 +1,4 @@
-# wildCart SB Server 2021
+# WildCart Spring Boot Server 2021
 
 * WildCart is a project that was developed by my students & I @ 2021.
 * It's an online shop.
