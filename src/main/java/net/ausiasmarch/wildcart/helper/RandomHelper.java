@@ -32,6 +32,9 @@
  */
 package net.ausiasmarch.wildcart.helper;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -39,6 +42,8 @@ import java.util.GregorianCalendar;
 import java.util.Random;
 import java.time.ZoneId;
 import java.util.concurrent.ThreadLocalRandom;
+import javax.xml.bind.DatatypeConverter;
+import net.ausiasmarch.wildcart.exception.CannotPerformOperationException;
 
 public class RandomHelper {
 
@@ -100,4 +105,15 @@ public class RandomHelper {
     public static double getRadomDouble(double minValue, double maxValue) {
         return Math.round(ThreadLocalRandom.current().nextDouble(minValue, maxValue) * 100d) / 100d;
     }
+
+    public static String getSHA256(String strToHash) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] digest = md.digest(strToHash.getBytes(StandardCharsets.UTF_8));
+            return DatatypeConverter.printHexBinary(digest).toLowerCase();
+        } catch (NoSuchAlgorithmException ex) {
+            throw new CannotPerformOperationException("no such algorithm: sha256");
+        }
+    }
+
 }

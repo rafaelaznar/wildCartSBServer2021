@@ -32,26 +32,11 @@
  */
 package net.ausiasmarch.wildcart.repository;
 
-import net.ausiasmarch.wildcart.entity.FacturaEntity;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import net.ausiasmarch.wildcart.entity.PendentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
-public interface FacturaRepository extends JpaRepository<FacturaEntity, Long> {
+public interface PendentRepository extends JpaRepository<PendentEntity, Long> {
 
-    @Query(value = "SELECT * FROM factura WHERE id_usuario = ?1", nativeQuery = true)
-    Page<FacturaEntity> findByUsuarioId(Long id_usuario, Pageable pageable);
+    PendentEntity findByToken(String token);
 
-    @Query(value = "SELECT * FROM factura WHERE (iva LIKE  %?1% OR fecha LIKE %?2%)", nativeQuery = true)
-    Page<FacturaEntity> findByIvaContainingOrFechaContaining(String iva, String fecha, Pageable oPageable);
-
-    @Query(value = "SELECT * FROM factura WHERE id_usuario = ?1 AND (iva LIKE  %?2% OR fecha LIKE %?3%)", nativeQuery = true)
-    Page<FacturaEntity> findByUsuarioIdAndIvaContainingOrFechaContaining(long id_usuario, String iva, String fecha, Pageable oPageable);
-    
-    @Query(value = "SELECT SUM(c.cantidad * c.precio) FROM factura f, compra c WHERE f.id_usuario = ?1 AND c.id_factura = f.id", nativeQuery = true)
-    Double getTotalFacturasUsuario(long id_usuario);
-    
-    @Query(value = "SELECT SUM(c.cantidad * c.precio) FROM factura f, compra c WHERE f.id = ?1 AND c.id_factura = f.id", nativeQuery = true)
-    Double getTotalFactura(long id_factura);
 }

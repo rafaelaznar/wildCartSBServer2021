@@ -8,13 +8,15 @@
     <title>WildCart API Specification</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
 
 </head>
 
 <body>
 
-    <div class="container" style="font-size: smaller;">
+    <div class="container-fluid" style="font-size: smaller; padding: 5em;">
         <div class="row">
             <div class="col-12">
                 <h1>WildCart API Specification</h1>
@@ -44,11 +46,21 @@
                             <td>GET</td>
                             <td>id</td>
                             <td>
-                                <pre>{
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapsetipoproductoGet"
+                                        role="button" aria-expanded="false" aria-controls="collapsetipoproductoGet">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapsetipoproductoGet">
+                                    <div class="card card-body">
+                                        <pre>{
     "login":"admin",
     "password":"4298f843f830fb3cc13ecdfe1b2cf10f51f929df056d644d1bca73228c5e8f64"
 }
                                 </pre>
+                                    </div>
+                                </div>
                             </td>
                             <td>admin (1)</td>
                             <td>Obtains the description of the product</td>
@@ -77,8 +89,9 @@
                             </td>
                             <td>
                                 <p>
-                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseTipoproductoGetError"
-                                        role="button" aria-expanded="false" aria-controls="collapseTipoproductoGetError">
+                                    <a class="btn btn-danger" data-bs-toggle="collapse"
+                                        href="#collapseTipoproductoGetError" role="button" aria-expanded="false"
+                                        aria-controls="collapseTipoproductoGetError">
                                         JSON
                                     </a>
                                 </p>
@@ -151,11 +164,23 @@
                             <td>localhost:8082/tipoproducto/</td>
                             <td>GET</td>
                             <td></td>
-                            <td><pre>{
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapsetipoproductoGet"
+                                        role="button" aria-expanded="false" aria-controls="collapsetipoproductoGet">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapsetipoproductoGet">
+                                    <div class="card card-body">
+                                        <pre>{
     "login":"admin",
     "password":"4298f843f830fb3cc13ecdfe1b2cf10f51f929df056d644d1bca73228c5e8f64"
 }
-                            </pre></td>
+                            </pre>
+                                    </div>
+                                </div>
+                            </td>
                             <td>admin (1)</td>
                             <td>returns the pagination of type product, from 0 to max 10</td>
                             <td>Anyone can access to description</td>
@@ -163,8 +188,8 @@
                             <td>
 
                                 <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#GetPage"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#GetPage" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
                                         JSON
                                     </a>
                                 </p>
@@ -214,8 +239,8 @@
                             <td>
 
                                 <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#GetPage2"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#GetPage2" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
                                         JSON
                                     </a>
                                 </p>
@@ -257,20 +282,31 @@
                             <td>localhost:8082/tipoproducto/count</td>
                             <td>GET</td>
                             <td></td>
-                            <td><pre>{
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapsetipoproductoGet"
+                                        role="button" aria-expanded="false" aria-controls="collapsetipoproductoGet">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapsetipoproductoGet">
+                                    <div class="card card-body">
+                                        <pre>{
     "login":"admin",
     "password":"4298f843f830fb3cc13ecdfe1b2cf10f51f929df056d644d1bca73228c5e8f64"
 }</pre>
+                                    </div>
+                                </div>
                             </td>
                             <td>admin (1)</td>
                             <td>returns the total of producttype</td>
                             <td>Anyone can access to count</td>
                             <td>The count of tipoproducto is obtained from DataBase</td>
                             <td>
-                                
+
                                 <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#delete"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#delete" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
                                         JSON
                                     </a>
                                 </p>
@@ -283,8 +319,8 @@
                             </td>
                             <td>
                                 <p>
-                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#count"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetError">
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#count" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGetError">
                                         JSON
                                     </a>
                                 </p>
@@ -313,10 +349,10 @@
                             <td>Anyone can access to count</td>
                             <td>The count of tipoproducto is obtained from DataBase</td>
                             <td>
-                                
+
                                 <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#delete"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#delete" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
                                         JSON
                                     </a>
                                 </p>
@@ -329,14 +365,14 @@
                             </td>
                             <td>
                                 <p>
-                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#count2"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetError">
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#count2" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGetError">
                                         JSON
                                     </a>
                                 </p>
                                 <div class="collapse" id="count2">
                                     <div class="card card-body">
-                                       
+
                                     </div>
                                 </div>
                             </td>
@@ -347,10 +383,21 @@
                             <td>localhost:8082/tipoproducto/{id}</td>
                             <td>DELETE</td>
                             <td>id</td>
-                            <td><pre>{
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapsetipoproductoGet"
+                                        role="button" aria-expanded="false" aria-controls="collapsetipoproductoGet">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapsetipoproductoGet">
+                                    <div class="card card-body">
+                                        <pre>{
     "login":"admin",
     "password":"4298f843f830fb3cc13ecdfe1b2cf10f51f929df056d644d1bca73228c5e8f64"
 }</pre>
+                                    </div>
+                                </div>
                             </td>
                             <td>admin (1)</td>
                             <td>delete a type of product correspondents which this id</td>
@@ -359,8 +406,8 @@
                             <td>
 
                                 <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#delete"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#delete" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
                                         JSON
                                     </a>
                                 </p>
@@ -406,8 +453,8 @@
                             <td>
 
                                 <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#delete2"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#delete2" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
                                         JSON
                                     </a>
                                 </p>
@@ -444,18 +491,30 @@
                             <td>localhost:8082/tipoproducto/</td>
                             <td>POST</td>
                             <td></td>
-                            <td><pre>{
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#delete2" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="delete2">
+                                    <div class="card card-body">
+                                        <pre>{
     "login":"admin",
     "password":"4298f843f830fb3cc13ecdfe1b2cf10f51f929df056d644d1bca73228c5e8f64"
-}</pre></td>
+}</pre>
+                                    </div>
+                                </div>
+                            </td>
                             <td>admin (1)</td>
                             <td>It creates a new tipoproducto</td>
                             <td>Only admin role</td>
                             <td>As admin, you complete the fields to create a new tipoproducto</td>
                             <td>
                                 <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#create"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#create" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
                                         JSON
                                     </a>
                                 </p>
@@ -490,15 +549,15 @@
                             <td>localhost:8082/tipoproducto/</td>
                             <td>POST</td>
                             <td></td>
-                            <td>*Payload*</td>
+                            <td></td>
                             <td>user (2)</td>
                             <td>A user cant realize this action</td>
                             <td>Only admin role</td>
                             <td>**As admin, you complete the fields to create a new tipoproducto</td>
                             <td>
                                 <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#create2"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#create2" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
                                         JSON
                                     </a>
                                 </p>
@@ -533,10 +592,21 @@
                             <td>localhost:8082/tipoproducto/</td>
                             <td>PUT</td>
                             <td>id</td>
-                            <td><pre>{
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#create" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="create">
+                                    <div class="card card-body">
+                                        <pre>{
         "id": 20,
         "nombre": "QWERTY911"
     }</pre>
+                                    </div>
+                                </div>
                             </td>
                             <td>admin (1)</td>
                             <td>It modifies or updates a tipoproducto</td>
@@ -544,8 +614,8 @@
                             <td>As admin, you choose the id of a tipoproducto that you want to modify and update</td>
                             <td>
                                 <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#update"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#update" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
                                         JSON
                                     </a>
                                 </p>
@@ -580,10 +650,21 @@
                             <td>localhost:8082/tipoproducto/</td>
                             <td>PUT</td>
                             <td>id</td>
-                            <td><pre>{
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#update" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="update">
+                                    <div class="card card-body">
+                                        <pre>{
             "id": 20,
             "nombre": "QWERTY911"
             }</pre>
+                                    </div>
+                                </div>
                             </td>
                             <td>user (2)</td>
                             <td>A user cant realize this action</td>
@@ -591,8 +672,8 @@
                             <td>As admin, you choose the id of a tipoproducto you want to modify and update</td>
                             <td>
                                 <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#update2"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#update2" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
                                         JSON
                                     </a>
                                 </p>
@@ -627,15 +708,15 @@
                             <td>localhost:8082/tipoproducto/generate</td>
                             <td>POST</td>
                             <td></td>
-                            <td>*Payload*</td>
+                            <td></td>
                             <td>admin (1)</td>
                             <td>It generates a new tipoproducto with random features that already exist</td>
                             <td>Anyone can access</td>
                             <td>A random tipoproducto is generated</td>
                             <td>
                                 <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#generate"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#generate" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
                                         JSON
                                     </a>
                                 </p>
@@ -665,15 +746,15 @@
                             <td>localhost:8082/tipoproducto/generate</td>
                             <td>POST</td>
                             <td></td>
-                            <td>*Payload*</td>
+                            <td></td>
                             <td>user (2)</td>
                             <td>It generates a new tipoproducto with random features that already exist</td>
                             <td>Anyone can access</td>
                             <td>A random tipoproducto is generated</td>
                             <td>
                                 <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#generate2"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#generate2" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
                                         JSON
                                     </a>
                                 </p>
@@ -708,15 +789,15 @@
                             <td>localhost:8082/tipoproducto/generate/{amount}</td>
                             <td>POST</td>
                             <td>Quantity</td>
-                            <td>*Payload*</td>
+                            <td></td>
                             <td>admin (1)</td>
                             <td>It generates a number of new tipoproducto with random features that already exist</td>
                             <td>Only admin</td>
                             <td>Have to select a number and it generates a quantity of a random tipoproducto</td>
                             <td>
                                 <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#some"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#some" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
                                         JSON
                                     </a>
                                 </p>
@@ -728,8 +809,8 @@
                             </td>
                             <td>
                                 <p>
-                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#someError"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetError">
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#someError" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGetError">
                                         JSON
                                     </a>
                                 </p>
@@ -746,15 +827,15 @@
                             <td>localhost:8082/tipoproducto/generate/{amount}</td>
                             <td>POST</td>
                             <td>Quantity</td>
-                            <td>*Payload*</td>
+                            <td></td>
                             <td>user (2)</td>
                             <td>A user cant access to this function</td>
                             <td>Only admin</td>
                             <td>Have to select a number and it generates a quantity of a random tipoproducto</td>
                             <td>
                                 <p>
-                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#some2"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGet">
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#some2" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGet">
                                         JSON
                                     </a>
                                 </p>
@@ -766,8 +847,8 @@
                             </td>
                             <td>
                                 <p>
-                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#someError2"
-                                        role="button" aria-expanded="false" aria-controls="collapseCarritoGetError">
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#someError2" role="button"
+                                        aria-expanded="false" aria-controls="collapseCarritoGetError">
                                         JSON
                                     </a>
                                 </p>

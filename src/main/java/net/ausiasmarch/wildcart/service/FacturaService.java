@@ -89,6 +89,7 @@ public class FacturaService {
 
     public Page<FacturaEntity> getPage(Pageable oPageable, String strFilter, Long lUsuario) {
         oAuthService.OnlyAdminsOrUsers();
+        ValidationHelper.validateRPP(oPageable.getPageSize());
         if (oAuthService.isAdmin()) {
             if (lUsuario != null) {
                 if (strFilter == null || strFilter.isEmpty() || strFilter.trim().isEmpty()) {
@@ -182,6 +183,19 @@ public class FacturaService {
         List<FacturaEntity> facturaList = facturaPage.getContent();
         oFacturaEntity = oFacturaRepository.getById(facturaList.get(0).getId());
         return oFacturaEntity;
+    }
+
+    public Double getTotalFacturas4User(Long id_usuario) {
+        oUsuarioService.validate(id_usuario);
+        oAuthService.OnlyAdminsOrOwnUsersData(id_usuario);
+        return oFacturaRepository.getTotalFacturasUsuario(id_usuario);
+    }
+
+    public Double getTotalFactura(Long id_factura) {
+        this.validate(id_factura);
+        FacturaEntity oFactura = oFacturaRepository.getById(id_factura);
+        oAuthService.OnlyAdminsOrOwnUsersData(oFactura.getUsuario().getId());
+        return oFacturaRepository.getTotalFactura(id_factura);
     }
 
 }

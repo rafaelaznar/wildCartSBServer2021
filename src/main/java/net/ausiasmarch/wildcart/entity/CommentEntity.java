@@ -35,8 +35,6 @@ package net.ausiasmarch.wildcart.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -44,41 +42,31 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.PostLoad;
-import javax.persistence.PreRemove;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
-@Table(name = "factura")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class FacturaEntity {
+@Table(name = "comment")
+@JsonIgnoreProperties({"hibernateLazyInitialize", "handler"})
+public class CommentEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String comment;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-    private LocalDateTime fecha;
-
-    private int iva;
-    private boolean pagado;
-
-    @Transient
-    private Double total;
-
-    //@OneToMany(mappedBy = "factura", fetch = FetchType.LAZY, cascade = CascadeType.ALL )
-    @OneToMany(mappedBy = "factura", fetch = FetchType.LAZY)
-    private final List<CompraEntity> compras;
+    private LocalDateTime creation;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    private LocalDateTime lastedition;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_usuario")
     private UsuarioEntity usuario;
 
-    public FacturaEntity() {
-        this.compras = new ArrayList<>();
-    }
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id_producto")
+    private ProductoEntity producto;
 
     public Long getId() {
         return id;
@@ -88,32 +76,28 @@ public class FacturaEntity {
         this.id = id;
     }
 
-    public LocalDateTime getFecha() {
-        return fecha;
+    public String getComment() {
+        return comment;
     }
 
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
-    public int getIva() {
-        return iva;
+    public LocalDateTime getCreation() {
+        return creation;
     }
 
-    public void setIva(int iva) {
-        this.iva = iva;
+    public void setCreation(LocalDateTime creation) {
+        this.creation = creation;
     }
 
-    public boolean isPagado() {
-        return pagado;
+    public LocalDateTime getLastedition() {
+        return lastedition;
     }
 
-    public void setPagado(boolean pagado) {
-        this.pagado = pagado;
-    }
-
-    public int getCompras() {
-        return compras.size();
+    public void setLastedition(LocalDateTime lastedition) {
+        this.lastedition = lastedition;
     }
 
     public UsuarioEntity getUsuario() {
@@ -124,18 +108,12 @@ public class FacturaEntity {
         this.usuario = usuario;
     }
 
-    public Double getTotal() {
-        Double dtotal = 0D;
-        for (int i = 0; i < compras.size(); i++) {
-            dtotal += ((compras.get(i).getPrecio() * compras.get(i).getCantidad())
-                   - (compras.get(i).getPrecio() * compras.get(i).getCantidad() * ((double) compras.get(i).getDescuento_producto() / 100))
-                   - (compras.get(i).getPrecio() * compras.get(i).getCantidad() * ((double) compras.get(i).getDescuento_usuario() / 100)));
-        }
-        return dtotal;
+    public ProductoEntity getProducto() {
+        return producto;
     }
 
-    @PreRemove
-    public void nullify() {
-        this.compras.forEach(c -> c.setFactura(null));
+    public void setProducto(ProductoEntity producto) {
+        this.producto = producto;
     }
+
 }

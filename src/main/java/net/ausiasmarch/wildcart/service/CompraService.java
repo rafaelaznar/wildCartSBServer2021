@@ -94,6 +94,7 @@ public class CompraService {
 
     public Page<CompraEntity> getPage(Pageable oPageable, String strFilter, Long lFactura, Long lProducto) {
         oAuthService.OnlyAdminsOrUsers();
+        ValidationHelper.validateRPP(oPageable.getPageSize());
         Page<CompraEntity> oPage = null;
         if (oAuthService.isAdmin()) {
             if (lFactura != null) {

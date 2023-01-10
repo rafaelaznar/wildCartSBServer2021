@@ -1,0 +1,1741 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WildCart API Specification</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <div class="container" style="font-size: smaller;">
+        <div class="row">
+            <div class="col-12">
+                <h1>WildCart API Specification</h1>
+                <h2>Endpoints</h2>
+                <table class="table table-responsive table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Entity</th>
+                            <th>Operation</th>
+                            <th>URL</th>
+                            <th>Method</th>
+                            <th>Arguments</th>
+                            <th>Payload</th>
+                            <th>Profile</th>
+                            <th>Description</th>
+                            <th>Security</th>
+                            <th>Process</th>
+                            <th>Response example</th>
+                            <th>Error response example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>compra</td>
+                            <td>get</td>
+                            <td>localhost:8082/compra/5</td>
+                            <td>GET</td>
+                            <td>id</td>
+                            <td></td>
+                            <td>user(2)</td>
+                            <td>Get the purchase of a user in session</td>
+                            <td>A user can only see their own purchase</td>
+                            <td>The purchase is obtained from the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCompraGet"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraGet">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGet">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "id": 5,
+    "cantidad": 99,
+    "precio": 356.12,
+    "fecha": "2022-09-22T03:33:10.000Z",
+    "descuento_usuario": 5,
+    "descuento_producto": 33,
+    "factura": {
+        "id": 2,
+        "fecha": "2010-01-29T21:12:56.000Z",
+        "iva": 10,
+        "pagado": true,
+        "compras": 3,
+        "usuario": {
+            "id": 14,
+            "dni": "42772154C",
+            "nombre": "mark",
+            "apellido1": "mocholi",
+            "apellido2": "gil",
+            "login": "mark_mocholi",
+            "email": "mark_mocholi@daw.tk",
+            "descuento": 16,
+            "validado": false,
+            "activo": false,
+            "tipousuario": {
+                "id": 2,
+                "nombre": "usuario",
+                "usuarios": 82
+            },
+            "carritos": 0,
+            "facturas": 2
+        }
+    },
+    "producto": {
+        "id": 670,
+        "codigo": "85595D",
+        "nombre": "Vitrina de metal de color rojo de tamaño extra grande",
+        "existencias": 61,
+        "precio": 22.43,
+        "imagen": 1,
+        "descuento": 16,
+        "tipoproducto": {
+            "id": 31,
+            "nombre": "Productos de lujo para el hogar",
+            "productos": 15
+        },
+        "carritos": 0,
+        "compras": 1
+    }
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCompraGetError"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraGetError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGetError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T19:13:55.712+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed for your own data",
+    "details": "uri=/compra/3"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>compra</td>
+                            <td>get</td>
+                            <td>localhost:8082/compra/3</td>
+                            <td>GET</td>
+                            <td>id</td>
+                            <td></td>
+                            <td>admin(1)</td>
+                            <td>Get the purchase of a user in session</td>
+                            <td>A user can only see their own purchase</td>
+                            <td>The purchase is obtained from the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCompraGetAdmin"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraGetAdmin">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGetAdmin">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "id": 3,
+    "cantidad": 126,
+    "precio": 41.22,
+    "fecha": "2022-10-13T22:00:00.000Z",
+    "descuento_usuario": 2,
+    "descuento_producto": 2,
+    "factura": {
+        "id": 3,
+        "fecha": "2013-03-10T23:49:14.000Z",
+        "iva": 10,
+        "pagado": true,
+        "compras": 3,
+        "usuario": {
+            "id": 50,
+            "dni": "70217090E",
+            "nombre": "jose",
+            "apellido1": "gil",
+            "apellido2": "raga",
+            "login": "jose_gil",
+            "email": "jose_gil@daw.tk",
+            "descuento": 18,
+            "validado": false,
+            "activo": false,
+            "tipousuario": {
+                "id": 2,
+                "nombre": "usuario",
+                "usuarios": 82
+            },
+            "carritos": 0,
+            "facturas": 1
+        }
+    },
+    "producto": {
+        "id": 2,
+        "codigo": "62724C",
+        "nombre": "Aparador de cristal de color naranja de tamaño mediano",
+        "existencias": 30,
+        "precio": 63.88,
+        "imagen": 1,
+        "descuento": 49,
+        "tipoproducto": {
+            "id": 93,
+            "nombre": "Artículos de alta resistencia para la restauracion",
+            "productos": 4
+        },
+        "carritos": 0,
+        "compras": 3
+    }
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCompraGetErrorAdmin"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraGetErrorAdmin">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGetErrorAdmin">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-14T10:48:41.497+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/compra/3"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>compra</td>
+                            <td>count</td>
+                            <td>localhost:8082/compra/count</td>
+                            <td>GET</td>
+                            <td></td>
+                            <td></td>
+                            <td>admin(1)</td>
+                            <td>Counts the purchases that are registered in the database</td>
+                            <td></td>
+                            <td>The number of purchases is obtained from the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCompraCount"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompracount">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraCount">
+                                    <div class="card card-body">
+                                        <pre>
+100
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseCompraCountError"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraCountError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraCountError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T19:32:19.886+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/compra/count"
+}
+</pre>
+                                    </div>
+                                </div>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>compra</td>
+                            <td>getPage</td>
+                            <td>localhost:8082/compra?page=0&size=3&sort=fecha,asc&sort=id,desc
+                            </td>
+                            <td>GET</td>
+                            <td>page,size,sort,(asc, desc)</td>
+                            <td></td>
+                            <td>user(2)</td>
+                            <td>Show your purchase page in the order you specify</td>
+                            <td></td>
+                            <td>The purchases are obtained from the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCompraGetPage"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraGetPage">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGetPage">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "content": [
+        {
+            "id": 5,
+            "cantidad": 99,
+            "precio": 356.12,
+            "fecha": "2022-09-22T03:33:10.000Z",
+            "descuento_usuario": 5,
+            "descuento_producto": 33,
+            "factura": {
+                "id": 2,
+                "fecha": "2010-01-29T21:12:56.000Z",
+                "iva": 10,
+                "pagado": true,
+                "compras": 3,
+                "usuario": {
+                    "id": 14,
+                    "dni": "42772154C",
+                    "nombre": "mark",
+                    "apellido1": "mocholi",
+                    "apellido2": "gil",
+                    "login": "mark_mocholi",
+                    "email": "mark_mocholi@daw.tk",
+                    "descuento": 16,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 2,
+                        "nombre": "usuario",
+                        "usuarios": 82
+                    },
+                    "carritos": 0,
+                    "facturas": 2
+                }
+            },
+            "producto": {
+                "id": 670,
+                "codigo": "85595D",
+                "nombre": "Vitrina de metal de color rojo de tamaño extra grande",
+                "existencias": 61,
+                "precio": 22.43,
+                "imagen": 1,
+                "descuento": 16,
+                "tipoproducto": {
+                    "id": 31,
+                    "nombre": "Productos de lujo para el hogar",
+                    "productos": 15
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        },
+        {
+            "id": 28,
+            "cantidad": 177,
+            "precio": 324.39,
+            "fecha": "2022-09-22T14:55:58.000Z",
+            "descuento_usuario": 7,
+            "descuento_producto": 23,
+            "factura": {
+                "id": 2,
+                "fecha": "2010-01-29T21:12:56.000Z",
+                "iva": 10,
+                "pagado": true,
+                "compras": 3,
+                "usuario": {
+                    "id": 14,
+                    "dni": "42772154C",
+                    "nombre": "mark",
+                    "apellido1": "mocholi",
+                    "apellido2": "gil",
+                    "login": "mark_mocholi",
+                    "email": "mark_mocholi@daw.tk",
+                    "descuento": 16,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 2,
+                        "nombre": "usuario",
+                        "usuarios": 82
+                    },
+                    "carritos": 0,
+                    "facturas": 2
+                }
+            },
+            "producto": {
+                "id": 36,
+                "codigo": "64347V",
+                "nombre": "Cama de cartón de color azul de tamaño grade",
+                "existencias": 10,
+                "precio": 11.65,
+                "imagen": 1,
+                "descuento": 5,
+                "tipoproducto": {
+                    "id": 29,
+                    "nombre": "Manufacturas de gran tonelage para cines y teatros",
+                    "productos": 17
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        },
+        {
+            "id": 83,
+            "cantidad": 42,
+            "precio": 17.3,
+            "fecha": "2022-09-22T17:14:46.000Z",
+            "descuento_usuario": 4,
+            "descuento_producto": 50,
+            "factura": {
+                "id": 2,
+                "fecha": "2010-01-29T21:12:56.000Z",
+                "iva": 10,
+                "pagado": true,
+                "compras": 3,
+                "usuario": {
+                    "id": 14,
+                    "dni": "42772154C",
+                    "nombre": "mark",
+                    "apellido1": "mocholi",
+                    "apellido2": "gil",
+                    "login": "mark_mocholi",
+                    "email": "mark_mocholi@daw.tk",
+                    "descuento": 16,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 2,
+                        "nombre": "usuario",
+                        "usuarios": 82
+                    },
+                    "carritos": 0,
+                    "facturas": 2
+                }
+            },
+            "producto": {
+                "id": 885,
+                "codigo": "97779W",
+                "nombre": "Cama de cartón de color blanco de tamaño grade",
+                "existencias": 1,
+                "precio": 54.0,
+                "imagen": 1,
+                "descuento": 33,
+                "tipoproducto": {
+                    "id": 51,
+                    "nombre": "Artículos de lujo para la oficina",
+                    "productos": 19
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 3,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalPages": 1,
+    "totalElements": 3,
+    "last": true,
+    "number": 0,
+    "sort": {
+        "empty": false,
+        "sorted": true,
+        "unsorted": false
+    },
+    "size": 3,
+    "first": true,
+    "numberOfElements": 3,
+    "empty": false
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse"
+                                        href="#collapseCompraGetPageError" role="button" aria-expanded="false"
+                                        aria-controls="collapseCompraGetPageError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGetPageError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T22:01:14.448+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/compra"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>compra</td>
+                            <td>getPage</td>
+                            <td>localhost:8082/compra?page=0&size=3&sort=fecha,asc&sort=id,desc
+                            </td>
+                            <td>GET</td>
+                            <td>page,size,sort,(asc, desc)</td>
+                            <td></td>
+                            <td>admin(1)</td>
+                            <td>Show your purchase page in the order you specify</td>
+                            <td></td>
+                            <td>The purchases are obtained from the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCompraGetPageAdmin"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraGetPageAdmin">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGetPageAdmin">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "content": [
+        {
+            "id": 95,
+            "cantidad": 115,
+            "precio": 261.44,
+            "fecha": "2022-09-21T21:23:41.000Z",
+            "descuento_usuario": 5,
+            "descuento_producto": 5,
+            "factura": {
+                "id": 90,
+                "fecha": "2016-10-24T21:13:00.000Z",
+                "iva": 4,
+                "pagado": true,
+                "compras": 1,
+                "usuario": {
+                    "id": 34,
+                    "dni": "72839332B",
+                    "nombre": "vika",
+                    "apellido1": "coronado",
+                    "apellido2": "villanueva",
+                    "login": "vika_coronado",
+                    "email": "coronado_vika@daw.tk",
+                    "descuento": 36,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 2,
+                        "nombre": "usuario",
+                        "usuarios": 82
+                    },
+                    "carritos": 0,
+                    "facturas": 1
+                }
+            },
+            "producto": {
+                "id": 633,
+                "codigo": "81239R",
+                "nombre": "Cama de madera de color rojo de tamaño extra grande",
+                "existencias": 100,
+                "precio": 95.86,
+                "imagen": 1,
+                "descuento": 0,
+                "tipoproducto": {
+                    "id": 77,
+                    "nombre": "Elaboraciones artesanos para el hogar",
+                    "productos": 16
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        },
+        {
+            "id": 74,
+            "cantidad": 195,
+            "precio": 125.81,
+            "fecha": "2022-09-21T21:26:21.000Z",
+            "descuento_usuario": 9,
+            "descuento_producto": 58,
+            "factura": {
+                "id": 91,
+                "fecha": "2016-12-31T21:13:00.000Z",
+                "iva": 10,
+                "pagado": false,
+                "compras": 2,
+                "usuario": {
+                    "id": 38,
+                    "dni": "78392012P",
+                    "nombre": "javi",
+                    "apellido1": "frejo",
+                    "apellido2": "salom",
+                    "login": "javi_frejo",
+                    "email": "javi_frejo@daw.tk",
+                    "descuento": 14,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 2,
+                        "nombre": "usuario",
+                        "usuarios": 82
+                    },
+                    "carritos": 0,
+                    "facturas": 1
+                }
+            },
+            "producto": {
+                "id": 426,
+                "codigo": "17641I",
+                "nombre": "Aparador de bambú de color marron de tamaño pequeño",
+                "existencias": 36,
+                "precio": 79.52,
+                "imagen": 1,
+                "descuento": 39,
+                "tipoproducto": {
+                    "id": 41,
+                    "nombre": "Manufacturas abatibles para cines y teatros",
+                    "productos": 6
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        },
+        {
+            "id": 87,
+            "cantidad": 15,
+            "precio": 244.18,
+            "fecha": "2022-09-21T21:34:12.000Z",
+            "descuento_usuario": 6,
+            "descuento_producto": 55,
+            "factura": {
+                "id": 33,
+                "fecha": "2019-07-03T21:12:57.000Z",
+                "iva": 4,
+                "pagado": true,
+                "compras": 2,
+                "usuario": {
+                    "id": 68,
+                    "dni": "87794494K",
+                    "nombre": "javi",
+                    "apellido1": "arias",
+                    "apellido2": "aparici",
+                    "login": "javi_arias",
+                    "email": "javi_arias@daw.tk",
+                    "descuento": 6,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 2,
+                        "nombre": "usuario",
+                        "usuarios": 82
+                    },
+                    "carritos": 0,
+                    "facturas": 3
+                }
+            },
+            "producto": {
+                "id": 814,
+                "codigo": "77927F",
+                "nombre": "Marco de metal de color negro de tamaño extra grande",
+                "existencias": 6,
+                "precio": 19.87,
+                "imagen": 1,
+                "descuento": 23,
+                "tipoproducto": {
+                    "id": 61,
+                    "nombre": "Utilidades de segunda mano para el camping",
+                    "productos": 9
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 3,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalPages": 34,
+    "totalElements": 100,
+    "last": false,
+    "number": 0,
+    "sort": {
+        "empty": false,
+        "sorted": true,
+        "unsorted": false
+    },
+    "size": 3,
+    "first": true,
+    "numberOfElements": 3,
+    "empty": false
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse"
+                                        href="#collapseCompraGetPageErrorAdmin" role="button" aria-expanded="false"
+                                        aria-controls="collapseCompraGetPageErrorAdmin">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGetPageErrorAdmin">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T22:01:14.448+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/compra"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>compra</td>
+                            <td>getPage factura</td>
+                            <td>localhost:8082/compra?page=0&size=3&sort=fecha,asc&sort=id,desc&factura=2</td>
+                            <td>GET</td>
+                            <td>page,size,sort,(asc, desc), id</td>
+                            <td></td>
+                            <td>user(2)</td>
+                            <td>Shows a page with the purchases made filtered by invoice id</td>
+                            <td></td>
+                            <td>The purchases are obtained from the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCompraGetPageFactura"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraGetPageFactura">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGetPageFactura">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "content": [
+        {
+            "id": 5,
+            "cantidad": 99,
+            "precio": 356.12,
+            "fecha": "2022-09-22T03:33:10.000Z",
+            "descuento_usuario": 5,
+            "descuento_producto": 33,
+            "factura": {
+                "id": 2,
+                "fecha": "2010-01-29T21:12:56.000Z",
+                "iva": 10,
+                "pagado": true,
+                "compras": 3,
+                "usuario": {
+                    "id": 14,
+                    "dni": "42772154C",
+                    "nombre": "mark",
+                    "apellido1": "mocholi",
+                    "apellido2": "gil",
+                    "login": "mark_mocholi",
+                    "email": "mark_mocholi@daw.tk",
+                    "descuento": 16,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 2,
+                        "nombre": "usuario",
+                        "usuarios": 82
+                    },
+                    "carritos": 0,
+                    "facturas": 2
+                }
+            },
+            "producto": {
+                "id": 670,
+                "codigo": "85595D",
+                "nombre": "Vitrina de metal de color rojo de tamaño extra grande",
+                "existencias": 61,
+                "precio": 22.43,
+                "imagen": 1,
+                "descuento": 16,
+                "tipoproducto": {
+                    "id": 31,
+                    "nombre": "Productos de lujo para el hogar",
+                    "productos": 15
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        },
+        {
+            "id": 28,
+            "cantidad": 177,
+            "precio": 324.39,
+            "fecha": "2022-09-22T14:55:58.000Z",
+            "descuento_usuario": 7,
+            "descuento_producto": 23,
+            "factura": {
+                "id": 2,
+                "fecha": "2010-01-29T21:12:56.000Z",
+                "iva": 10,
+                "pagado": true,
+                "compras": 3,
+                "usuario": {
+                    "id": 14,
+                    "dni": "42772154C",
+                    "nombre": "mark",
+                    "apellido1": "mocholi",
+                    "apellido2": "gil",
+                    "login": "mark_mocholi",
+                    "email": "mark_mocholi@daw.tk",
+                    "descuento": 16,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 2,
+                        "nombre": "usuario",
+                        "usuarios": 82
+                    },
+                    "carritos": 0,
+                    "facturas": 2
+                }
+            },
+            "producto": {
+                "id": 36,
+                "codigo": "64347V",
+                "nombre": "Cama de cartón de color azul de tamaño grade",
+                "existencias": 10,
+                "precio": 11.65,
+                "imagen": 1,
+                "descuento": 5,
+                "tipoproducto": {
+                    "id": 29,
+                    "nombre": "Manufacturas de gran tonelage para cines y teatros",
+                    "productos": 17
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        },
+        {
+            "id": 83,
+            "cantidad": 42,
+            "precio": 17.3,
+            "fecha": "2022-09-22T17:14:46.000Z",
+            "descuento_usuario": 4,
+            "descuento_producto": 50,
+            "factura": {
+                "id": 2,
+                "fecha": "2010-01-29T21:12:56.000Z",
+                "iva": 10,
+                "pagado": true,
+                "compras": 3,
+                "usuario": {
+                    "id": 14,
+                    "dni": "42772154C",
+                    "nombre": "mark",
+                    "apellido1": "mocholi",
+                    "apellido2": "gil",
+                    "login": "mark_mocholi",
+                    "email": "mark_mocholi@daw.tk",
+                    "descuento": 16,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 2,
+                        "nombre": "usuario",
+                        "usuarios": 82
+                    },
+                    "carritos": 0,
+                    "facturas": 2
+                }
+            },
+            "producto": {
+                "id": 885,
+                "codigo": "97779W",
+                "nombre": "Cama de cartón de color blanco de tamaño grade",
+                "existencias": 1,
+                "precio": 54.0,
+                "imagen": 1,
+                "descuento": 33,
+                "tipoproducto": {
+                    "id": 51,
+                    "nombre": "Artículos de lujo para la oficina",
+                    "productos": 19
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 3,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalPages": 1,
+    "totalElements": 3,
+    "last": true,
+    "number": 0,
+    "sort": {
+        "empty": false,
+        "sorted": true,
+        "unsorted": false
+    },
+    "size": 3,
+    "first": true,
+    "numberOfElements": 3,
+    "empty": false
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse"
+                                        href="#collapseCompraGetPageFacturaError" role="button" aria-expanded="false"
+                                        aria-controls="collapseCompraGetPageFacturaError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGetPageFacturaError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-14T16:17:05.987+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/compra"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>compra</td>
+                            <td>getPage factura</td>
+                            <td>localhost:8082/compra?page=0&size=3&sort=fecha,asc&sort=id,desc&factura=26</td>
+                            <td>GET</td>
+                            <td>page,size,sort,(asc, desc), id</td>
+                            <td></td>
+                            <td>admin(1)</td>
+                            <td>Shows a page with the purchases made filtered by invoice id</td>
+                            <td></td>
+                            <td>The purchases are obtained from the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCompraGetPageFacturaAdmin"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraGetPageFacturaAdmin">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGetPageFacturaAdmin">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "content": [
+        {
+            "id": 100,
+            "cantidad": 9,
+            "precio": 14.87,
+            "fecha": "2022-09-22T13:25:08.000Z",
+            "descuento_usuario": 9,
+            "descuento_producto": 56,
+            "factura": {
+                "id": 26,
+                "fecha": "2014-09-20T21:12:57.000Z",
+                "iva": 4,
+                "pagado": false,
+                "compras": 2,
+                "usuario": {
+                    "id": 47,
+                    "dni": "40041544Q",
+                    "nombre": "jose",
+                    "apellido1": "raga",
+                    "apellido2": "santos",
+                    "login": "jose_raga",
+                    "email": "jose_raga@daw.tk",
+                    "descuento": 34,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 1,
+                        "nombre": "administrador",
+                        "usuarios": 19
+                    },
+                    "carritos": 0,
+                    "facturas": 3
+                }
+            },
+            "producto": {
+                "id": 161,
+                "codigo": "37095E",
+                "nombre": "Vitrina de bambú de color rosa de tamaño grade",
+                "existencias": 5,
+                "precio": 8.9,
+                "imagen": 1,
+                "descuento": 3,
+                "tipoproducto": {
+                    "id": 69,
+                    "nombre": "Manufacturas de segunda mano para la restauracion",
+                    "productos": 12
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        },
+        {
+            "id": 3,
+            "cantidad": 128,
+            "precio": 288.79,
+            "fecha": "2022-09-22T13:43:46.000Z",
+            "descuento_usuario": 2,
+            "descuento_producto": 36,
+            "factura": {
+                "id": 26,
+                "fecha": "2014-09-20T21:12:57.000Z",
+                "iva": 4,
+                "pagado": false,
+                "compras": 2,
+                "usuario": {
+                    "id": 47,
+                    "dni": "40041544Q",
+                    "nombre": "jose",
+                    "apellido1": "raga",
+                    "apellido2": "santos",
+                    "login": "jose_raga",
+                    "email": "jose_raga@daw.tk",
+                    "descuento": 34,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 1,
+                        "nombre": "administrador",
+                        "usuarios": 19
+                    },
+                    "carritos": 0,
+                    "facturas": 3
+                }
+            },
+            "producto": {
+                "id": 60,
+                "codigo": "60912A",
+                "nombre": "Aparador de plastico de color negro de tamaño pequeño",
+                "existencias": 67,
+                "precio": 85.45,
+                "imagen": 1,
+                "descuento": 31,
+                "tipoproducto": {
+                    "id": 76,
+                    "nombre": "Elaboraciones ortopédicos para el jardin",
+                    "productos": 4
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 3,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalPages": 1,
+    "totalElements": 2,
+    "last": true,
+    "number": 0,
+    "sort": {
+        "empty": false,
+        "sorted": true,
+        "unsorted": false
+    },
+    "size": 3,
+    "first": true,
+    "numberOfElements": 2,
+    "empty": false
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse"
+                                        href="#collapseCompraGetPageFacturaErrorAdmin" role="button" aria-expanded="false"
+                                        aria-controls="collapseCompraGetPageFacturaErrorAdmin">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGetPageFacturaErrorAdmin">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-14T16:17:05.987+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/compra"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>compra</td>
+                            <td>getPage producto</td>
+                            <td>localhost:8082/compra?page=0&size=3&sort=fecha,asc&sort=id,desc&producto=670</td>
+                            <td>GET</td>
+                            <td>page,size,sort,(asc, desc), id</td>
+                            <td></td>
+                            <td>user(2)</td>
+                            <td>Shows a page with the purchases made filtered by product id</td>
+                            <td></td>
+                            <td>The purchases are obtained from the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCompraGetPageProducto"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraGetPageProducto">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGetPageProducto">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "content": [
+        {
+            "id": 5,
+            "cantidad": 99,
+            "precio": 356.12,
+            "fecha": "2022-09-22T03:33:10.000Z",
+            "descuento_usuario": 5,
+            "descuento_producto": 33,
+            "factura": {
+                "id": 2,
+                "fecha": "2010-01-29T21:12:56.000Z",
+                "iva": 10,
+                "pagado": true,
+                "compras": 3,
+                "usuario": {
+                    "id": 14,
+                    "dni": "42772154C",
+                    "nombre": "mark",
+                    "apellido1": "mocholi",
+                    "apellido2": "gil",
+                    "login": "mark_mocholi",
+                    "email": "mark_mocholi@daw.tk",
+                    "descuento": 16,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 2,
+                        "nombre": "usuario",
+                        "usuarios": 82
+                    },
+                    "carritos": 0,
+                    "facturas": 2
+                }
+            },
+            "producto": {
+                "id": 670,
+                "codigo": "85595D",
+                "nombre": "Vitrina de metal de color rojo de tamaño extra grande",
+                "existencias": 61,
+                "precio": 22.43,
+                "imagen": 1,
+                "descuento": 16,
+                "tipoproducto": {
+                    "id": 31,
+                    "nombre": "Productos de lujo para el hogar",
+                    "productos": 15
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 3,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalPages": 1,
+    "totalElements": 1,
+    "last": true,
+    "number": 0,
+    "sort": {
+        "empty": false,
+        "sorted": true,
+        "unsorted": false
+    },
+    "size": 3,
+    "first": true,
+    "numberOfElements": 1,
+    "empty": false
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse"
+                                        href="#collapseCompraGetPageProductoError" role="button" aria-expanded="false"
+                                        aria-controls="collapseCompraGetPageProductoError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGetPageProductoError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-14T16:17:05.987+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/compra"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>compra</td>
+                            <td>getPage producto</td>
+                            <td>localhost:8082/compra?page=0&size=3&sort=fecha,asc&sort=id,desc&producto=69</td>
+                            <td>GET</td>
+                            <td>page,size,sort,(asc, desc), id</td>
+                            <td></td>
+                            <td>admin(1)</td>
+                            <td>Shows a page with the purchases made filtered by product id</td>
+                            <td></td>
+                            <td>The purchases are obtained from the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCompraGetPageProductoAdmin"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraGetPageProductoAdmin">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGetPageProductoAdmin">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "content": [
+        {
+            "id": 2,
+            "cantidad": 63,
+            "precio": 393.4,
+            "fecha": "2022-09-22T04:41:16.000Z",
+            "descuento_usuario": 3,
+            "descuento_producto": 46,
+            "factura": {
+                "id": 17,
+                "fecha": "2016-11-05T21:12:57.000Z",
+                "iva": 21,
+                "pagado": false,
+                "compras": 5,
+                "usuario": {
+                    "id": 83,
+                    "dni": "42532343F",
+                    "nombre": "jose",
+                    "apellido1": "arias",
+                    "apellido2": "raga",
+                    "login": "jose_arias",
+                    "email": "arias_jose@daw.tk",
+                    "descuento": 42,
+                    "validado": false,
+                    "activo": false,
+                    "tipousuario": {
+                        "id": 2,
+                        "nombre": "usuario",
+                        "usuarios": 82
+                    },
+                    "carritos": 0,
+                    "facturas": 3
+                }
+            },
+            "producto": {
+                "id": 69,
+                "codigo": "46064T",
+                "nombre": "Sofá de cristal de color azul de tamaño extra grande",
+                "existencias": 99,
+                "precio": 81.88,
+                "imagen": 1,
+                "descuento": 29,
+                "tipoproducto": {
+                    "id": 62,
+                    "nombre": "Productos ortopédicos para hospitales",
+                    "productos": 7
+                },
+                "carritos": 0,
+                "compras": 1
+            }
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "empty": false,
+            "sorted": true,
+            "unsorted": false
+        },
+        "offset": 0,
+        "pageNumber": 0,
+        "pageSize": 3,
+        "paged": true,
+        "unpaged": false
+    },
+    "totalPages": 1,
+    "totalElements": 1,
+    "last": true,
+    "number": 0,
+    "sort": {
+        "empty": false,
+        "sorted": true,
+        "unsorted": false
+    },
+    "size": 3,
+    "first": true,
+    "numberOfElements": 1,
+    "empty": false
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse"
+                                        href="#collapseCompraGetPageProductoErrorAdmin" role="button" aria-expanded="false"
+                                        aria-controls="collapseCompraGetPageProductoErrorAdmin">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGetPageProductoErrorAdmin">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-14T16:17:05.987+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to user or admin role",
+    "details": "uri=/compra"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>compra</td>
+                            <td>create</td>
+                            <td>localhost:8082/compra/</td>
+                            <td>POST</td>
+                            <td></td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseCompraCreatePayload"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraCreatePayload">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraCreatePayload">
+                                    <div class="card card-body">
+                                <pre>
+{
+    "cantidad": 146,
+    "precio": 41.8,
+    "fecha": "2022-10-13T22:00:00.000Z",
+    "descuento_usuario": 6,
+    "descuento_producto": 12,
+    "factura": {
+        "id": 3
+    },
+    "producto": {
+        "id": 2
+    }
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>admin(1)</td>
+                            <td>Create a new purchase</td>
+                            <td></td>
+                            <td>The new purchase is inserted into the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCompraCreate"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraCreate">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraCreate">
+                                    <div class="card card-body">
+                                        <pre>
+102
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse"
+                                        href="#collapseCompraCreateError" role="button" aria-expanded="false"
+                                        aria-controls="collapseCompraCreateError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraCreateError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T22:40:17.619+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/compra/"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>compra</td>
+                            <td>update</td>
+                            <td>localhost:8082/compra/</td>
+                            <td>PUT</td>
+                            <td></td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-success" data-bs-toggle="collapse" href="#collapseCompraUpdatePayload"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraUpdatePayload">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraUpdatePayload">
+                                    <div class="card card-body">
+                                
+                                <pre>
+{
+    "id": 3,
+    "cantidad": 126,
+    "precio": 41.22,
+    "fecha": "2022-10-13T22:00:00.000Z",
+    "descuento_usuario": 2,
+    "descuento_producto": 2,
+    "factura": {
+        "id": 3
+    },
+    "producto": {
+        "id": 2
+    }
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>admin(1)</td>
+                            <td>Update a purchase</td>
+                            <td></td>
+                            <td>The purchase is updated in the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCompraUpdate"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraUpdate">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraUpdate">
+                                    <div class="card card-body">
+                                        <pre>
+3
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse"
+                                        href="#collapseCompraUpdateError" role="button" aria-expanded="false"
+                                        aria-controls="collapseCompraUpdateError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraUpdateError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T22:45:26.278+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/compra/"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>compra</td>
+                            <td>delete</td>
+                            <td>localhost:8082/compra/35</td>
+                            <td>DELETE</td>
+                            <td>id</td>
+                            <td>
+                            </td>
+                            <td>admin(1)</td>
+                            <td>Delete a purchase</td>
+                            <td></td>
+                            <td>The purchase is deleted from the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCompraDelete"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraDelete">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraDelete">
+                                    <div class="card card-body">
+                                        <pre>
+35
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse"
+                                        href="#collapseCompraDeleteError" role="button" aria-expanded="false"
+                                        aria-controls="collapseCompraDeleteError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraDeleteError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T22:52:57.210+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/compra/32"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>compra</td>
+                            <td>generate</td>
+                            <td>http://localhost:8082/compra/generate</td>
+                            <td>POST</td>
+                            <td></td>
+                            <td></td>
+                            <td>admin(1)</td>
+                            <td>Generates a purchase with random data</td>
+                            <td></td>
+                            <td>A purchase is added to the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseCompraGenerate"
+                                        role="button" aria-expanded="false" aria-controls="collapseCompraGerate">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGenerate">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "id": null,
+    "cantidad": 3,
+    "precio": 363.67,
+    "fecha": "2022-10-13T08:08:13.077Z",
+    "descuento_usuario": 2,
+    "descuento_producto": 41,
+    "factura": {
+        "id": 25,
+        "fecha": "2011-04-29T23:49:14.000Z",
+        "iva": 4,
+        "pagado": true,
+        "compras": 2,
+        "usuario": {
+            "id": 28,
+            "dni": "69777231S",
+            "nombre": "daniel",
+            "apellido1": "kuvshinnikova",
+            "apellido2": "sanchis",
+            "login": "daniel_kuvshinnikova",
+            "email": "kuvshinnikova_daniel@daw.tk",
+            "descuento": 39,
+            "validado": false,
+            "activo": false,
+            "tipousuario": {
+                "id": 2,
+                "nombre": "usuario",
+                "usuarios": 82
+            },
+            "carritos": 0,
+            "facturas": 1
+        }
+    },
+    "producto": {
+        "id": 48,
+        "codigo": "63095D",
+        "nombre": "Sillón de cristal de color azul de tamaño grade",
+        "existencias": 94,
+        "precio": 90.14,
+        "imagen": 1,
+        "descuento": 46,
+        "tipoproducto": {
+            "id": 25,
+            "nombre": "Manufacturas de gran tonelage para la restauracion",
+            "productos": 2
+        },
+        "carritos": 0,
+        "compras": 2
+    }
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse"
+                                        href="#collapseCompraGenerateError" role="button" aria-expanded="false"
+                                        aria-controls="collapseCompraGenerateError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGenerateError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T23:05:10.508+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/compra/generate"
+}
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>compra</td>
+                            <td>generateSome</td>
+                            <td>http://localhost:8082/compra/generate/10</td>
+                            <td>POST</td>
+                            <td>amount</td>
+                            <td></td>
+                            <td>admin(1)</td>
+                            <td>Generates an amount "n" of purchase with random data</td>
+                            <td></td>
+                            <td>A purchase quantity "n" is added to the database</td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-primary" data-bs-toggle="collapse"
+                                        href="#collapseCompraGenerateSome" role="button" aria-expanded="false"
+                                        aria-controls="collapseCompraGenerateSome">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGenerateSome">
+                                    <div class="card card-body">
+                                        <pre>
+120
+</pre>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <p>
+                                    <a class="btn btn-danger" data-bs-toggle="collapse"
+                                        href="#collapseCompraGenerateSomeError" role="button" aria-expanded="false"
+                                        aria-controls="collapseCompraGenerateSomeError">
+                                        JSON
+                                    </a>
+                                </p>
+                                <div class="collapse" id="collapseCompraGenerateSomeError">
+                                    <div class="card card-body">
+                                        <pre>
+{
+    "timestamp": "2022-10-13T23:08:06.721+00:00",
+    "status": "UNAUTHORIZED",
+    "message": "ERROR: Unauthorized access attempt: this request is only allowed to admin role",
+    "details": "uri=/compra/generate/10"
+}
+</pre>
+                                    </div>
+
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</body>
+
+</html>

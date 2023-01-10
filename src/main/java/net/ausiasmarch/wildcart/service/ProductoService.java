@@ -88,6 +88,7 @@ public class ProductoService {
     }
 
     public Page<ProductoEntity> getPage(Pageable oPageable, String strFilter, Long lTipoProducto) {
+        ValidationHelper.validateRPP(oPageable.getPageSize());
         Page<ProductoEntity> oPage = null;
         if (lTipoProducto == null) {
             if (strFilter == null || strFilter.isEmpty() || strFilter.trim().isEmpty()) {

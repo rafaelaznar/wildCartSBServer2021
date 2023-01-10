@@ -72,9 +72,9 @@ public class FacturaController {
 
     @GetMapping("")
     public ResponseEntity<Page<FacturaEntity>> getPage(
-            @ParameterObject @PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable oPageable,
-            @RequestParam(name = "filter", required = false) String strFilter,
-            @RequestParam(name = "usuario", required = false) Long lUsuario) {
+           @ParameterObject @PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable oPageable,
+           @RequestParam(name = "filter", required = false) String strFilter,
+           @RequestParam(name = "usuario", required = false) Long lUsuario) {
         return new ResponseEntity<Page<FacturaEntity>>(oFacturaService.getPage(oPageable, strFilter, lUsuario), HttpStatus.OK);
     }
 
@@ -103,4 +103,13 @@ public class FacturaController {
         return new ResponseEntity<Long>(oFacturaService.generateSome(amount), HttpStatus.OK);
     }
 
+    @GetMapping("/total/usuario/{id}")
+    public ResponseEntity<?> getTotalFacturasUsuario(@PathVariable(value = "id") Long id_usuario) {
+        return new ResponseEntity<Double>(oFacturaService.getTotalFacturas4User(id_usuario), HttpStatus.OK);
+    }
+
+    @GetMapping("/total/{id}")
+    public ResponseEntity<?> getTotalFactura(@PathVariable(value = "id") Long id_factura) {
+        return new ResponseEntity<Double>(oFacturaService.getTotalFactura(id_factura), HttpStatus.OK);
+    }
 }

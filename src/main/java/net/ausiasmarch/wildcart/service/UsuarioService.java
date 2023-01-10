@@ -111,6 +111,7 @@ public class UsuarioService {
 
     public Page<UsuarioEntity> getPage(Pageable oPageable, String strFilter, Long lTipoUsuario) {
         oAuthService.OnlyAdmins();
+        ValidationHelper.validateRPP(oPageable.getPageSize());
         Page<UsuarioEntity> oPage = null;
         if (lTipoUsuario == null) {
             if (strFilter == null || strFilter.isEmpty() || strFilter.trim().isEmpty()) {
@@ -210,15 +211,11 @@ public class UsuarioService {
         return oUsuarioRepository.count();
     }
 
-    public UsuarioEntity getOneRandom() {
+    public UsuarioEntity getOneRandom() {        
         if (count() > 0) {
-            UsuarioEntity oUsuarioEntity = null;
+            List<UsuarioEntity> usuarioList = oUsuarioRepository.findAll();
             int iPosicion = RandomHelper.getRandomInt(0, (int) oUsuarioRepository.count() - 1);
-            Pageable oPageable = PageRequest.of(iPosicion, 1);
-            Page<UsuarioEntity> usuarioPage = oUsuarioRepository.findAll(oPageable);
-            List<UsuarioEntity> usuarioList = usuarioPage.getContent();
-            oUsuarioEntity = oUsuarioRepository.getById(usuarioList.get(0).getId());
-            return oUsuarioEntity;
+            return oUsuarioRepository.getById(usuarioList.get(iPosicion).getId());            
         } else {
             throw new CannotPerformOperationException("ho hay usuarios en la base de datos");
         }
@@ -272,5 +269,5 @@ public class UsuarioService {
         list.remove(randomNumber);
         return value;
     }
-
+   
 }

@@ -33,10 +33,13 @@
 package net.ausiasmarch.wildcart.api;
 
 import javax.servlet.http.HttpSession;
+import net.ausiasmarch.wildcart.bean.CaptchaBean;
+import net.ausiasmarch.wildcart.bean.CaptchaResponse;
 import net.ausiasmarch.wildcart.bean.UsuarioBean;
 import net.ausiasmarch.wildcart.entity.UsuarioEntity;
 import net.ausiasmarch.wildcart.repository.UsuarioRepository;
 import net.ausiasmarch.wildcart.service.AuthService;
+import net.ausiasmarch.wildcart.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -76,6 +79,16 @@ public class SessionController {
     public ResponseEntity<?> logout() {
         oAuthService.logout();
         return new ResponseEntity<>(null, HttpStatus.OK);
+    }
+
+    @GetMapping("/prelogin")
+    public ResponseEntity<CaptchaResponse> prelogin() {
+        return new ResponseEntity<CaptchaResponse>(oAuthService.prelogin(), HttpStatus.OK);
+    }
+
+    @PostMapping("/loginc")
+    public ResponseEntity<UsuarioEntity> loginc(@org.springframework.web.bind.annotation.RequestBody CaptchaBean oCaptchaBean) {
+        return new ResponseEntity<UsuarioEntity>(oAuthService.loginc(oCaptchaBean), HttpStatus.OK);
     }
 
 }

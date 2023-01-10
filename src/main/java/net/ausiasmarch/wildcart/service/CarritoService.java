@@ -114,6 +114,7 @@ public class CarritoService {
 
     public Page<CarritoEntity> getPage(Pageable oPageable, Long lUsuario, Long lProducto) {
         oAuthService.OnlyAdminsOrUsers();
+        ValidationHelper.validateRPP(oPageable.getPageSize());
         Page<CarritoEntity> oPage = null;
         if (oAuthService.isAdmin()) {
             if (lUsuario != null) {

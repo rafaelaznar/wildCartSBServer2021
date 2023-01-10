@@ -33,10 +33,18 @@
 package net.ausiasmarch.wildcart.service;
 
 import javax.servlet.http.HttpSession;
+import javax.transaction.Transactional;
+import net.ausiasmarch.wildcart.bean.CaptchaBean;
+import net.ausiasmarch.wildcart.bean.CaptchaResponse;
 import net.ausiasmarch.wildcart.bean.UsuarioBean;
+import net.ausiasmarch.wildcart.entity.PendentEntity;
+import net.ausiasmarch.wildcart.entity.QuestionEntity;
 import net.ausiasmarch.wildcart.exception.UnauthorizedException;
 import net.ausiasmarch.wildcart.entity.UsuarioEntity;
+import net.ausiasmarch.wildcart.helper.RandomHelper;
 import net.ausiasmarch.wildcart.helper.TipoUsuarioHelper;
+import net.ausiasmarch.wildcart.repository.PendentRepository;
+import net.ausiasmarch.wildcart.repository.QuestionRepository;
 import net.ausiasmarch.wildcart.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -50,6 +58,12 @@ public class AuthService {
 
     @Autowired
     UsuarioRepository oUsuarioRepository;
+
+    @Autowired
+    QuestionRepository oQuestionRepository;
+
+    @Autowired
+    PendentRepository oPendentRepository;
 
     public UsuarioEntity login(@RequestBody UsuarioBean oUsuarioBean) {
         if (oUsuarioBean.getPassword() != null) {
@@ -84,6 +98,15 @@ public class AuthService {
             return false;
         } else {
             return true;
+        }
+    }
+
+    public UsuarioEntity getUser() {
+        UsuarioEntity oUsuarioSessionEntity = (UsuarioEntity) oHttpSession.getAttribute("usuario");
+        if (oUsuarioSessionEntity != null) {
+            return oUsuarioSessionEntity;
+        } else {
+            throw new UnauthorizedException("this request is only allowed to auth users");
         }
     }
 
@@ -157,6 +180,48 @@ public class AuthService {
             }
         } else {
             throw new UnauthorizedException("this request is only allowed to user or admin role");
+        }
+    }
+
+    @Transactional
+    public CaptchaResponse prelogin() {
+
+        Long iRandom = Long.valueOf(RandomHelper.getRandomInt(1, (int) oQuestionRepository.count())); //pte cambiar el 5 
+
+        QuestionEntity oQuestionEntity = oQuestionRepository.findById(iRandom).get();
+
+        PendentEntity oPendentEntity = new PendentEntity();
+        oPendentEntity.setQuestion(oQuestionEntity);
+        PendentEntity oPendentEntityNueva = oPendentRepository.save(oPendentEntity);
+        oPendentEntityNueva.setToken(RandomHelper.getSHA256("" + iRandom + oPendentEntityNueva.getId() + RandomHelper.getRandomInt(1, 9999)));
+        oPendentRepository.save(oPendentEntityNueva);
+
+        CaptchaResponse oCaptchaResponse = new CaptchaResponse();
+        oCaptchaResponse.setQuestion(oPendentEntityNueva.getQuestion().getStatement());
+        oCaptchaResponse.setToken(oPendentEntityNueva.getToken());
+
+        return oCaptchaResponse;
+    }
+
+    public UsuarioEntity loginc(CaptchaBean oCaptchaBean) {
+        if (oCaptchaBean.getPassword() != null) {
+            UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByLoginAndPassword(oCaptchaBean.getLogin(), oCaptchaBean.getPassword());
+            if (oUsuarioEntity != null) {
+                // valida login y pass
+                PendentEntity oPendentEntity = oPendentRepository.findByToken(oCaptchaBean.getToken());
+                if (oPendentEntity.getQuestion().getResponse().toLowerCase().contains(oCaptchaBean.getAnswer().toLowerCase())) {
+                    oHttpSession.setAttribute("usuario", oUsuarioEntity);
+                    //borrar el reg
+                    oPendentRepository.delete(oPendentEntity);
+                    return oUsuarioEntity;
+                } else {
+                    throw new UnauthorizedException("wrong login or password or response");
+                }
+            } else {
+                throw new UnauthorizedException("login or password incorrect");
+            }
+        } else {
+            throw new UnauthorizedException("wrong password");
         }
     }
 
