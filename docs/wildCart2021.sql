@@ -208,7 +208,7 @@ CREATE TABLE `usuario` (
   `apellido1` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `apellido2` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `login` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `password` varchar(512) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'da8ab09ab4889c6208116a675cad0b13e335943bd7fc418782d054b32fdfba04',
+  `password` varchar(512) COLLATE utf8_unicode_ci NOT NULL DEFAULT '4298f843f830fb3cc13ecdfe1b2cf10f51f929df056d644d1bca73228c5e8f64',
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `descuento` int(11) NOT NULL DEFAULT 0,
   `id_tipousuario` bigint(20) NOT NULL DEFAULT 2,
@@ -223,7 +223,7 @@ CREATE TABLE `usuario` (
 
 INSERT INTO `usuario` (`id`, `dni`, `nombre`, `apellido1`, `apellido2`, `login`, `password`, `email`, `descuento`, `id_tipousuario`, `token`, `validado`, `activo`) VALUES
 (1, '12345678Z', 'Gregorio', 'Sánchez', 'Fernández', 'admin', '4298f843f830fb3cc13ecdfe1b2cf10f51f929df056d644d1bca73228c5e8f64', 'admin@wildcart.com', 0, 1, NULL, 1, 1),
-(2, '98765432M', 'Juan', 'Tamariz', 'Negron', 'user', 'da8ab09ab4889c6208116a675cad0b13e335943bd7fc418782d054b32fdfba04', 'juant@wildcart2021.es', 2, 2, NULL, 1, 1);
+(2, '98765432M', 'Juan', 'Tamariz', 'Negron', 'user', '4298f843f830fb3cc13ecdfe1b2cf10f51f929df056d644d1bca73228c5e8f64', 'juant@wildcart2021.es', 2, 2, NULL, 1, 1);
 
 -- --------------------------------------------------------
 
