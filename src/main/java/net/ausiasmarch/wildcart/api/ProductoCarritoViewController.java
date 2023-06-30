@@ -66,7 +66,7 @@ public class ProductoCarritoViewController {
 
     // /producto/3
     @GetMapping("/{id}")
-    public ResponseEntity<?> get(@PathVariable(value = "id") Long id) {        
+    public ResponseEntity<?> get(@PathVariable(value = "id") Long id) {
         //System.out.println("ProductoCarritoViewController petición: get: producto:" + id + " usuario: " + oAuthService.getUserID() + " is uaser: " + oAuthService.isUser());
         if (oAuthService.isLoggedIn()) {
             return new ResponseEntity<ProductoEntity>(oProductoService.get(id), HttpStatus.OK);
@@ -84,9 +84,9 @@ public class ProductoCarritoViewController {
     // /producto?page=0&size=10&sort=precio,desc&filter=verde&tipoproducto=2
     @GetMapping("")
     public ResponseEntity<Page<?>> getPage(
-            @ParameterObject @PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable oPageable,
-            @RequestParam(name = "filter", required = false) String strFilter,
-            @RequestParam(name = "tipoproducto", required = false) Long lTipoProducto) {
+           @ParameterObject @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable oPageable,
+           @RequestParam(name = "filter", required = false) String strFilter,
+           @RequestParam(name = "tipoproducto", required = false) Long lTipoProducto) {
         if (oAuthService.isUser()) {
             return new ResponseEntity<Page<?>>(oProductoCarritoViewService.getPage(oPageable, strFilter, lTipoProducto), HttpStatus.OK);
         } else {
