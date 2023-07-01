@@ -171,7 +171,7 @@ public class CommentService {
         } else {
             if (oAuthService.isUser()) {
                 oNewCommentEntity.setId(0L);
-                oNewCommentEntity.setUsuario(oAuthService.getUser());
+                oNewCommentEntity.setUsuario(oAuthService.getUser()); //for non-admins user must be taken from session
                 //fechas
                 oNewCommentEntity.setCreation(LocalDateTime.now());
                 oNewCommentEntity.setLastedition(null);
