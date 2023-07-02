@@ -32,11 +32,12 @@
  */
 package net.ausiasmarch.wildcart.repository;
 
+import java.util.Optional;
 import net.ausiasmarch.wildcart.entity.PendentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PendentRepository extends JpaRepository<PendentEntity, Long> {
 
-    PendentEntity findByToken(String token);
+    Optional<PendentEntity> findByToken(String token);
 
 }

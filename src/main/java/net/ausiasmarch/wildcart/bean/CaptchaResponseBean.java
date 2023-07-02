@@ -1,6 +1,6 @@
 package net.ausiasmarch.wildcart.bean;
 
-public class CaptchaResponse {
+public class CaptchaResponseBean {
 
     private String token;
     private String question;

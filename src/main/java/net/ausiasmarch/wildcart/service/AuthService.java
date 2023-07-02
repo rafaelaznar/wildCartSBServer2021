@@ -35,12 +35,13 @@ package net.ausiasmarch.wildcart.service;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import net.ausiasmarch.wildcart.bean.CaptchaBean;
-import net.ausiasmarch.wildcart.bean.CaptchaResponse;
+import net.ausiasmarch.wildcart.bean.CaptchaResponseBean;
 import net.ausiasmarch.wildcart.bean.UsuarioBean;
 import net.ausiasmarch.wildcart.entity.PendentEntity;
 import net.ausiasmarch.wildcart.entity.QuestionEntity;
 import net.ausiasmarch.wildcart.exception.UnauthorizedException;
 import net.ausiasmarch.wildcart.entity.UsuarioEntity;
+import net.ausiasmarch.wildcart.exception.ResourceNotFoundException;
 import net.ausiasmarch.wildcart.helper.RandomHelper;
 import net.ausiasmarch.wildcart.helper.TipoUsuarioHelper;
 import net.ausiasmarch.wildcart.repository.PendentRepository;
@@ -184,44 +185,50 @@ public class AuthService {
     }
 
     @Transactional
-    public CaptchaResponse prelogin() {
+    public CaptchaResponseBean prelogin() {
 
-        Long iRandom = Long.valueOf(RandomHelper.getRandomInt(1, (int) oQuestionRepository.count())); //pte cambiar el 5 
-
-        QuestionEntity oQuestionEntity = oQuestionRepository.findById(iRandom).get();
+        long lQuestionId = Long.valueOf(RandomHelper.getRandomInt(1, (int) oQuestionRepository.count()));
+        QuestionEntity oQuestionEntity = oQuestionRepository.findById(lQuestionId)
+               .orElseThrow(() -> new ResourceNotFoundException("Question not found (id = " + lQuestionId + ")"));
 
         PendentEntity oPendentEntity = new PendentEntity();
         oPendentEntity.setQuestion(oQuestionEntity);
-        PendentEntity oPendentEntityNueva = oPendentRepository.save(oPendentEntity);
-        oPendentEntityNueva.setToken(RandomHelper.getSHA256("" + iRandom + oPendentEntityNueva.getId() + RandomHelper.getRandomInt(1, 9999)));
-        oPendentRepository.save(oPendentEntityNueva);
+        PendentEntity oNewPendentEntity = oPendentRepository.save(oPendentEntity); //new       
 
-        CaptchaResponse oCaptchaResponse = new CaptchaResponse();
-        oCaptchaResponse.setQuestion(oPendentEntityNueva.getQuestion().getStatement());
-        oCaptchaResponse.setToken(oPendentEntityNueva.getToken());
+        oNewPendentEntity.setToken(RandomHelper.getSHA256(
+               String.valueOf(oNewPendentEntity.getId())
+               + String.valueOf(lQuestionId)
+               + String.valueOf(RandomHelper.getRandomInt(1, 9999))));
 
-        return oCaptchaResponse;
+        oPendentRepository.save(oNewPendentEntity); //update
+
+        CaptchaResponseBean oCaptchaResponseBean = new CaptchaResponseBean();
+        oCaptchaResponseBean.setQuestion(oNewPendentEntity.getQuestion().getStatement());
+        oCaptchaResponseBean.setToken(oNewPendentEntity.getToken());
+
+        return oCaptchaResponseBean;
     }
 
-    public UsuarioEntity loginc(CaptchaBean oCaptchaBean) {
-        if (oCaptchaBean.getPassword() != null) {
+    public UsuarioEntity loginC(@RequestBody CaptchaBean oCaptchaBean) {
+        if (oCaptchaBean.getLogin() != null && oCaptchaBean.getPassword() != null) {
             UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByLoginAndPassword(oCaptchaBean.getLogin(), oCaptchaBean.getPassword());
             if (oUsuarioEntity != null) {
-                // valida login y pass
-                PendentEntity oPendentEntity = oPendentRepository.findByToken(oCaptchaBean.getToken());
-                if (oPendentEntity.getQuestion().getResponse().toLowerCase().contains(oCaptchaBean.getAnswer().toLowerCase())) {
-                    oHttpSession.setAttribute("usuario", oUsuarioEntity);
-                    //borrar el reg
-                    oPendentRepository.delete(oPendentEntity);
+               
+                PendentEntity oPendentEntity = oPendentRepository.findByToken(oCaptchaBean.getToken())
+                       .orElseThrow(() -> new ResourceNotFoundException("Pendent not found (token = " + oCaptchaBean.getToken() + ")"));
+
+                if (oPendentEntity.getQuestion().getResponse().toLowerCase().equals(oCaptchaBean.getAnswer().toLowerCase())) {
+                     oHttpSession.setAttribute("usuario", oUsuarioEntity);
+                     oPendentRepository.delete(oPendentEntity);
                     return oUsuarioEntity;
                 } else {
-                    throw new UnauthorizedException("wrong login or password or response");
+                    throw new UnauthorizedException("Captcha error");
                 }
             } else {
-                throw new UnauthorizedException("login or password incorrect");
+                throw new UnauthorizedException("Login or password error");
             }
         } else {
-            throw new UnauthorizedException("wrong password");
+            throw new UnauthorizedException("Login or password not found");
         }
     }
 

@@ -32,20 +32,18 @@
  */
 package net.ausiasmarch.wildcart.api;
 
-import javax.servlet.http.HttpSession;
 import net.ausiasmarch.wildcart.bean.CaptchaBean;
-import net.ausiasmarch.wildcart.bean.CaptchaResponse;
+import net.ausiasmarch.wildcart.bean.CaptchaResponseBean;
 import net.ausiasmarch.wildcart.bean.UsuarioBean;
 import net.ausiasmarch.wildcart.entity.UsuarioEntity;
-import net.ausiasmarch.wildcart.repository.UsuarioRepository;
 import net.ausiasmarch.wildcart.service.AuthService;
-import net.ausiasmarch.wildcart.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -82,13 +80,13 @@ public class SessionController {
     }
 
     @GetMapping("/prelogin")
-    public ResponseEntity<CaptchaResponse> prelogin() {
-        return new ResponseEntity<CaptchaResponse>(oAuthService.prelogin(), HttpStatus.OK);
+    public ResponseEntity<CaptchaResponseBean> prelogin() {
+        return new ResponseEntity<>(oAuthService.prelogin(), HttpStatus.OK);
     }
 
-    @PostMapping("/loginc")
-    public ResponseEntity<UsuarioEntity> loginc(@org.springframework.web.bind.annotation.RequestBody CaptchaBean oCaptchaBean) {
-        return new ResponseEntity<UsuarioEntity>(oAuthService.loginc(oCaptchaBean), HttpStatus.OK);
+    @GetMapping("/loginc")
+    public ResponseEntity<UsuarioEntity> loginc(@RequestBody CaptchaBean oCaptchaBean) {
+        return new ResponseEntity<UsuarioEntity>(oAuthService.loginC(oCaptchaBean), HttpStatus.OK);
     }
 
 }
