@@ -32,6 +32,7 @@
  */
 package net.ausiasmarch.wildcart.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
@@ -49,6 +50,7 @@ import net.ausiasmarch.wildcart.repository.PendentRepository;
 import net.ausiasmarch.wildcart.repository.QuestionRepository;
 import net.ausiasmarch.wildcart.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -66,6 +68,9 @@ public class AuthService {
 
     @Autowired
     PendentRepository oPendentRepository;
+
+    @Value("${captcha.timeout}")
+    private long captchaTimeout;
 
     public UsuarioEntity login(@RequestBody UsuarioBean oUsuarioBean) {
         if (oUsuarioBean.getPassword() != null) {
@@ -197,6 +202,7 @@ public class AuthService {
 
         PendentEntity oPendentEntity = new PendentEntity();
         oPendentEntity.setQuestion(oQuestionEntity);
+        oPendentEntity.setTimecode(LocalDateTime.now());
         PendentEntity oNewPendentEntity = oPendentRepository.save(oPendentEntity); //new       
 
         oNewPendentEntity.setToken(RandomHelper.getSHA256(
@@ -221,12 +227,30 @@ public class AuthService {
                 PendentEntity oPendentEntity = oPendentRepository.findByToken(oCaptchaBean.getToken())
                        .orElseThrow(() -> new ResourceNotFoundException("Pendent not found (token = " + oCaptchaBean.getToken() + ")"));
 
-                if (oPendentEntity.getQuestion().getResponse().toLowerCase().equals(oCaptchaBean.getAnswer().toLowerCase())) {
-                    oHttpSession.setAttribute("usuario", oUsuarioEntity);
-                    oPendentRepository.delete(oPendentEntity);
-                    return oUsuarioEntity;
-                } else {
+                LocalDateTime timecode = oPendentEntity.getTimecode();
+
+                if (LocalDateTime.now().isAfter(oPendentEntity.getTimecode().plusSeconds(captchaTimeout))) {
+                    throw new UnauthorizedException("Captcha expired");
+                }
+
+                if (oPendentEntity.getQuestion().getResponse().contains("|")) {
+                    String[] answersArray = oPendentEntity.getQuestion().getResponse().split("\\|");
+                    for (String strAnswer : answersArray) {
+                        if (strAnswer.equalsIgnoreCase(oCaptchaBean.getAnswer())) {
+                            oHttpSession.setAttribute("usuario", oUsuarioEntity);
+                            oPendentRepository.delete(oPendentEntity);
+                            return oUsuarioEntity;
+                        }
+                    }
                     throw new UnauthorizedException("Captcha error");
+                } else {
+                    if (oPendentEntity.getQuestion().getResponse().toLowerCase().equals(oCaptchaBean.getAnswer().toLowerCase())) {
+                        oHttpSession.setAttribute("usuario", oUsuarioEntity);
+                        oPendentRepository.delete(oPendentEntity);
+                        return oUsuarioEntity;
+                    } else {
+                        throw new UnauthorizedException("Captcha error");
+                    }
                 }
             } else {
                 throw new UnauthorizedException("Login or password error");
@@ -234,6 +258,16 @@ public class AuthService {
         } else {
             throw new UnauthorizedException("Login or password not found");
         }
+    }
+
+    private void deleteExpiredPendents() {
+        List<PendentEntity> lPendents = oPendentRepository.findAll();
+
+        lPendents.forEach((oPendentEntity) -> {
+            if (oPendentEntity.getTimecode().plusSeconds(captchaTimeout).isBefore(LocalDateTime.now())) {
+                oPendentRepository.delete(oPendentEntity);
+            }
+        });
     }
 
 }

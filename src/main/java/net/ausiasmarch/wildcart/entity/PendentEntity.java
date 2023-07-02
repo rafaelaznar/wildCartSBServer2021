@@ -1,5 +1,6 @@
 package net.ausiasmarch.wildcart.entity;
 
+import java.time.LocalDateTime;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -22,6 +23,8 @@ public class PendentEntity {
     private QuestionEntity question;
 
     private String token;
+
+    private LocalDateTime timecode;
 
     public Long getId() {
         return id;
@@ -47,4 +50,11 @@ public class PendentEntity {
         this.token = token;
     }
 
+    public LocalDateTime getTimecode() {
+        return timecode;
+    }
+
+    public void setTimecode(LocalDateTime timecode) {
+        this.timecode = timecode;
+    }
 }
