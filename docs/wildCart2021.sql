@@ -103,8 +103,10 @@ CREATE TABLE `file` (
 CREATE TABLE `pendent` (
   `id` bigint(20) NOT NULL,
   `id_question` bigint(20) NOT NULL,
-  `token` varchar(512) COLLATE utf8_unicode_ci DEFAULT NULL
+  `token` varchar(512) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `timecode` timestamp NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 -- --------------------------------------------------------
 
