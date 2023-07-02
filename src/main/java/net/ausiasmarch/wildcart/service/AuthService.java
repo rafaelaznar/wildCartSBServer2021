@@ -32,6 +32,7 @@
  */
 package net.ausiasmarch.wildcart.service;
 
+import java.util.List;
 import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import net.ausiasmarch.wildcart.bean.CaptchaBean;
@@ -187,7 +188,10 @@ public class AuthService {
     @Transactional
     public CaptchaResponseBean prelogin() {
 
-        long lQuestionId = Long.valueOf(RandomHelper.getRandomInt(1, (int) oQuestionRepository.count()));
+        //long lQuestionId = Long.valueOf(RandomHelper.getRandomInt(1, (int) oQuestionRepository.count()));
+        List<QuestionEntity> allQuestions = oQuestionRepository.findAll();
+        Long lQuestionId = allQuestions.get(RandomHelper.getRandomInt(0, allQuestions.size() - 1)).getId();
+
         QuestionEntity oQuestionEntity = oQuestionRepository.findById(lQuestionId)
                .orElseThrow(() -> new ResourceNotFoundException("Question not found (id = " + lQuestionId + ")"));
 
@@ -213,13 +217,13 @@ public class AuthService {
         if (oCaptchaBean.getLogin() != null && oCaptchaBean.getPassword() != null) {
             UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByLoginAndPassword(oCaptchaBean.getLogin(), oCaptchaBean.getPassword());
             if (oUsuarioEntity != null) {
-               
+
                 PendentEntity oPendentEntity = oPendentRepository.findByToken(oCaptchaBean.getToken())
                        .orElseThrow(() -> new ResourceNotFoundException("Pendent not found (token = " + oCaptchaBean.getToken() + ")"));
 
                 if (oPendentEntity.getQuestion().getResponse().toLowerCase().equals(oCaptchaBean.getAnswer().toLowerCase())) {
-                     oHttpSession.setAttribute("usuario", oUsuarioEntity);
-                     oPendentRepository.delete(oPendentEntity);
+                    oHttpSession.setAttribute("usuario", oUsuarioEntity);
+                    oPendentRepository.delete(oPendentEntity);
                     return oUsuarioEntity;
                 } else {
                     throw new UnauthorizedException("Captcha error");
