@@ -32,6 +32,7 @@
  */
 package net.ausiasmarch.wildcart.api;
 
+import java.util.List;
 import net.ausiasmarch.wildcart.entity.ProductoCarritoViewEntity;
 import net.ausiasmarch.wildcart.entity.ProductoEntity;
 import net.ausiasmarch.wildcart.service.AuthService;
@@ -88,9 +89,9 @@ public class ProductoController {
     // /producto?page=0&size=10&sort=precio,desc&filter=verde&tipoproducto=2
     @GetMapping("")
     public ResponseEntity<Page<ProductoEntity>> getPage(
-            @ParameterObject @PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable oPageable,
-            @RequestParam(name = "filter", required = false) String strFilter,
-            @RequestParam(name = "tipoproducto", required = false) Long lTipoProducto) {
+           @ParameterObject @PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable oPageable,
+           @RequestParam(name = "filter", required = false) String strFilter,
+           @RequestParam(name = "tipoproducto", required = false) Long lTipoProducto) {
         return new ResponseEntity<Page<ProductoEntity>>(oProductoService.getPage(oPageable, strFilter, lTipoProducto), HttpStatus.OK);
     }
 
@@ -120,6 +121,11 @@ public class ProductoController {
     @PostMapping("/generate/{amount}")
     public ResponseEntity<Long> generateSome(@PathVariable(value = "amount") int amount) {
         return new ResponseEntity<>(oProductoService.generateSome(amount), HttpStatus.OK);
+    }
+
+    @GetMapping("/allByDescuentoDesc/{quantity}")
+    public ResponseEntity<List<ProductoEntity>> all(@PathVariable(value = "quantity") Long quantity) {
+        return new ResponseEntity<List<ProductoEntity>>(oProductoService.allByDescuentoDesc(quantity), HttpStatus.OK);
     }
 
 }

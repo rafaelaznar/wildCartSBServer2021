@@ -175,4 +175,13 @@ public class ProductoService {
         return oProductoEntity;
     }
 
+    public List<ProductoEntity> allByDescuentoDesc(Long quantity) {
+        oAuthService.OnlyAdmins();
+        if (quantity <= 10) {
+            return oProductoRepository.findTop10ByOrderByDescuentoDesc();
+        } else {
+            throw new ResourceNotFoundException("quantity not affordable");
+        }
+    }
+
 }

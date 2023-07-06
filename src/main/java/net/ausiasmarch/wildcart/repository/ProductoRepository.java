@@ -32,6 +32,7 @@
  */
 package net.ausiasmarch.wildcart.repository;
 
+import java.util.List;
 import net.ausiasmarch.wildcart.entity.ProductoEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -46,6 +47,6 @@ public interface ProductoRepository extends JpaRepository<ProductoEntity, Long> 
 
     @Query(value = "SELECT * FROM producto WHERE id_tipoproducto = ?1 AND (nombre LIKE  %?2% OR codigo LIKE %?3%)", nativeQuery = true)
     Page<ProductoEntity> findByTipoproductoIdAndNombreOrCodigo(long id_tipoproducto, String nombre, String codigo, Pageable oPageable);
-    
-    
+
+    public List<ProductoEntity> findTop10ByOrderByDescuentoDesc();
 }
