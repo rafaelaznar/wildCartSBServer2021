@@ -33,8 +33,10 @@
 package net.ausiasmarch.wildcart.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import javax.transaction.Transactional;
 import net.ausiasmarch.wildcart.entity.CompraEntity;
+import net.ausiasmarch.wildcart.entity.FacturaEntity;
 import net.ausiasmarch.wildcart.exception.ResourceNotFoundException;
 import net.ausiasmarch.wildcart.helper.RandomHelper;
 import net.ausiasmarch.wildcart.helper.ValidationHelper;
@@ -48,6 +50,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CompraService {
+
+    @Autowired
+    FacturaRepository oFacturaRepository;
 
     @Autowired
     FacturaService oFacturaService;
@@ -90,6 +95,11 @@ public class CompraService {
     public Long count() {
         oAuthService.OnlyAdmins();
         return oCompraRepository.count();
+    }
+
+    public List<CompraEntity> all(Long id_factura) {
+        oAuthService.OnlyAdminsOrOwnUsersData(oFacturaRepository.findById(id_factura).get().getUsuario().getId());
+        return oCompraRepository.findByFacturaIdOrderByFechaDesc(id_factura);
     }
 
     public Page<CompraEntity> getPage(Pageable oPageable, String strFilter, Long lFactura, Long lProducto) {

@@ -32,7 +32,9 @@
  */
 package net.ausiasmarch.wildcart.api;
 
+import java.util.List;
 import net.ausiasmarch.wildcart.entity.CompraEntity;
+import net.ausiasmarch.wildcart.entity.FacturaEntity;
 import net.ausiasmarch.wildcart.service.CompraService;
 import org.springdoc.api.annotations.ParameterObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,12 +71,17 @@ public class CompraController {
         return new ResponseEntity<Long>(oCompraService.count(), HttpStatus.OK);
     }
 
+    @GetMapping("/all/{id_factura}")
+    public ResponseEntity<List<CompraEntity>> all(@PathVariable(value = "id_factura") Long id_factura) {
+        return new ResponseEntity<List<CompraEntity>>(oCompraService.all(id_factura), HttpStatus.OK);
+    }
+
     @GetMapping("")
     public ResponseEntity<?> getPage(
-            @ParameterObject @PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable oPageable,
-            @RequestParam(name = "filter", required = false) String strFilter,
-            @RequestParam(name = "factura", required = false) Long lFactura,
-            @RequestParam(name = "producto", required = false) Long lProducto) {
+           @ParameterObject @PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable oPageable,
+           @RequestParam(name = "filter", required = false) String strFilter,
+           @RequestParam(name = "factura", required = false) Long lFactura,
+           @RequestParam(name = "producto", required = false) Long lProducto) {
         return new ResponseEntity<Page<CompraEntity>>(oCompraService.getPage(oPageable, strFilter, lFactura, lProducto), HttpStatus.OK);
     }
 
