@@ -175,7 +175,7 @@ public class ProductoService {
         return oProductoEntity;
     }
 
-    public List<ProductoEntity> allByDescuentoDesc(Long quantity) {
+    public List<ProductoEntity> nByDescuentoDesc(Long quantity) {
         oAuthService.OnlyAdmins();
         if (quantity <= 10) {
             return oProductoRepository.findTop10ByOrderByDescuentoDesc();

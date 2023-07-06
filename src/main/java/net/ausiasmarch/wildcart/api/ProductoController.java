@@ -123,9 +123,9 @@ public class ProductoController {
         return new ResponseEntity<>(oProductoService.generateSome(amount), HttpStatus.OK);
     }
 
-    @GetMapping("/allByDescuentoDesc/{quantity}")
-    public ResponseEntity<List<ProductoEntity>> all(@PathVariable(value = "quantity") Long quantity) {
-        return new ResponseEntity<List<ProductoEntity>>(oProductoService.allByDescuentoDesc(quantity), HttpStatus.OK);
+    @GetMapping("/nByDescuentoDesc/{quantity}")
+    public ResponseEntity<List<ProductoEntity>> nByDescuentoDesc(@PathVariable(value = "quantity") Long quantity) {
+        return new ResponseEntity<List<ProductoEntity>>(oProductoService.nByDescuentoDesc(quantity), HttpStatus.OK);
     }
 
 }
