@@ -63,6 +63,11 @@ public class UsuarioController {
     public ResponseEntity<UsuarioEntity> get(@PathVariable(value = "id") Long id) {
         return new ResponseEntity<UsuarioEntity>(oUsuarioService.get(id), HttpStatus.OK);
     }
+    
+    @GetMapping("/username/{username}")
+    public ResponseEntity<UsuarioEntity> getFromUsername(@PathVariable(value = "username") String username) {
+        return new ResponseEntity<UsuarioEntity>(oUsuarioService.get(username), HttpStatus.OK);
+    }
 
     @GetMapping("/count")
     public ResponseEntity<Long> count() {

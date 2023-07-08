@@ -40,7 +40,6 @@ import net.ausiasmarch.wildcart.service.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,23 +59,8 @@ public class SessionController {
     }
 
     @PostMapping
-    public ResponseEntity<UsuarioEntity> login(@org.springframework.web.bind.annotation.RequestBody UsuarioBean oUsuarioBean) {
-        return new ResponseEntity<UsuarioEntity>(oAuthService.login(oUsuarioBean), HttpStatus.OK);
-    }
-
-//    @PostMapping(produces = "application/json", consumes = "application/json")
-//    public ResponseEntity<UsuarioEntity> login(
-//            @org.springframework.web.bind.annotation.RequestBody // Spring
-//            @io.swagger.v3.oas.annotations.parameters.RequestBody // Swagger
-//            @Valid // Bean validation to ensure if the incoming object is valid
-//            final UsuarioBean oUsuarioBean ) //            @RequestBody(description = "login endpoint", required = true, content = @Content(schema = @Schema(implementation = UsuarioEntity.class))) UsuarioBean oUsuarioBean) ,
-//    {
-//        return new ResponseEntity<UsuarioEntity>(oAuthService.login(oUsuarioBean), HttpStatus.OK);
-//    }
-    @DeleteMapping("")
-    public ResponseEntity<?> logout() {
-        oAuthService.logout();
-        return new ResponseEntity<>(null, HttpStatus.OK);
+    public ResponseEntity<String> login(@org.springframework.web.bind.annotation.RequestBody UsuarioBean oUsuarioBean) {
+        return new ResponseEntity<String>("\"" + oAuthService.login(oUsuarioBean) + "\"", HttpStatus.OK);
     }
 
     @GetMapping("/prelogin")
@@ -85,8 +69,7 @@ public class SessionController {
     }
 
     @GetMapping("/loginc")
-    public ResponseEntity<UsuarioEntity> loginc(@RequestBody CaptchaBean oCaptchaBean) {
-        return new ResponseEntity<UsuarioEntity>(oAuthService.loginC(oCaptchaBean), HttpStatus.OK);
+    public ResponseEntity<String> loginc(@RequestBody CaptchaBean oCaptchaBean) {
+        return new ResponseEntity<String>(oAuthService.loginC(oCaptchaBean), HttpStatus.OK);
     }
-
 }

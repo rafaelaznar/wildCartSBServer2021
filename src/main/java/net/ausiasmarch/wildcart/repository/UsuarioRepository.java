@@ -32,6 +32,7 @@
  */
 package net.ausiasmarch.wildcart.repository;
 
+import java.util.Optional;
 import net.ausiasmarch.wildcart.entity.UsuarioEntity;
 
 import org.springframework.data.domain.Page;
@@ -42,6 +43,8 @@ import org.springframework.data.jpa.repository.Query;
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
 
     UsuarioEntity findByLoginAndPassword(String login, String password); //oAuth
+    
+    Optional<UsuarioEntity> findByLogin(String login); //oAuth
 
     boolean existsByLogin(String login);
 

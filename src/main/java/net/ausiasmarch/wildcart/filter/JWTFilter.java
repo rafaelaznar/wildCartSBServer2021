@@ -41,32 +41,42 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import net.ausiasmarch.wildcart.helper.JwtHelper;
+
 import org.springframework.stereotype.Component;
 
 @Component
-public class CORSFilter implements Filter {
+public class JWTFilter implements Filter {
 
     @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
-
-        HttpServletRequest request = (HttpServletRequest) req;
-        HttpServletResponse response = (HttpServletResponse) res;
-
-        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE, OPTIONS");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, remember-me, Authorization");
-        chain.doFilter(req, res);
-
+    public void init(FilterConfig filterConfig) throws ServletException {
     }
 
     @Override
-    public void init(FilterConfig filterConfig) {
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        String auth = request.getHeader("Authorization");
+        if ("OPTIONS".equals(request.getMethod())) {
+            response.setStatus(HttpServletResponse.SC_OK);
+            filterChain.doFilter(servletRequest, servletResponse);
+        } else {
+            if (auth == null || !auth.startsWith("Bearer ")) {
+                //NO ESTA EL TOKEN
+            } else {
+                String token = auth.substring(7);
+                try {
+                    String nombre = JwtHelper.validateJWT(token);
+                    request.setAttribute("usuario", nombre);
+                } catch (Exception e) {
+                    throw new ServletException("Invalid token");
+                }
+            }
+            filterChain.doFilter(servletRequest, servletResponse);
+        }
     }
 
     @Override
     public void destroy() {
     }
-
 }

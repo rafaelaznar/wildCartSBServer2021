@@ -47,23 +47,24 @@ import net.ausiasmarch.wildcart.helper.TipoUsuarioHelper;
 import net.ausiasmarch.wildcart.helper.ValidationHelper;
 import net.ausiasmarch.wildcart.repository.UsuarioRepository;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import net.ausiasmarch.wildcart.repository.TipousuarioRepository;
 
 @Service
 public class UsuarioService {
 
-    @Autowired
-    TipousuarioService oTipousuarioService;
-    @Autowired
-    TipousuarioRepository oTipousuarioRepository;
+    private final TipousuarioService oTipousuarioService;
+    private final TipousuarioRepository oTipousuarioRepository;
+    private final UsuarioRepository oUsuarioRepository;
+    private final AuthService oAuthService;
 
     @Autowired
-    UsuarioRepository oUsuarioRepository;
-
-    @Autowired
-    AuthService oAuthService;
+    public UsuarioService(AuthService oAuthService, UsuarioRepository oUsuarioRepository, TipousuarioRepository oTipousuarioRepository, TipousuarioService oTipousuarioService) {
+        this.oTipousuarioService = oTipousuarioService;
+        this.oTipousuarioRepository = oTipousuarioRepository;
+        this.oUsuarioRepository = oUsuarioRepository;
+        this.oAuthService = oAuthService;
+    }
 
     private final String DNI_LETTERS = "TRWAGMYFPDXBNJZSQVHLCKE";
     private final String WILDCART_DEFAULT_PASSWORD = "4298f843f830fb3cc13ecdfe1b2cf10f51f929df056d644d1bca73228c5e8f64"; //wildcart
@@ -97,11 +98,13 @@ public class UsuarioService {
 
     public UsuarioEntity get(Long id) {
         oAuthService.OnlyAdminsOrOwnUsersData(id);
-        try {
-            return oUsuarioRepository.findById(id).get();
-        } catch (Exception ex) {
-            throw new ResourceNotFoundException("id " + id + " not exist");
-        }
+        return oUsuarioRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id " + id + " not exist"));
+    }
+
+    public UsuarioEntity get(String username) {
+        UsuarioEntity oUsuario = oUsuarioRepository.findByLogin(username).orElseThrow(() -> new ResourceNotFoundException("username " + username + " not exist"));
+        oAuthService.OnlyAdminsOrOwnUsersData(oUsuario.getId());
+        return oUsuario;
     }
 
     public Long count() {
@@ -118,14 +121,14 @@ public class UsuarioService {
                 oPage = oUsuarioRepository.findAll(oPageable);
             } else {
                 oPage = oUsuarioRepository.findByDniIgnoreCaseContainingOrNombreIgnoreCaseContainingOrApellido1IgnoreCaseContainingOrApellido2IgnoreCaseContaining(
-                        strFilter, strFilter, strFilter, strFilter, oPageable);
+                       strFilter, strFilter, strFilter, strFilter, oPageable);
             }
         } else {
             if (strFilter == null || strFilter.isEmpty() || strFilter.trim().isEmpty()) {
                 oPage = oUsuarioRepository.findByTipousuarioId(lTipoUsuario, oPageable);
             } else {
                 oPage = oUsuarioRepository.findByTipousuarioIdAndDniIgnoreCaseContainingOrNombreIgnoreCaseContainingOrApellido1IgnoreCaseContainingOrApellido2IgnoreCaseContaining(
-                        lTipoUsuario, strFilter, strFilter, strFilter, strFilter, oPageable);
+                       lTipoUsuario, strFilter, strFilter, strFilter, strFilter, oPageable);
             }
         }
         return oPage;
@@ -211,11 +214,11 @@ public class UsuarioService {
         return oUsuarioRepository.count();
     }
 
-    public UsuarioEntity getOneRandom() {        
+    public UsuarioEntity getOneRandom() {
         if (count() > 0) {
             List<UsuarioEntity> usuarioList = oUsuarioRepository.findAll();
             int iPosicion = RandomHelper.getRandomInt(0, (int) oUsuarioRepository.count() - 1);
-            return oUsuarioRepository.getById(usuarioList.get(iPosicion).getId());            
+            return oUsuarioRepository.getById(usuarioList.get(iPosicion).getId());
         } else {
             throw new CannotPerformOperationException("ho hay usuarios en la base de datos");
         }
@@ -269,5 +272,5 @@ public class UsuarioService {
         list.remove(randomNumber);
         return value;
     }
-   
+
 }
