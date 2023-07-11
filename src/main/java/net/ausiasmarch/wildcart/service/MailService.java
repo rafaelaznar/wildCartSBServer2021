@@ -17,16 +17,16 @@ public class MailService {
     @Async
     void sendMail(EmailBean oEmailBean) {
         MimeMessagePreparator messagePreparator = mimeMessage -> {
-            MimeMessageHelper messageHelper = new MimeMessageHelper(mimeMessage);
-            messageHelper.setFrom(oEmailBean.getSender());
-            messageHelper.setTo(oEmailBean.getRecipient());
-            messageHelper.setSubject(oEmailBean.getSubject());
-            messageHelper.setText(oEmailBean.getBody());
+            MimeMessageHelper oMimeMessageHelper = new MimeMessageHelper(mimeMessage);
+            oMimeMessageHelper.setFrom(oEmailBean.getSender());
+            oMimeMessageHelper.setTo(oEmailBean.getRecipient());
+            oMimeMessageHelper.setSubject(oEmailBean.getSubject());
+            oMimeMessageHelper.setText(oEmailBean.getBody());
         };
         try {
             oJavaMailSender.send(messagePreparator);
         } catch (MailException e) {
-            throw new CannotPerformOperationException("Error al enviar email a " + oEmailBean.getRecipient());
+            throw new CannotPerformOperationException("Error al enviar email a " + oEmailBean.getRecipient() + ": " + e.getMessage());
         }
     }
 }
