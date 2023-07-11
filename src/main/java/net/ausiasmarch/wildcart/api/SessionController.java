@@ -34,6 +34,7 @@ package net.ausiasmarch.wildcart.api;
 
 import net.ausiasmarch.wildcart.bean.CaptchaBean;
 import net.ausiasmarch.wildcart.bean.CaptchaResponseBean;
+import net.ausiasmarch.wildcart.bean.RecoverBean;
 import net.ausiasmarch.wildcart.bean.UsuarioBean;
 import net.ausiasmarch.wildcart.entity.UsuarioEntity;
 import net.ausiasmarch.wildcart.service.AuthService;
@@ -69,19 +70,34 @@ public class SessionController {
         return new ResponseEntity<>(oAuthService.prelogin(), HttpStatus.OK);
     }
 
-    @GetMapping("/loginc")
+    @PostMapping("/loginc")
     public ResponseEntity<String> loginc(@RequestBody CaptchaBean oCaptchaBean) {
         return new ResponseEntity<String>(oAuthService.loginC(oCaptchaBean), HttpStatus.OK);
     }
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody UsuarioEntity oUsuarioEntity) {
-        return new ResponseEntity<String>(oAuthService.signup(oUsuarioEntity), HttpStatus.OK);
+        return new ResponseEntity<String>(oAuthService.signupPhase1(oUsuarioEntity), HttpStatus.OK);
     }
 
     @GetMapping("/verify/{token}")
     public ResponseEntity<String> verifyAccount(@PathVariable String token) {
-        return new ResponseEntity<String>(oAuthService.verify(token), HttpStatus.OK);
+        return new ResponseEntity<String>(oAuthService.signupPhase2(token), HttpStatus.OK);
+    }
+
+    @GetMapping("/recover/username/{username}")
+    public ResponseEntity<String> recoverByUsernamePhase1(@PathVariable String username) {
+        return new ResponseEntity<String>(oAuthService.recoverByUsernamePhase1(username), HttpStatus.OK);
+    }
+
+    @GetMapping("/recover/email/{email}")
+    public ResponseEntity<String> recoverByEmailPhase1(@PathVariable String email) {
+        return new ResponseEntity<String>(oAuthService.recoverByEmailPhase1(email), HttpStatus.OK);
+    }
+        
+    @PostMapping("/recover")
+    public ResponseEntity<String> recoverByUsernamePhase2(@RequestBody RecoverBean oRecoverBean) {
+        return new ResponseEntity<String>(oAuthService.recoverPhase2(oRecoverBean), HttpStatus.OK);
     }
 
 }

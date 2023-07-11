@@ -42,6 +42,7 @@ import javax.transaction.Transactional;
 import net.ausiasmarch.wildcart.bean.CaptchaBean;
 import net.ausiasmarch.wildcart.bean.CaptchaResponseBean;
 import net.ausiasmarch.wildcart.bean.EmailBean;
+import net.ausiasmarch.wildcart.bean.RecoverBean;
 import net.ausiasmarch.wildcart.bean.UsuarioBean;
 import net.ausiasmarch.wildcart.entity.PendentEntity;
 import net.ausiasmarch.wildcart.entity.QuestionEntity;
@@ -83,7 +84,7 @@ public class AuthService {
     @Value("${captcha.timeout}")
     private long captchaTimeout;
 
-    public String signup(UsuarioEntity oUsuarioEntity) {
+    public String signupPhase1(UsuarioEntity oUsuarioEntity) {
         oUsuarioEntity.setToken(RandomHelper.getSHA256(RandomHelper.getToken(256)));
         oUsuarioEntity.setValidado(false);
         oUsuarioRepository.save(oUsuarioEntity);
@@ -96,11 +97,47 @@ public class AuthService {
         return "El usuario se ha registrado correctamente. Por favor revise su email para validar la cuenta.";
     }
 
-    public String verify(String token) {
+    public String signupPhase2(String token) {
         UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByToken(token).orElseThrow(() -> new ResourceNotFoundException("token not found"));
         oUsuarioEntity.setToken("validado " + now());
-        oUsuarioEntity.setActivo(true);
+        oUsuarioEntity.setValidado(true);
         return "Usuario validado correctamente en el sistema";
+    }
+
+    public String recoverByUsernamePhase1(String username) {
+        UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByLogin(username).orElseThrow(() -> new ResourceNotFoundException("username not found"));
+        oUsuarioEntity.setToken(RandomHelper.getSHA256(RandomHelper.getToken(256)));                
+        oUsuarioEntity.setValidado(false);
+        oUsuarioRepository.save(oUsuarioEntity);
+        EmailBean oEmailBean = new EmailBean();
+        oEmailBean.setSender("");
+        oEmailBean.setRecipient("");
+        oEmailBean.setSubject("");
+        oEmailBean.setBody("");
+        oMailService.sendMail(oEmailBean);
+        return "El usuario se ha registrado correctamente. Por favor revise su email para validar la cuenta.";        
+    }
+
+    public String recoverByEmailPhase1(String email) {
+        UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("username not found"));
+        oUsuarioEntity.setToken(RandomHelper.getSHA256(RandomHelper.getToken(256)));                
+        oUsuarioEntity.setValidado(false);
+        oUsuarioRepository.save(oUsuarioEntity);
+        EmailBean oEmailBean = new EmailBean();
+        oEmailBean.setSender("");
+        oEmailBean.setRecipient("");
+        oEmailBean.setSubject("");
+        oEmailBean.setBody("");
+        oMailService.sendMail(oEmailBean);
+        return "El usuario se ha registrado correctamente. Por favor revise su email para validar la cuenta.";        
+    }    
+
+    public String recoverPhase2(RecoverBean oRecoverBean) {
+        UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByToken(oRecoverBean.getToken()).orElseThrow(() -> new ResourceNotFoundException("token not found"));
+        oUsuarioEntity.setPassword(oRecoverBean.getPassword());
+        oUsuarioEntity.setToken("validado " + now());
+        oUsuarioEntity.setValidado(true);
+        return "Se ha actualizado la contraseña en el sistema";
     }
 
     public String login(@RequestBody UsuarioBean oUsuarioBean) {
