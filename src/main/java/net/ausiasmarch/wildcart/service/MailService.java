@@ -1,4 +1,3 @@
-
 package net.ausiasmarch.wildcart.service;
 
 import net.ausiasmarch.wildcart.bean.EmailBean;
@@ -10,12 +9,10 @@ import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
-
-
 @Service
 public class MailService {
-    
-    private final JavaMailSender mailSender = null;    
+
+    private JavaMailSender oJavaMailSender = null;
 
     @Async
     void sendMail(EmailBean oEmailBean) {
@@ -27,8 +24,8 @@ public class MailService {
             messageHelper.setText(oEmailBean.getBody());
         };
         try {
-            mailSender.send(messagePreparator);            
-        } catch (MailException e) {            
+            oJavaMailSender.send(messagePreparator);
+        } catch (MailException e) {
             throw new CannotPerformOperationException("Error al enviar email a " + oEmailBean.getRecipient());
         }
     }
