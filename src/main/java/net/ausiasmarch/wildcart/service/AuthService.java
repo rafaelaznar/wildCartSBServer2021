@@ -33,6 +33,7 @@
 package net.ausiasmarch.wildcart.service;
 
 import java.time.LocalDateTime;
+import static java.time.LocalDateTime.now;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
@@ -40,6 +41,7 @@ import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import net.ausiasmarch.wildcart.bean.CaptchaBean;
 import net.ausiasmarch.wildcart.bean.CaptchaResponseBean;
+import net.ausiasmarch.wildcart.bean.EmailBean;
 import net.ausiasmarch.wildcart.bean.UsuarioBean;
 import net.ausiasmarch.wildcart.entity.PendentEntity;
 import net.ausiasmarch.wildcart.entity.QuestionEntity;
@@ -75,8 +77,31 @@ public class AuthService {
     @Autowired
     private HttpServletRequest oRequest;
 
+    @Autowired
+    private MailService oMailService;
+
     @Value("${captcha.timeout}")
     private long captchaTimeout;
+
+    public String signup(UsuarioEntity oUsuarioEntity) {
+        oUsuarioEntity.setToken(RandomHelper.getSHA256(RandomHelper.getToken(256)));
+        oUsuarioEntity.setValidado(false);
+        oUsuarioRepository.save(oUsuarioEntity);
+        EmailBean oEmailBean = new EmailBean();
+        oEmailBean.setSender("");
+        oEmailBean.setRecipient("");
+        oEmailBean.setSubject("");
+        oEmailBean.setBody("");
+        oMailService.sendMail(oEmailBean);
+        return "El usuario se ha registrado correctamente. Por favor revise su email para validar la cuenta.";
+    }
+
+    public String verify(String token) {
+        UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByToken(token).orElseThrow(() -> new ResourceNotFoundException("token not found"));
+        oUsuarioEntity.setToken("validado " + now());
+        oUsuarioEntity.setActivo(true);
+        return "Usuario validado correctamente en el sistema";
+    }
 
     public String login(@RequestBody UsuarioBean oUsuarioBean) {
         if (oUsuarioBean.getPassword() != null) {

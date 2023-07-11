@@ -45,6 +45,8 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
     UsuarioEntity findByLoginAndPassword(String login, String password); //oAuth
     
     Optional<UsuarioEntity> findByLogin(String login); //oAuth
+    
+    Optional<UsuarioEntity> findByToken(String token);
 
     boolean existsByLogin(String login);
 
