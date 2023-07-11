@@ -70,11 +70,11 @@ public class ProductoService {
     }
 
     public void validate(ProductoEntity oProductoEntity) {
-        ValidationHelper.validateStringLength(oProductoEntity.getCodigo(), 2, 50, "codigo en ProductoService (el campo debe tener longitud de 2 a 50 caracteres)");
-        ValidationHelper.validateStringLength(oProductoEntity.getNombre(), 2, 255, "codigo en ProductoService (el campo debe tener longitud de 2 a 255 caracteres)");
-        ValidationHelper.validateRange(oProductoEntity.getExistencias(), 0, 1000, "campo existencias (de 0 a 1000)");
-        ValidationHelper.validateRange(oProductoEntity.getPrecio(), 0, 100000, "campo precio (de 0 a 100000)");
-        ValidationHelper.validateRange(oProductoEntity.getDescuento(), 0, 100, "campo descuento (de 0 a 100)");
+        ValidationHelper.isBetween(oProductoEntity.getCodigo(), 2, 50, "codigo en ProductoService (el campo debe tener longitud de 2 a 50 caracteres)");
+        ValidationHelper.isBetween(oProductoEntity.getNombre(), 2, 255, "codigo en ProductoService (el campo debe tener longitud de 2 a 255 caracteres)");
+        ValidationHelper.isBetween(oProductoEntity.getExistencias(), 0, 1000, "campo existencias (de 0 a 1000)");
+        ValidationHelper.isBetween(oProductoEntity.getPrecio(), 0, 100000, "campo precio (de 0 a 100000)");
+        ValidationHelper.isBetween(oProductoEntity.getDescuento(), 0, 100, "campo descuento (de 0 a 100)");
         oTipoproductoService.validate(oProductoEntity.getTipoproducto().getId());
     }
 

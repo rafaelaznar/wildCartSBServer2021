@@ -68,7 +68,7 @@ public class TipoProductoService {
     }
 
     public void validate(TipoproductoEntity oTipoproductoEntity) {
-        ValidationHelper.validateStringLength(oTipoproductoEntity.getNombre(), 2, 100, "campo nombre Tipoproducto (el campo debe tener longitud de 2 a 100 caracteres)");
+        ValidationHelper.isBetween(oTipoproductoEntity.getNombre(), 2, 100, "campo nombre Tipoproducto (el campo debe tener longitud de 2 a 100 caracteres)");
     }
 
     public TipoproductoEntity get(@PathVariable(value = "id") Long id) {

@@ -41,7 +41,13 @@ public class ValidationHelper {
     public static final String EMAIL_PATTERN = "^.+@.+\\..+$";
     public static final String CODIGO_PATTERN = "^([A-Z0-9]{1,6}-)[A-Za-z0-9]{5,200}$";
 
-    public static boolean isNumeric(String str) {
+    public static void isNotNull(String fieldName, String str) {
+        if (str == null) {
+            throw new ValidationException("Error en la validación: " + fieldName + " no puede ser nulo");
+        }
+    }
+
+    private static boolean isNumeric(String str) {
         try {
             Double.parseDouble(str);
             return true;
@@ -50,23 +56,42 @@ public class ValidationHelper {
         }
     }
 
-    public static void validateRPP(int iRPP) {
-        if (iRPP < 1 || iRPP > 1000) {
-            throw new ValidationException("RPP value is not valid (must be between 1 and 1000)");
+    public static void isNumeric(String fieldName, String str) {
+        if (!isNumeric(str)) {
+            throw new ValidationException("Error en la validación: " + fieldName + " ha de ser numérico");
         }
     }
 
-    public static void validateStringLength(String strNombre, int minlength, int maxlength, String error) {
+    public static void isBetween(int iNumber, int Min, int Max, String error) {
+        if (iNumber < Min || iNumber > Max) {
+            throw new ValidationException("error en la validación: " + error);
+        }
+    }
+
+    public static void isBetween(double iNumber, double iMin, double iMax, String error) {
+        if (iNumber >= iMin && iNumber <= iMax) {
+        } else {
+            throw new ValidationException("error de validación: " + error);
+        }
+    }
+
+    public static void isBetween(String strNombre, int minlength, int maxlength, String error) {
         if (strNombre.length() >= minlength && strNombre.length() <= maxlength) {
         } else {
             throw new ValidationException("error en la validación: " + error);
         }
     }
 
-    public static boolean validatePattern(String strInput, String strPattern) {
+    public static void validateRPP(int iRPP) {
+        ValidationHelper.isBetween(iRPP, 1, 10000, "RPP no válido (1-10000)");
+    }
+
+    public static void validatePattern(String strInput, String strPattern, String error) {
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(strPattern);
         java.util.regex.Matcher m = p.matcher(strInput);
-        return m.matches();
+        if (!m.matches()) {
+            throw new ValidationException("error de validación: " + error);
+        }
     }
 
     public static void validateDNI(String itDNI, String error) {
@@ -88,7 +113,7 @@ public class ValidationHelper {
     }
 
     public static void validateEmail(String email, String error) {
-        validateStringLength(email, 3, 255, error);
+        isBetween(email, 3, 255, error);
         String ePattern = "^.+@.+\\..+$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
         java.util.regex.Matcher m = p.matcher(email);
@@ -98,7 +123,7 @@ public class ValidationHelper {
     }
 
     public static void validateLogin(String strLogin, String error) {
-        validateStringLength(strLogin, 6, 20, error);
+        isBetween(strLogin, 6, 20, error);
         String ePattern = "^[a-zA-Z0-9]([._-](?![._-])|[a-zA-Z0-9]){4,18}[a-zA-Z0-9]$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
         java.util.regex.Matcher m = p.matcher(strLogin);
@@ -107,22 +132,8 @@ public class ValidationHelper {
         }
     }
 
-    public static void validateRange(int iNumber, int iMin, int iMax, String error) {
-        if (iNumber >= iMin && iNumber <= iMax) {
-        } else {
-            throw new ValidationException("error de validación: " + error);
-        }
-    }
-
-    public static void validateRange(double iNumber, double iMin, double iMax, String error) {
-        if (iNumber >= iMin && iNumber <= iMax) {
-        } else {
-            throw new ValidationException("error de validación: " + error);
-        }
-    }
-
     public static void validateDate(LocalDateTime oDate, LocalDateTime oDateStart, LocalDateTime oDateEnd,
-            String error) {
+           String error) {
         Long lDur1 = Duration.between(oDateStart, oDate).toMillis();
         Long lDur2 = Duration.between(oDate, oDateEnd).toMillis();
         if (lDur1 > 0L && lDur2 > 0L) {

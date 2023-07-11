@@ -85,9 +85,9 @@ public class CarritoService {
     }
 
     public void validate(CarritoEntity oCarritoEntity) {
-        ValidationHelper.validateRange(oCarritoEntity.getCantidad(), 1, 1000, "campo cantidad de la entidad carrito (debe ser un entero entre 1 y 1000)");
+        ValidationHelper.isBetween(oCarritoEntity.getCantidad(), 1, 1000, "campo cantidad de la entidad carrito (debe ser un entero entre 1 y 1000)");
         //el precio sale de la bd: se copia del precio del producto, se supone que está validado. Este campo se borrará porque el precio se fija en la compra!!!
-        ValidationHelper.validateRange(oCarritoEntity.getPrecio(), 1, 10000, "campo precio de la entidad carrito (debe ser un entero entre 0 y 10000)");
+        ValidationHelper.isBetween(oCarritoEntity.getPrecio(), 1, 10000, "campo precio de la entidad carrito (debe ser un entero entre 0 y 10000)");
         oUsuarioService.validate(oCarritoEntity.getUsuario().getId());
         oProductoService.validate(oCarritoEntity.getProducto().getId());
     }

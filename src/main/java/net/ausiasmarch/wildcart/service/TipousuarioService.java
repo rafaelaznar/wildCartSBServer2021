@@ -59,7 +59,7 @@ public class TipousuarioService {
     }
 
     public void validate(TipousuarioEntity oTipousuarioEntity) {
-        ValidationHelper.validateStringLength(oTipousuarioEntity.getNombre(), 2, 100, "campo nombre de Tipousuario (el campo debe tener longitud de 2 a 100 caracteres)");
+        ValidationHelper.isBetween(oTipousuarioEntity.getNombre(), 2, 100, "campo nombre de Tipousuario (el campo debe tener longitud de 2 a 100 caracteres)");
     }
 
     public List<TipousuarioEntity> generateUsersType() {

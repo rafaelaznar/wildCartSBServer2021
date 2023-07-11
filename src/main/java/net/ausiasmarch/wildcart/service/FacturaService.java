@@ -72,7 +72,7 @@ public class FacturaService {
 
     public void validate(FacturaEntity oFacturaEntity) {
         ValidationHelper.validateDate(oFacturaEntity.getFecha(), LocalDateTime.of(1990, 01, 01, 00, 00, 00), LocalDateTime.of(2025, 01, 01, 00, 00, 00), "campo fecha de factura");
-        ValidationHelper.validateRange(oFacturaEntity.getIva(), 0, 30, "campo iva de factura");
+        ValidationHelper.isBetween(oFacturaEntity.getIva(), 0, 30, "campo iva de factura");
         oUsuarioService.validate(oFacturaEntity.getUsuario().getId());
     }
 

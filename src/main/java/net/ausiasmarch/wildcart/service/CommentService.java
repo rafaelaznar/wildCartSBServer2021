@@ -81,7 +81,7 @@ public class CommentService {
     }
 
     public void validate(CommentEntity oCommentEntity) {
-        ValidationHelper.validateStringLength(oCommentEntity.getComment(), 10, 200, "error in comment length");
+        ValidationHelper.isBetween(oCommentEntity.getComment(), 10, 200, "error in comment length");
     }
 
     public CommentEntity get(Long id) {

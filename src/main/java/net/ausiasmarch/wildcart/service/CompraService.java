@@ -36,13 +36,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import javax.transaction.Transactional;
 import net.ausiasmarch.wildcart.entity.CompraEntity;
-import net.ausiasmarch.wildcart.entity.FacturaEntity;
 import net.ausiasmarch.wildcart.exception.ResourceNotFoundException;
 import net.ausiasmarch.wildcart.helper.RandomHelper;
 import net.ausiasmarch.wildcart.helper.ValidationHelper;
 import net.ausiasmarch.wildcart.repository.CompraRepository;
 import net.ausiasmarch.wildcart.repository.FacturaRepository;
-import net.ausiasmarch.wildcart.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -76,11 +74,11 @@ public class CompraService {
     }
 
     public void validate(CompraEntity oCompraEntity) {
-        ValidationHelper.validateRange(oCompraEntity.getCantidad(), 1, 1000, "campo cantidad de la entidad compra (debe ser un entero entre 1 y 1000)");
+        ValidationHelper.isBetween(oCompraEntity.getCantidad(), 1, 1000, "campo cantidad de la entidad compra (debe ser un entero entre 1 y 1000)");
         //el precio sale de la bd: se copia del precio del producto, se supone que está validado. Lo mismo los descuentos. La fecha se toma del servidor.
-        ValidationHelper.validateRange(oCompraEntity.getPrecio(), 1, 1000, "campo cantidad de la entidad compra (debe ser un entero entre 0 y 1000000)");
-        ValidationHelper.validateRange(oCompraEntity.getDescuento_producto(), 0, 100, "campo descuento de producto de la entidad compra (debe ser un entero entre 0 y 100)");
-        ValidationHelper.validateRange(oCompraEntity.getDescuento_usuario(), 0, 100, "campo descuento de usuario de la entidad compra (debe ser un entero entre 0 y 100)");
+        ValidationHelper.isBetween(oCompraEntity.getPrecio(), 1, 1000, "campo cantidad de la entidad compra (debe ser un entero entre 0 y 1000000)");
+        ValidationHelper.isBetween(oCompraEntity.getDescuento_producto(), 0, 100, "campo descuento de producto de la entidad compra (debe ser un entero entre 0 y 100)");
+        ValidationHelper.isBetween(oCompraEntity.getDescuento_usuario(), 0, 100, "campo descuento de usuario de la entidad compra (debe ser un entero entre 0 y 100)");
         ValidationHelper.validateDate(oCompraEntity.getFecha(), LocalDateTime.of(1990, 01, 01, 00, 00, 00), LocalDateTime.of(2025, 01, 01, 00, 00, 00), "campo fecha de compra");
     }
 

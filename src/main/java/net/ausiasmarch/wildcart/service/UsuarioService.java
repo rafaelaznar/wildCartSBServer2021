@@ -84,15 +84,15 @@ public class UsuarioService {
 
     public void validate(UsuarioEntity oUsuarioEntity) {
         ValidationHelper.validateDNI(oUsuarioEntity.getDni(), "campo DNI de Usuario");
-        ValidationHelper.validateStringLength(oUsuarioEntity.getNombre(), 2, 50, "campo nombre de Usuario (el campo debe tener longitud de 2 a 50 caracteres)");
-        ValidationHelper.validateStringLength(oUsuarioEntity.getApellido1(), 2, 50, "campo primer apellido de Usuario (el campo debe tener longitud de 2 a 50 caracteres)");
-        ValidationHelper.validateStringLength(oUsuarioEntity.getApellido2(), 2, 50, "campo segundo apellido de Usuario (el campo debe tener longitud de 2 a 50 caracteres)");
+        ValidationHelper.isBetween(oUsuarioEntity.getNombre(), 2, 50, "campo nombre de Usuario (el campo debe tener longitud de 2 a 50 caracteres)");
+        ValidationHelper.isBetween(oUsuarioEntity.getApellido1(), 2, 50, "campo primer apellido de Usuario (el campo debe tener longitud de 2 a 50 caracteres)");
+        ValidationHelper.isBetween(oUsuarioEntity.getApellido2(), 2, 50, "campo segundo apellido de Usuario (el campo debe tener longitud de 2 a 50 caracteres)");
         ValidationHelper.validateEmail(oUsuarioEntity.getEmail(), " campo email de Usuario");
         ValidationHelper.validateLogin(oUsuarioEntity.getLogin(), " campo login de Usuario");
         if (oUsuarioRepository.existsByLogin(oUsuarioEntity.getLogin())) {
             throw new ValidationException("el campo Login está repetido");
         }
-        ValidationHelper.validateRange(oUsuarioEntity.getDescuento(), 0, 100, "campo Descuento de la entidad Usuario (debe ser un entero entre 0 y 100)");
+        ValidationHelper.isBetween(oUsuarioEntity.getDescuento(), 0, 100, "campo Descuento de la entidad Usuario (debe ser un entero entre 0 y 100)");
         oTipousuarioService.validate(oUsuarioEntity.getTipousuario().getId());
     }
 
