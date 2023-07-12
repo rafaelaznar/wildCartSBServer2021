@@ -92,4 +92,11 @@ public class AppExceptionHandler {
         return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
     }
 
+    @ExceptionHandler(CaptchaException.class)
+    public ResponseEntity<?> CaptchaException(CaptchaException ex, WebRequest request) {
+        ErrorResponseBean errorDetails
+               = new ErrorResponseBean(new Date(), HttpStatus.NOT_ACCEPTABLE.name(), ex.getMessage(), request.getDescription(false));
+        return new ResponseEntity<>(errorDetails, HttpStatus.NOT_ACCEPTABLE);
+    }
+
 }

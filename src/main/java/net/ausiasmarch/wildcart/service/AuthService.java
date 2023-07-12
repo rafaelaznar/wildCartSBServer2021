@@ -299,7 +299,7 @@ public class AuthService {
                             //return oUsuarioEntity;
                         }
                     }
-                    throw new UnauthorizedException("Captcha error");
+                    throw new UnauthorizedException("Wrong response");
                 } else {
                     if (oPendentEntity.getQuestion().getResponse().toLowerCase().equals(oCaptchaBean.getAnswer().toLowerCase())) {
                         //oHttpSession.setAttribute("usuario", oUsuarioEntity);
