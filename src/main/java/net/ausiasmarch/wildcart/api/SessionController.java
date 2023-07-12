@@ -72,7 +72,7 @@ public class SessionController {
 
     @PostMapping("/loginc")
     public ResponseEntity<String> loginc(@RequestBody CaptchaBean oCaptchaBean) {
-        return new ResponseEntity<String>(oAuthService.loginC(oCaptchaBean), HttpStatus.OK);
+        return new ResponseEntity<String>("\"" + oAuthService.loginC(oCaptchaBean) + "\"", HttpStatus.OK);
     }
 
     @PostMapping("/signup")
@@ -94,7 +94,7 @@ public class SessionController {
     public ResponseEntity<String> recoverByEmailPhase1(@PathVariable String email) {
         return new ResponseEntity<String>(oAuthService.recoverByEmailPhase1(email), HttpStatus.OK);
     }
-        
+
     @PostMapping("/recover")
     public ResponseEntity<String> recoverByUsernamePhase2(@RequestBody RecoverBean oRecoverBean) {
         return new ResponseEntity<String>(oAuthService.recoverPhase2(oRecoverBean), HttpStatus.OK);

@@ -276,8 +276,8 @@ public class AuthService {
     }
 
     public String loginC(@RequestBody CaptchaBean oCaptchaBean) {
-        if (oCaptchaBean.getLogin() != null && oCaptchaBean.getPassword() != null) {
-            UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByLoginAndPassword(oCaptchaBean.getLogin(), oCaptchaBean.getPassword());
+        if (oCaptchaBean.getUsername() != null && oCaptchaBean.getPassword() != null) {
+            UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByLoginAndPassword(oCaptchaBean.getUsername(), oCaptchaBean.getPassword());
             if (oUsuarioEntity != null) {
 
                 PendentEntity oPendentEntity = oPendentRepository.findByToken(oCaptchaBean.getToken())
@@ -295,7 +295,7 @@ public class AuthService {
                         if (strAnswer.equalsIgnoreCase(oCaptchaBean.getAnswer())) {
                             //oHttpSession.setAttribute("usuario", oUsuarioEntity);
                             oPendentRepository.delete(oPendentEntity);
-                            return JwtHelper.generateJWT(oCaptchaBean.getLogin());
+                            return JwtHelper.generateJWT(oCaptchaBean.getUsername());
                             //return oUsuarioEntity;
                         }
                     }
@@ -305,7 +305,7 @@ public class AuthService {
                         //oHttpSession.setAttribute("usuario", oUsuarioEntity);
                         oPendentRepository.delete(oPendentEntity);
                         //return oUsuarioEntity;
-                        return JwtHelper.generateJWT(oCaptchaBean.getLogin());
+                        return JwtHelper.generateJWT(oCaptchaBean.getUsername());
                     } else {
                         throw new UnauthorizedException("Captcha error");
                     }

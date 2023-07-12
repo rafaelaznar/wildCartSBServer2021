@@ -3,19 +3,19 @@ package net.ausiasmarch.wildcart.bean;
 
 public class CaptchaBean {
 
-    private String login = "";
+    private String username = "";
     private String password = "";
     private String token = "";
     private String answer = "";
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
-
+    
     public String getPassword() {
         return password;
     }
@@ -39,7 +39,5 @@ public class CaptchaBean {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
-    
-    
     
 }
