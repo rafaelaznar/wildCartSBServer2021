@@ -112,4 +112,9 @@ public class FacturaController {
     public ResponseEntity<?> getTotalFactura(@PathVariable(value = "id") Long id_factura) {
         return new ResponseEntity<Double>(oFacturaService.getTotalFactura(id_factura), HttpStatus.OK);
     }
+
+    @DeleteMapping("")
+    public ResponseEntity<Long> purgue() {
+        return new ResponseEntity<Long>(oFacturaService.purge(), HttpStatus.OK);
+    }
 }

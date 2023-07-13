@@ -198,4 +198,10 @@ public class FacturaService {
         return oFacturaRepository.getTotalFactura(id_factura);
     }
 
+    public Long purge() {
+        //delete facturas without compras (maintenance)
+        oAuthService.OnlyAdmins();
+        return oFacturaRepository.purgeFacturas();
+    }
+
 }
