@@ -11,7 +11,6 @@ import java.util.UUID;
 import javax.crypto.SecretKey;
 import net.ausiasmarch.wildcart.exception.JWTException;
 
-
 public class JwtHelper {
 
     private static final String SECRET = "HOLAHOLAasdfghjklHOLAHOLA";
@@ -43,9 +42,15 @@ public class JwtHelper {
                .parseClaimsJws(strJWT);
 
         Claims claims = headerClaimsJwt.getBody();
-        if (!claims.getIssuer().equals(ISSUER)) {
-            throw new JWTException("Error validating JWT");
+
+        if (claims.getExpiration().before(new Date())) {
+            throw new JWTException("Error validating JWT: token expired");
         }
+
+        if (!claims.getIssuer().equals(ISSUER)) {
+            throw new JWTException("Error validating JWT: wrong issuer");
+        }
+        
         return claims.get("name", String.class);
     }
 }
