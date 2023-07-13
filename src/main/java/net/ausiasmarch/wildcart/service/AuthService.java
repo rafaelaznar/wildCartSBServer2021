@@ -106,7 +106,7 @@ public class AuthService {
 
     public String recoverByUsernamePhase1(String username) {
         UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByLogin(username).orElseThrow(() -> new ResourceNotFoundException("username not found"));
-        oUsuarioEntity.setToken(RandomHelper.getSHA256(RandomHelper.getToken(256)));                
+        oUsuarioEntity.setToken(RandomHelper.getSHA256(RandomHelper.getToken(256)));
         oUsuarioEntity.setValidado(false);
         oUsuarioRepository.save(oUsuarioEntity);
         EmailBean oEmailBean = new EmailBean();
@@ -115,12 +115,12 @@ public class AuthService {
         oEmailBean.setSubject("");
         oEmailBean.setBody("");
         oMailService.sendMail(oEmailBean);
-        return "El usuario se ha registrado correctamente. Por favor revise su email para validar la cuenta.";        
+        return "El usuario se ha registrado correctamente. Por favor revise su email para validar la cuenta.";
     }
 
     public String recoverByEmailPhase1(String email) {
         UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("username not found"));
-        oUsuarioEntity.setToken(RandomHelper.getSHA256(RandomHelper.getToken(256)));                
+        oUsuarioEntity.setToken(RandomHelper.getSHA256(RandomHelper.getToken(256)));
         oUsuarioEntity.setValidado(false);
         oUsuarioRepository.save(oUsuarioEntity);
         EmailBean oEmailBean = new EmailBean();
@@ -129,8 +129,8 @@ public class AuthService {
         oEmailBean.setSubject("");
         oEmailBean.setBody("");
         oMailService.sendMail(oEmailBean);
-        return "El usuario se ha registrado correctamente. Por favor revise su email para validar la cuenta.";        
-    }    
+        return "El usuario se ha registrado correctamente. Por favor revise su email para validar la cuenta.";
+    }
 
     public String recoverPhase2(RecoverBean oRecoverBean) {
         UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByToken(oRecoverBean.getToken()).orElseThrow(() -> new ResourceNotFoundException("token not found"));
@@ -289,22 +289,26 @@ public class AuthService {
                     throw new UnauthorizedException("Captcha expired");
                 }
 
+                if (oUsuarioEntity.isActivo()) {
+                    throw new UnauthorizedException("User is not active");
+                }
+                
+                if (oUsuarioEntity.isValidado()) {
+                    throw new UnauthorizedException("User is not validated");
+                }
+
                 if (oPendentEntity.getQuestion().getResponse().contains("|")) {
                     String[] answersArray = oPendentEntity.getQuestion().getResponse().split("\\|");
                     for (String strAnswer : answersArray) {
                         if (strAnswer.equalsIgnoreCase(oCaptchaBean.getAnswer())) {
-                            //oHttpSession.setAttribute("usuario", oUsuarioEntity);
                             oPendentRepository.delete(oPendentEntity);
                             return JwtHelper.generateJWT(oCaptchaBean.getUsername());
-                            //return oUsuarioEntity;
                         }
                     }
-                    throw new UnauthorizedException("Wrong response");
+                    throw new UnauthorizedException("Wrong captcha response");
                 } else {
                     if (oPendentEntity.getQuestion().getResponse().toLowerCase().equals(oCaptchaBean.getAnswer().toLowerCase())) {
-                        //oHttpSession.setAttribute("usuario", oUsuarioEntity);
                         oPendentRepository.delete(oPendentEntity);
-                        //return oUsuarioEntity;
                         return JwtHelper.generateJWT(oCaptchaBean.getUsername());
                     } else {
                         throw new UnauthorizedException("Captcha error");
