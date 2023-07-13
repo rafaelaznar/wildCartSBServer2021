@@ -32,16 +32,20 @@
  */
 package net.ausiasmarch.wildcart.repository;
 
+import javax.transaction.Transactional;
 import net.ausiasmarch.wildcart.entity.FacturaEntity;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 public interface FacturaRepository extends JpaRepository<FacturaEntity, Long> {
 
+    @Modifying
+    @Transactional
     @Query(value = "DELETE FROM factura where id not in (select distinct(id_factura) from compra)", nativeQuery = true)
-    Long purgeFacturas();
+    int purgeFacturas();
 
     @Query(value = "SELECT * FROM factura WHERE id_usuario = ?1", nativeQuery = true)
     Page<FacturaEntity> findByUsuarioId(Long id_usuario, Pageable pageable);

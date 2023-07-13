@@ -113,8 +113,8 @@ public class FacturaController {
         return new ResponseEntity<Double>(oFacturaService.getTotalFactura(id_factura), HttpStatus.OK);
     }
 
-    @DeleteMapping("")
-    public ResponseEntity<Long> purgue() {
-        return new ResponseEntity<Long>(oFacturaService.purge(), HttpStatus.OK);
+    @DeleteMapping("/purge")
+    public ResponseEntity<Integer> purgue() {
+        return new ResponseEntity<Integer>(oFacturaService.purge(), HttpStatus.OK);
     }
 }
