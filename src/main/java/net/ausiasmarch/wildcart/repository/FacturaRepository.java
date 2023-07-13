@@ -40,7 +40,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface FacturaRepository extends JpaRepository<FacturaEntity, Long> {
 
-    @Query(value = "DELETE FROM factura where id not in (select distinct(id_factura) from compra), nativeQuery = true")
+    @Query(value = "DELETE FROM factura where id not in (select distinct(id_factura) from compra)", nativeQuery = true)
     Long purgeFacturas();
 
     @Query(value = "SELECT * FROM factura WHERE id_usuario = ?1", nativeQuery = true)
