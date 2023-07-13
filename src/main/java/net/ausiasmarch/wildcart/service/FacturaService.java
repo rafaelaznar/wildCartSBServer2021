@@ -37,7 +37,6 @@ import java.util.List;
 import javax.transaction.Transactional;
 import net.ausiasmarch.wildcart.exception.ResourceNotFoundException;
 import net.ausiasmarch.wildcart.entity.FacturaEntity;
-import net.ausiasmarch.wildcart.entity.TipousuarioEntity;
 import net.ausiasmarch.wildcart.exception.CannotPerformOperationException;
 import net.ausiasmarch.wildcart.helper.RandomHelper;
 import net.ausiasmarch.wildcart.helper.ValidationHelper;

@@ -63,7 +63,7 @@ public class UsuarioController {
     public ResponseEntity<UsuarioEntity> get(@PathVariable(value = "id") Long id) {
         return new ResponseEntity<UsuarioEntity>(oUsuarioService.get(id), HttpStatus.OK);
     }
-    
+
     @GetMapping("/username/{username}")
     public ResponseEntity<UsuarioEntity> getFromUsername(@PathVariable(value = "username") String username) {
         return new ResponseEntity<UsuarioEntity>(oUsuarioService.get(username), HttpStatus.OK);
@@ -76,9 +76,9 @@ public class UsuarioController {
 
     @GetMapping("")
     public ResponseEntity<Page<UsuarioEntity>> getPage(
-            @ParameterObject @PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable oPageable,
-            @RequestParam(name = "filter", required = false) String strFilter,
-            @RequestParam(name = "tipousuario", required = false) Long lTipoUsuario) {
+           @ParameterObject @PageableDefault(page = 0, size = 10, direction = Sort.Direction.DESC) Pageable oPageable,
+           @RequestParam(name = "filter", required = false) String strFilter,
+           @RequestParam(name = "tipousuario", required = false) Long lTipoUsuario) {
         return new ResponseEntity<Page<UsuarioEntity>>(oUsuarioService.getPage(oPageable, strFilter, lTipoUsuario), HttpStatus.OK);
     }
 
@@ -107,4 +107,13 @@ public class UsuarioController {
         return new ResponseEntity<>(oUsuarioService.generateSome(amount), HttpStatus.OK);
     }
 
+    @GetMapping("/flipactive/{id}")
+    public ResponseEntity<UsuarioEntity> flipactive(@PathVariable(value = "id") Long id) {
+        return new ResponseEntity<UsuarioEntity>(oUsuarioService.flipActive(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/flipvalid/{id}")
+    public ResponseEntity<UsuarioEntity> flipvalid(@PathVariable(value = "id") Long id) {
+        return new ResponseEntity<UsuarioEntity>(oUsuarioService.flipValid(id), HttpStatus.OK);
+    }
 }

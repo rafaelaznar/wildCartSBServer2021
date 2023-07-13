@@ -173,7 +173,10 @@ public class UsuarioService {
 
     @Transactional
     private UsuarioEntity update4Users(UsuarioEntity oUpdatedUsuarioEntity) {
-        UsuarioEntity oUsuarioEntity = oUsuarioRepository.findById(oUpdatedUsuarioEntity.getId()).get();
+        //UsuarioEntity oUsuarioEntity = oUsuarioRepository.findById(oUpdatedUsuarioEntity.getId()).get();
+        UsuarioEntity oUsuarioEntity = oUsuarioRepository.findById(oUpdatedUsuarioEntity.getId()).orElseThrow(
+               () -> new ResourceNotFoundException("id " + oUpdatedUsuarioEntity.getId() + " not exist")
+        );
         //keeping login password token & validado descuento activo tipousuario
         oUsuarioEntity.setDni(oUpdatedUsuarioEntity.getDni());
         oUsuarioEntity.setNombre(oUpdatedUsuarioEntity.getNombre());
@@ -196,6 +199,20 @@ public class UsuarioService {
         } else {
             throw new ResourceNotModifiedException("id " + id + " not exist");
         }
+    }
+
+    public UsuarioEntity flipActive(Long id) {
+        oAuthService.OnlyAdmins();
+        UsuarioEntity oUsuarioEntity = oUsuarioRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id " + id + " not exist"));
+        oUsuarioEntity.setActivo(!oUsuarioEntity.isActivo());
+        return oUsuarioRepository.save(oUsuarioEntity);
+    }
+
+    public UsuarioEntity flipValid(Long id) {
+        oAuthService.OnlyAdmins();
+        UsuarioEntity oUsuarioEntity = oUsuarioRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("id " + id + " not exist"));
+        oUsuarioEntity.setValidado(!oUsuarioEntity.isValidado());
+        return oUsuarioRepository.save(oUsuarioEntity);
     }
 
     public UsuarioEntity generate() {
