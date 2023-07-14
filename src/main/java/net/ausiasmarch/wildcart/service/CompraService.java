@@ -84,9 +84,11 @@ public class CompraService {
 
     public CompraEntity get(Long id) {
         validate(id);
-        oFacturaService.validate(oCompraRepository.getById(id).getFactura().getId());
-        oUsuarioService.validate(oCompraRepository.getById(id).getFactura().getUsuario().getId());
-        oAuthService.OnlyAdminsOrOwnUsersData(oCompraRepository.getById(id).getFactura().getUsuario().getId()); //no pueden haber compras sin facturar en la BD!!
+        oProductoService.validate(oCompraRepository.getById(id).getProducto().getId());
+        if (oCompraRepository.getById(id).getFactura() != null) { // Puede haber compras sin facturar
+            oFacturaService.validate(oCompraRepository.getById(id).getFactura().getId()); 
+            oAuthService.OnlyAdminsOrOwnUsersData(oCompraRepository.getById(id).getFactura().getUsuario().getId());
+        }
         return oCompraRepository.getById(id);
     }
 
