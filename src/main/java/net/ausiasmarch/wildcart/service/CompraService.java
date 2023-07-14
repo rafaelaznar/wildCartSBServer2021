@@ -86,7 +86,7 @@ public class CompraService {
         validate(id);
         oProductoService.validate(oCompraRepository.getById(id).getProducto().getId());
         if (oCompraRepository.getById(id).getFactura() != null) { // Puede haber compras sin facturar
-            oFacturaService.validate(oCompraRepository.getById(id).getFactura().getId()); 
+            oFacturaService.validate(oCompraRepository.getById(id).getFactura().getId());
             oAuthService.OnlyAdminsOrOwnUsersData(oCompraRepository.getById(id).getFactura().getUsuario().getId());
         }
         return oCompraRepository.getById(id);
@@ -157,8 +157,14 @@ public class CompraService {
         oCompraEntity.setId(null);
         oProductoService.validate(oCompraEntity.getProducto().getId());
         oCompraEntity.setProducto(oProductoService.get(oCompraEntity.getProducto().getId()));
-        oFacturaService.validate(oCompraEntity.getFactura().getId());
-        oCompraEntity.setFactura(oFacturaService.get(oCompraEntity.getFactura().getId()));
+        if (oCompraEntity.getFactura() != null) {
+            if (oCompraEntity.getFactura().getId() != null) {
+                oFacturaService.validate(oCompraEntity.getFactura().getId());
+                oCompraEntity.setFactura(oFacturaService.get(oCompraEntity.getFactura().getId()));
+            } else {
+                oCompraEntity.setFactura(null);
+            }
+        }
         return oCompraRepository.save(oCompraEntity).getId();
     }
 
@@ -169,8 +175,14 @@ public class CompraService {
         validate(oCompraEntity);
         oProductoService.validate(oCompraEntity.getProducto().getId());
         oCompraEntity.setProducto(oProductoService.get(oCompraEntity.getProducto().getId()));
-        oFacturaService.validate(oCompraEntity.getFactura().getId());
-        oCompraEntity.setFactura(oFacturaService.get(oCompraEntity.getFactura().getId()));
+        if (oCompraEntity.getFactura() != null) {
+            if (oCompraEntity.getFactura().getId() != null) {
+                oFacturaService.validate(oCompraEntity.getFactura().getId());
+                oCompraEntity.setFactura(oFacturaService.get(oCompraEntity.getFactura().getId()));
+            } else {
+                oCompraEntity.setFactura(null);
+            }
+        }
         return oCompraRepository.save(oCompraEntity).getId();
     }
 
