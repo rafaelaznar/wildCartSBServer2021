@@ -37,6 +37,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -79,15 +80,15 @@ public class UsuarioEntity {
     @JoinColumn(name = "id_tipousuario")
     private TipousuarioEntity tipousuario;
 
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private final List<CarritoEntity> carritos;
 
     @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
     private final List<FacturaEntity> facturas;
 
-    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private final List<CommentEntity> comments;
-       
+
     public UsuarioEntity() {
         this.facturas = new ArrayList<>();
         this.carritos = new ArrayList<>();
@@ -212,7 +213,7 @@ public class UsuarioEntity {
     public int getFacturas() {
         return facturas.size();
     }
-    
+
     public int getComments() {
         return comments.size();
     }

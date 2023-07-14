@@ -35,6 +35,7 @@ package net.ausiasmarch.wildcart.entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -66,16 +67,15 @@ public class ProductoEntity {
     @JoinColumn(name = "id_tipoproducto")
     private TipoproductoEntity tipoproducto;
 
-    @OneToMany(mappedBy = "producto", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "producto", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private final List<CarritoEntity> carritos;
 
     @OneToMany(mappedBy = "producto", fetch = FetchType.LAZY)
     private final List<CompraEntity> compras;
 
-    @OneToMany(mappedBy = "producto", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "producto", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, orphanRemoval = true)
     private final List<CommentEntity> comments;
-    
-    
+
     public ProductoEntity() {
         this.carritos = new ArrayList<>();
         this.compras = new ArrayList<>();
@@ -156,7 +156,7 @@ public class ProductoEntity {
     public int getComments() {
         return comments.size();
     }
-        
+
     public TipoproductoEntity getTipoproducto() {
         return tipoproducto;
     }
