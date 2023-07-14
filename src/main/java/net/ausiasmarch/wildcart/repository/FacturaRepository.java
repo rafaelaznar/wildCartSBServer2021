@@ -50,11 +50,15 @@ public interface FacturaRepository extends JpaRepository<FacturaEntity, Long> {
     @Query(value = "SELECT * FROM factura WHERE id_usuario = ?1", nativeQuery = true)
     Page<FacturaEntity> findByUsuarioId(Long id_usuario, Pageable pageable);
 
-    @Query(value = "SELECT * FROM factura WHERE (iva LIKE  %?1% OR fecha LIKE %?2%)", nativeQuery = true)
-    Page<FacturaEntity> findByIvaContainingOrFechaContaining(String iva, String fecha, Pageable oPageable);
+    @Query(value = "SELECT * FROM  factura f, usuario u  WHERE  f.id_usuario = u.id", nativeQuery = true)
+    @Override
+    Page<FacturaEntity> findAll(Pageable pageable);
+    
+    @Query(value = "SELECT * FROM  factura f, usuario u  WHERE  f.id_usuario = u.id and ((f.iva = ?1 OR f.fecha LIKE %?2%) OR (u.nombre LIKE  %?3% OR u.apellido1 LIKE  %?3% OR u.apellido2 LIKE  %?3%))", nativeQuery = true)
+    Page<FacturaEntity> findByIvaContainingOrFechaContainingOrUsernameContaining(String iva, String fecha, String username, Pageable oPageable);
 
-    @Query(value = "SELECT * FROM factura WHERE id_usuario = ?1 AND (iva LIKE  %?2% OR fecha LIKE %?3%)", nativeQuery = true)
-    Page<FacturaEntity> findByUsuarioIdAndIvaContainingOrFechaContaining(long id_usuario, String iva, String fecha, Pageable oPageable);
+    @Query(value = "SELECT * FROM factura f, usuario u WHERE f.id_usuario = u.id and f.id_usuario = ?1 AND ((u.nombre LIKE  %?4% OR u.apellido1 LIKE  %?4% OR u.apellido2 LIKE  %?4%) OR (f.iva = ?2 OR f.fecha LIKE %?3%))", nativeQuery = true)
+    Page<FacturaEntity> findByUsuarioIdAndIvaContainingOrFechaContainingOrUsernameContaining(long id_usuario, String iva, String fecha, String username, Pageable oPageable);
 
     @Query(value = "SELECT SUM(c.cantidad * c.precio) FROM factura f, compra c WHERE f.id_usuario = ?1 AND c.id_factura = f.id", nativeQuery = true)
     Double getTotalFacturasUsuario(long id_usuario);

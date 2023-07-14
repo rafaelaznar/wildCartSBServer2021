@@ -95,20 +95,20 @@ public class FacturaService {
                 if (strFilter == null || strFilter.isEmpty() || strFilter.trim().isEmpty()) {
                     return oFacturaRepository.findByUsuarioId(lUsuario, oPageable);
                 } else {
-                    return oFacturaRepository.findByUsuarioIdAndIvaContainingOrFechaContaining(lUsuario, strFilter, strFilter, oPageable);
+                    return oFacturaRepository.findByUsuarioIdAndIvaContainingOrFechaContainingOrUsernameContaining(lUsuario, strFilter, strFilter, strFilter, oPageable);
                 }
             } else {
                 if (strFilter == null || strFilter.isEmpty() || strFilter.trim().isEmpty()) {
                     return oFacturaRepository.findAll(oPageable);
                 } else {
-                    return oFacturaRepository.findByIvaContainingOrFechaContaining(strFilter, strFilter, oPageable);
+                    return oFacturaRepository.findByIvaContainingOrFechaContainingOrUsernameContaining(strFilter, strFilter, strFilter, oPageable);
                 }
             }
         } else {
             if (strFilter == null || strFilter.isEmpty() || strFilter.trim().isEmpty()) {
                 return oFacturaRepository.findByUsuarioId(oAuthService.getUserID(), oPageable);
             } else {
-                return oFacturaRepository.findByUsuarioIdAndIvaContainingOrFechaContaining(oAuthService.getUserID(), strFilter, strFilter, oPageable);
+                return oFacturaRepository.findByUsuarioIdAndIvaContainingOrFechaContainingOrUsernameContaining(oAuthService.getUserID(), strFilter, strFilter, strFilter, oPageable);
             }
         }
     }
