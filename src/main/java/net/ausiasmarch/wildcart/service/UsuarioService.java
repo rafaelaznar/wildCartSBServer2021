@@ -190,7 +190,6 @@ public class UsuarioService {
     public Long delete(Long id) {
         oAuthService.OnlyAdmins();
         if (oUsuarioRepository.existsById(id)) {
-            // pte borrar los productos en el carrito del usuario
             oUsuarioRepository.deleteById(id);
             if (oUsuarioRepository.existsById(id)) {
                 throw new ResourceNotModifiedException("can't remove register " + id);
