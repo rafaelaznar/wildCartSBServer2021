@@ -65,4 +65,6 @@ public interface FacturaRepository extends JpaRepository<FacturaEntity, Long> {
 
     @Query(value = "SELECT SUM(c.cantidad * c.precio) FROM factura f, compra c WHERE f.id = ?1 AND c.id_factura = f.id", nativeQuery = true)
     Double getTotalFactura(long id_factura);
+
+    Long countByUsuarioId(Long userID);
 }

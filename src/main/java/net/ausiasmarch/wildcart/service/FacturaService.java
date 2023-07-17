@@ -38,6 +38,7 @@ import javax.transaction.Transactional;
 import net.ausiasmarch.wildcart.exception.ResourceNotFoundException;
 import net.ausiasmarch.wildcart.entity.FacturaEntity;
 import net.ausiasmarch.wildcart.exception.CannotPerformOperationException;
+import net.ausiasmarch.wildcart.exception.UnauthorizedException;
 import net.ausiasmarch.wildcart.helper.RandomHelper;
 import net.ausiasmarch.wildcart.helper.ValidationHelper;
 import net.ausiasmarch.wildcart.repository.FacturaRepository;
@@ -83,8 +84,15 @@ public class FacturaService {
     }
 
     public Long count() {
-        oAuthService.OnlyAdmins();
-        return oFacturaRepository.count();
+        if (oAuthService.isAdmin()) {
+            return oFacturaRepository.count();
+        } else {
+            if (oAuthService.isUser()) {
+                return oFacturaRepository.countByUsuarioId(oAuthService.getUserID());
+            } else {
+                throw new UnauthorizedException("this request is only allowed for admins or users");
+            }
+        }
     }
 
     public Page<FacturaEntity> getPage(Pageable oPageable, String strFilter, Long lUsuario) {
