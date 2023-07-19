@@ -48,5 +48,17 @@ public interface ProductoRepository extends JpaRepository<ProductoEntity, Long> 
     @Query(value = "SELECT * FROM producto WHERE id_tipoproducto = ?1 AND (nombre LIKE  %?2% OR codigo LIKE %?3%)", nativeQuery = true)
     Page<ProductoEntity> findByTipoproductoIdAndNombreOrCodigo(long id_tipoproducto, String nombre, String codigo, Pageable oPageable);
 
+    //Reports
     public List<ProductoEntity> findTop10ByOrderByDescuentoDesc();
+
+    public List<ProductoEntity> findTop50ByOrderByDescuentoDesc();
+
+    public List<ProductoEntity> findTop100ByOrderByDescuentoDesc();
+
+    public List<ProductoEntity> findTop10ByOrderByDescuentoAsc();
+
+    public List<ProductoEntity> findTop50ByOrderByDescuentoAsc();
+
+    public List<ProductoEntity> findTop100ByOrderByDescuentoAsc();
+
 }

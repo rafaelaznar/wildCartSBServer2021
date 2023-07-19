@@ -180,8 +180,33 @@ public class ProductoService {
         if (quantity <= 10) {
             return oProductoRepository.findTop10ByOrderByDescuentoDesc();
         } else {
-            throw new ResourceNotFoundException("quantity not affordable");
+            if (quantity <= 50) {
+                return oProductoRepository.findTop50ByOrderByDescuentoDesc();
+            } else {
+                if (quantity <= 100) {
+                    return oProductoRepository.findTop100ByOrderByDescuentoDesc();
+                } else {
+                    throw new ResourceNotFoundException("quantity not affordable");
+                }
+            }
         }
     }
 
+    public List<ProductoEntity> nByDescuentoAsc(Long quantity) {
+        oAuthService.OnlyAdmins();
+        if (quantity <= 10) {
+            return oProductoRepository.findTop10ByOrderByDescuentoAsc();
+        } else {
+            if (quantity <= 50) {
+                return oProductoRepository.findTop50ByOrderByDescuentoAsc();
+            } else {
+                if (quantity <= 100) {
+                    return oProductoRepository.findTop100ByOrderByDescuentoAsc();
+                } else {
+                    throw new ResourceNotFoundException("quantity not affordable");
+                }
+            }
+        }
+    }    
+    
 }

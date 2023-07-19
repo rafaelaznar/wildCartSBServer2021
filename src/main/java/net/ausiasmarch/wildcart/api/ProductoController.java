@@ -128,4 +128,9 @@ public class ProductoController {
         return new ResponseEntity<List<ProductoEntity>>(oProductoService.nByDescuentoDesc(quantity), HttpStatus.OK);
     }
 
+    @GetMapping("/nByDescuentoAsc/{quantity}")
+    public ResponseEntity<List<ProductoEntity>> nByDescuentoAsc(@PathVariable(value = "quantity") Long quantity) {
+        return new ResponseEntity<List<ProductoEntity>>(oProductoService.nByDescuentoAsc(quantity), HttpStatus.OK);
+    }
+
 }

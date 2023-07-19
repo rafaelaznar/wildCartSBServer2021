@@ -290,4 +290,40 @@ public class UsuarioService {
         return value;
     }
 
+    
+      public List<UsuarioEntity> nByDescuentoDesc(Long quantity) {
+        oAuthService.OnlyAdmins();
+        if (quantity <= 10) {
+            return oUsuarioRepository.findTop10ByOrderByDescuentoDesc();
+        } else {
+            if (quantity <= 50) {
+                return oUsuarioRepository.findTop50ByOrderByDescuentoDesc();
+            } else {
+                if (quantity <= 100) {
+                    return oUsuarioRepository.findTop100ByOrderByDescuentoDesc();
+                } else {
+                    throw new ResourceNotFoundException("quantity not affordable");
+                }
+            }
+        }
+    }
+
+    public List<UsuarioEntity> nByDescuentoAsc(Long quantity) {
+        oAuthService.OnlyAdmins();
+        if (quantity <= 10) {
+            return oUsuarioRepository.findTop10ByOrderByDescuentoAsc();
+        } else {
+            if (quantity <= 50) {
+                return oUsuarioRepository.findTop50ByOrderByDescuentoAsc();
+            } else {
+                if (quantity <= 100) {
+                    return oUsuarioRepository.findTop100ByOrderByDescuentoAsc();
+                } else {
+                    throw new ResourceNotFoundException("quantity not affordable");
+                }
+            }
+        }
+    } 
+    
+    
 }

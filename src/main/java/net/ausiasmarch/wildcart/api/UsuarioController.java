@@ -32,6 +32,7 @@
  */
 package net.ausiasmarch.wildcart.api;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -116,4 +117,15 @@ public class UsuarioController {
     public ResponseEntity<UsuarioEntity> flipvalid(@PathVariable(value = "id") Long id) {
         return new ResponseEntity<UsuarioEntity>(oUsuarioService.flipValid(id), HttpStatus.OK);
     }
+
+    @GetMapping("/nByDescuentoDesc/{quantity}")
+    public ResponseEntity<List<UsuarioEntity>> nByDescuentoDesc(@PathVariable(value = "quantity") Long quantity) {
+        return new ResponseEntity<List<UsuarioEntity>>(oUsuarioService.nByDescuentoDesc(quantity), HttpStatus.OK);
+    }
+
+    @GetMapping("/nByDescuentoAsc/{quantity}")
+    public ResponseEntity<List<UsuarioEntity>> nByDescuentoAsc(@PathVariable(value = "quantity") Long quantity) {
+        return new ResponseEntity<List<UsuarioEntity>>(oUsuarioService.nByDescuentoAsc(quantity), HttpStatus.OK);
+    }
+
 }

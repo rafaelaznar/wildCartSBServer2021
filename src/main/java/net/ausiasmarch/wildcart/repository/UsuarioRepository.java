@@ -32,6 +32,7 @@
  */
 package net.ausiasmarch.wildcart.repository;
 
+import java.util.List;
 import java.util.Optional;
 import net.ausiasmarch.wildcart.entity.UsuarioEntity;
 
@@ -43,11 +44,11 @@ import org.springframework.data.jpa.repository.Query;
 public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
 
     UsuarioEntity findByLoginAndPassword(String login, String password); //oAuth
-    
+
     Optional<UsuarioEntity> findByLogin(String login); //oAuth
-    
+
     Optional<UsuarioEntity> findByEmail(String login);
-    
+
     Optional<UsuarioEntity> findByToken(String token);
 
     boolean existsByLogin(String login);
@@ -58,4 +59,18 @@ public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
     Page<UsuarioEntity> findByDniIgnoreCaseContainingOrNombreIgnoreCaseContainingOrApellido1IgnoreCaseContainingOrApellido2IgnoreCaseContaining(String dni, String nombre, String apellido1, String apellido2, Pageable oPageable);
 
     Page<UsuarioEntity> findByTipousuarioId(Long tipoproducto, Pageable oPageable);
+
+    //Reports
+    public List<UsuarioEntity> findTop10ByOrderByDescuentoDesc();
+
+    public List<UsuarioEntity> findTop50ByOrderByDescuentoDesc();
+
+    public List<UsuarioEntity> findTop100ByOrderByDescuentoDesc();
+
+    public List<UsuarioEntity> findTop10ByOrderByDescuentoAsc();
+
+    public List<UsuarioEntity> findTop50ByOrderByDescuentoAsc();
+
+    public List<UsuarioEntity> findTop100ByOrderByDescuentoAsc();
+
 }
