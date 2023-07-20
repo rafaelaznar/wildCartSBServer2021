@@ -61,4 +61,15 @@ public interface ProductoRepository extends JpaRepository<ProductoEntity, Long> 
 
     public List<ProductoEntity> findTop100ByOrderByDescuentoAsc();
 
+    public List<ProductoEntity> findTop10ByOrderByExistenciasDesc();
+
+    public List<ProductoEntity> findTop50ByOrderByExistenciasDesc();
+
+    public List<ProductoEntity> findTop100ByOrderByExistenciasDesc();
+
+    public List<ProductoEntity> findTop10ByOrderByExistenciasAsc();
+
+    public List<ProductoEntity> findTop50ByOrderByExistenciasAsc();
+
+    public List<ProductoEntity> findTop100ByOrderByExistenciasAsc();
 }

@@ -207,6 +207,40 @@ public class ProductoService {
                 }
             }
         }
-    }    
-    
+    }
+
+    public List<ProductoEntity> nByExistenciasDesc(Long quantity) {
+        oAuthService.OnlyAdmins();
+        if (quantity <= 10) {
+            return oProductoRepository.findTop10ByOrderByExistenciasDesc();
+        } else {
+            if (quantity <= 50) {
+                return oProductoRepository.findTop50ByOrderByExistenciasDesc();
+            } else {
+                if (quantity <= 100) {
+                    return oProductoRepository.findTop100ByOrderByExistenciasDesc();
+                } else {
+                    throw new ResourceNotFoundException("quantity not affordable");
+                }
+            }
+        }
+    }
+
+    public List<ProductoEntity> nByExistenciasAsc(Long quantity) {
+        oAuthService.OnlyAdmins();
+        if (quantity <= 10) {
+            return oProductoRepository.findTop10ByOrderByExistenciasAsc();
+        } else {
+            if (quantity <= 50) {
+                return oProductoRepository.findTop50ByOrderByExistenciasAsc();
+            } else {
+                if (quantity <= 100) {
+                    return oProductoRepository.findTop100ByOrderByExistenciasAsc();
+                } else {
+                    throw new ResourceNotFoundException("quantity not affordable");
+                }
+            }
+        }
+    }
+
 }
