@@ -93,7 +93,7 @@ public class AuthService {
     private String recoverRecipientEmail;
 
     public String signupPhase1(UsuarioEntity oUsuarioEntity) {
-        sendRecoveryEmail(oUsuarioEntity, 
+        sendRecoveryEmail(oUsuarioEntity,
                "Aviso de seguridad: activación de nueva cuenta",
                EmailHelper.getEmailTemplateValidate(oUsuarioEntity.getNombre() + " " + oUsuarioEntity.getApellido1(), recoverFrontendURL));
         return "El usuario se ha registrado correctamente. Por favor revise su email para validar la cuenta.";
@@ -112,7 +112,7 @@ public class AuthService {
             oUsuarioEntity.setValidado(false);
             oUsuarioRepository.save(oUsuarioEntity);
             EmailBean oEmailBean = new EmailBean();
-            oEmailBean.setSender(recoverRecipientEmail);
+            oEmailBean.setSender(recoverRecipientEmail + "/" + oUsuarioEntity.getToken());
             oEmailBean.setRecipient(oUsuarioEntity.getEmail());
             oEmailBean.setSubject(subject);
             oEmailBean.setBody(body);
