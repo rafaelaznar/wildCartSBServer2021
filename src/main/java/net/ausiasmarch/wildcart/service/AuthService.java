@@ -48,7 +48,9 @@ import net.ausiasmarch.wildcart.entity.PendentEntity;
 import net.ausiasmarch.wildcart.entity.QuestionEntity;
 import net.ausiasmarch.wildcart.exception.UnauthorizedException;
 import net.ausiasmarch.wildcart.entity.UsuarioEntity;
+import net.ausiasmarch.wildcart.exception.CannotPerformOperationException;
 import net.ausiasmarch.wildcart.exception.ResourceNotFoundException;
+import net.ausiasmarch.wildcart.helper.EmailHelper;
 import net.ausiasmarch.wildcart.helper.JwtHelper;
 import net.ausiasmarch.wildcart.helper.RandomHelper;
 import net.ausiasmarch.wildcart.helper.TipoUsuarioHelper;
@@ -84,16 +86,16 @@ public class AuthService {
     @Value("${captcha.timeout}")
     private long captchaTimeout;
 
+    @Value("${recover.frontend.urlt}")
+    private String recoverFrontendURL;
+
+    @Value("${recover.recipient.email}")
+    private String recoverRecipientEmail;
+
     public String signupPhase1(UsuarioEntity oUsuarioEntity) {
-        oUsuarioEntity.setToken(RandomHelper.getSHA256(RandomHelper.getToken(256)));
-        oUsuarioEntity.setValidado(false);
-        oUsuarioRepository.save(oUsuarioEntity);
-        EmailBean oEmailBean = new EmailBean();
-        oEmailBean.setSender("");
-        oEmailBean.setRecipient("");
-        oEmailBean.setSubject("");
-        oEmailBean.setBody("");
-        oMailService.sendMail(oEmailBean);
+        sendRecoveryEmail(oUsuarioEntity, 
+               "Aviso de seguridad: activación de nueva cuenta",
+               EmailHelper.getEmailTemplateValidate(oUsuarioEntity.getNombre() + " " + oUsuarioEntity.getApellido1(), recoverFrontendURL));
         return "El usuario se ha registrado correctamente. Por favor revise su email para validar la cuenta.";
     }
 
@@ -104,32 +106,36 @@ public class AuthService {
         return "Usuario validado correctamente en el sistema";
     }
 
+    private void sendRecoveryEmail(UsuarioEntity oUsuarioEntity, String subject, String body) {
+        try {
+            oUsuarioEntity.setToken(RandomHelper.getSHA256(RandomHelper.getToken(256)));
+            oUsuarioEntity.setValidado(false);
+            oUsuarioRepository.save(oUsuarioEntity);
+            EmailBean oEmailBean = new EmailBean();
+            oEmailBean.setSender(recoverRecipientEmail);
+            oEmailBean.setRecipient(oUsuarioEntity.getEmail());
+            oEmailBean.setSubject(subject);
+            oEmailBean.setBody(body);
+            oMailService.sendMail(oEmailBean);
+        } catch (Exception ex) {
+            throw new CannotPerformOperationException("Error sending email");
+        }
+    }
+
     public String recoverByUsernamePhase1(String username) {
         UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByLogin(username).orElseThrow(() -> new ResourceNotFoundException("username not found"));
-        oUsuarioEntity.setToken(RandomHelper.getSHA256(RandomHelper.getToken(256)));
-        oUsuarioEntity.setValidado(false);
-        oUsuarioRepository.save(oUsuarioEntity);
-        EmailBean oEmailBean = new EmailBean();
-        oEmailBean.setSender("");
-        oEmailBean.setRecipient("");
-        oEmailBean.setSubject("");
-        oEmailBean.setBody("");
-        oMailService.sendMail(oEmailBean);
-        return "El usuario se ha registrado correctamente. Por favor revise su email para validar la cuenta.";
+        sendRecoveryEmail(oUsuarioEntity,
+               "Aviso de seguridad: solicitud para restablecer la contraseña en wildcart",
+               EmailHelper.getEmailTemplateRecover(oUsuarioEntity.getNombre() + " " + oUsuarioEntity.getApellido1(), recoverFrontendURL));
+        return "Por favor revise su email para validar la cuenta.";
     }
 
     public String recoverByEmailPhase1(String email) {
         UsuarioEntity oUsuarioEntity = oUsuarioRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("username not found"));
-        oUsuarioEntity.setToken(RandomHelper.getSHA256(RandomHelper.getToken(256)));
-        oUsuarioEntity.setValidado(false);
-        oUsuarioRepository.save(oUsuarioEntity);
-        EmailBean oEmailBean = new EmailBean();
-        oEmailBean.setSender("");
-        oEmailBean.setRecipient("");
-        oEmailBean.setSubject("");
-        oEmailBean.setBody("");
-        oMailService.sendMail(oEmailBean);
-        return "El usuario se ha registrado correctamente. Por favor revise su email para validar la cuenta.";
+        sendRecoveryEmail(oUsuarioEntity,
+               "Aviso de seguridad: solicitud para restablecer la contraseña en wildcart",
+               EmailHelper.getEmailTemplateRecover(oUsuarioEntity.getNombre() + " " + oUsuarioEntity.getApellido1(), recoverFrontendURL));
+        return "Por favor revise su email para validar la cuenta.";
     }
 
     public String recoverPhase2(RecoverBean oRecoverBean) {
@@ -292,7 +298,7 @@ public class AuthService {
                 if (oUsuarioEntity.isActivo()) {
                     throw new UnauthorizedException("User is not active");
                 }
-                
+
                 if (oUsuarioEntity.isValidado()) {
                     throw new UnauthorizedException("User is not validated");
                 }

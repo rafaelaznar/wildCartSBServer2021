@@ -41,4 +41,30 @@ public class EmailHelper {
         }
     }
 
+    public static String getEmailTemplateRecover(String name, String url) {
+        String t = "";
+        t += "Hola, " + name + ".\n";
+        t += "Hemos recibido una solicitud para restablecer la contraseña.\n";
+        t += "El siguiente enlace web sirve para reestablecer la contraseña:\n";
+        t += "   " + url + "\n";
+        t += "Si no has sido tú quien lo ha solicitado, debes ignorar este mensaje.\n";
+        t += "Por seguridad, nunca compartas este enlace con otras personas.\n";
+        t += "Gracias,\n";
+        t += "El equipo de WildCart\n";
+        return t;
+    }
+
+    public static String getEmailTemplateValidate(String name, String url) {
+        String t = "";
+        t += "Hola, " + name + ".\n";
+        t += "Hemos recibido una solicitud para establecer la contraseña.\n";
+        t += "El siguiente enlace web sirve para establecer la contraseña:\n";
+        t += "   " + url + "\n";
+        t += "Si no has sido tú quien lo ha solicitado, debes ignorar este mensaje.\n";
+        t += "Por seguridad, nunca compartas este enlace con otras personas.\n";
+        t += "Gracias,\n";
+        t += "El equipo de WildCart\n";
+        return t;
+    }
+
 }
