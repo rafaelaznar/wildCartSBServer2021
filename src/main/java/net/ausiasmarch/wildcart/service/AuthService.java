@@ -86,7 +86,7 @@ public class AuthService {
     @Value("${captcha.timeout}")
     private long captchaTimeout;
 
-    @Value("${recover.frontend.urlt}")
+    @Value("${recover.frontend.url}")
     private String recoverFrontendURL;
 
     @Value("${recover.recipient.email}")
